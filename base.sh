@@ -24,7 +24,7 @@ pacstrap ${TARGET} base
 
 # Generate fstab
 genfstab -U -p ${TARGET} >> ${TARGET}/etc/fstab
-cp chroot.sh ${TARGET}/root/chroot.sh
+cp chroot.sh ${TARGET}/root/base_chroot.sh
 
 # Enter chroot
 arch-chroot ${TARGET} \
@@ -32,6 +32,6 @@ arch-chroot ${TARGET} \
   TIMEZONE="Canada/Eastern" \
   HOSTNAME="wowbagger" \
   BOOTDEVICE="/dev/sda" \
-  /root/chroot.sh
+  /root/base_chroot.sh
 
 reboot
