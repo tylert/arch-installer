@@ -1,0 +1,2 @@
+- https://wiki.archlinux.org/index.php/Installation_guide
+- https://github.com/bianjp/archlinux-installer

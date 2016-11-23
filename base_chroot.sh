@@ -1,39 +1,39 @@
 #!/usr/bin/env bash
 
-# Set up timezone and clock
+set -xe
+
+# ---==[ Set up timezone and clock ]==-----------------------------------------
 ln -s "/usr/share/zoneinfo/${TIMEZONE}" /etc/localtime
 hwclock --systohc --utc
 
-# Set up locale and keymap
-LOCALE="en_CA"
-ENCODING="UTF-8"
-KEYMAP="us"
+# ---==[ Set up locale and keymap ]==------------------------------------------
 sed -i "/^#${LOCALE}.${ENCODING} ${ENCODING} /s/^#//" /etc/locale.gen
 locale-gen
 echo "LANG=${LOCALE}.${ENCODNIG}" > /etc/locale.conf
-export "LANG=${LOCALE}.${ENCODNIG}"
+export "LANG=${LOCALE}.${ENCODNIG}"  # update live environment too
 echo "KEYMAP=${KEYMAP}" > /etc/vconsole.conf
 
-# Set up hostname and hosts file
+# ---==[ Set up hostname and hosts file ]==------------------------------------
 if [ ! -z "${HOSTNAME}" ]; then
   echo "${HOSTNAME}" > /etc/hostname
-  hostname "${HOSTNAME}"
+  hostname "${HOSTNAME}"  # update live environment too
   echo "127.0.1.1  ${HOSTNAME}.localdomain  ${HOSTNAME}" >> /etc/hosts
-  echo "ff02::1  ip6-allnodes" >> /etc/hosts
-  echo "ff02::2  ip6-allrouters" >> /etc/hosts
 fi
+echo "ff02::1  ip6-allnodes" >> /etc/hosts
+echo "ff02::2  ip6-allrouters" >> /etc/hosts
 
-# Set up networking junk
+# ---==[ Set up networking junk ]==--------------------------------------------
 systemctl enable dhcpcd
 # XXX do more stuff here XXX
 #pacman -S --noconfirm dhclient
 
-# Set up users and groups
+# ---==[ Set up users and groups ]==-------------------------------------------
+pacman -S --noconfirm sudo
 #PASSWORD="hello"
 # XXX do more stuff here XXX
 #passwd
 
-# Build initrd
+# ---==[ Build initrd ]==------------------------------------------------------
 #pacman -Syy  # update things?
 #pacman -S --noconfirm lvm2  # already in base
 #pacman -S --noconfirm cryptsetup  # already in base
@@ -41,12 +41,13 @@ systemctl enable dhcpcd
 # /etc/mkinitcpio.conf
 # HOOKS="base udev ... block filesystems ..."
 # HOOKS="base udev ... block lvm2 filesystems ..."
+# HOOKS="... encrypt ... filesystems ..."
 #mkinitcpio -p linux
 
-# Boot loader stuff
+# ---==[ Set up boot loader stuff ]==------------------------------------------
 # If UEFI is enabled
+# XXX do more stuff here XXX
 # ls /sys/firmware/efi/efivars
 pacman -S --noconfirm grub
 grub-install --target=i386-pc "${BOOTDEVICE}"
 grub-mkconfig -o /boot/grub/grub.cfg
-# XXX do more stuff here XXX

@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
-# https://wiki.archlinux.org/index.php/Installation_guide
-# https://github.com/bianjp/archlinux-installer
+# Kick off the install procedure from the archiso CD
+
+set -xe
 
 # Check network and synchronize clock
 # XXX do more stuff here XXX
@@ -10,28 +11,25 @@ timedatectl set-ntp true
 # Set up partitions and mount them
 ROOT_PARTITION="/dev/mapper/primary-root"
 BOOT_PARTITION="/dev/sda1"
-# XXX do more stuff here XXX
 TARGET="/mnt"
+# XXX do more stuff here XXX
 mount ${ROOT_PARTITION} ${TARGET}
 mkdir ${TARGET}/boot
 mount ${BOOT_PARTITION} ${TARGET}/boot
 
-# Select mirror
+# Select mirror and do base install
 # XXX do more stuff here XXX
-
-# Base install
 pacstrap ${TARGET} base
 
-# Generate fstab
+# Generate fstab and prepare chroot
 genfstab -U -p ${TARGET} >> ${TARGET}/etc/fstab
-cp chroot.sh ${TARGET}/root/base_chroot.sh
+cp base_chroot.sh ${TARGET}/root/base_chroot.sh
 
 # Enter chroot
 arch-chroot ${TARGET} \
-  LOCALE="en_CA" ENCODING="UTF-8" KEYMAP="us" \
-  TIMEZONE="Canada/Eastern" \
-  HOSTNAME="wowbagger" \
   BOOTDEVICE="/dev/sda" \
+  LOCALE="en_CA" ENCODING="UTF-8" KEYMAP="us" TIMEZONE="Canada/Eastern" \
+  HOSTNAME="wowbagger" \
   /root/base_chroot.sh
 
 reboot
