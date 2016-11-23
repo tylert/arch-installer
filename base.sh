@@ -19,7 +19,7 @@ mount ${BOOT_PARTITION} ${TARGET}/boot
 
 # Select mirror and do base install
 # XXX do more stuff here XXX
-pacstrap ${TARGET} base base_devel
+pacstrap ${TARGET} base base-devel
 
 # Generate fstab and prepare chroot
 genfstab -U -p ${TARGET} >> ${TARGET}/etc/fstab
