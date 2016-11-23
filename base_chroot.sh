@@ -1,12 +1,28 @@
 #!/usr/bin/env bash
 
+# Things to run inside our arch-chroot
+
 set -xe
 
 # ---==[ Set up timezone and clock ]==-----------------------------------------
+if [ ! -z "${TIMEZONE}" ]; then
+    TIMEZONE="UTC"
+else
+
 ln -s "/usr/share/zoneinfo/${TIMEZONE}" /etc/localtime
 hwclock --systohc --utc
 
 # ---==[ Set up locale and keymap ]==------------------------------------------
+if [ ! -z "${LOCALE}" ]; then
+    LOCALE="en_CA"
+fi
+if [ ! -z "${ENCODING}" ]; then
+    ENCODING="UTF-8"
+fi
+if [ ! -z "${KEYMAP}" ]; then
+    KEYMAP="us"
+fi
+
 sed -i "/^#${LOCALE}.${ENCODING} ${ENCODING} /s/^#//" /etc/locale.gen
 locale-gen
 echo "LANG=${LOCALE}.${ENCODNIG}" > /etc/locale.conf
@@ -15,10 +31,15 @@ echo "KEYMAP=${KEYMAP}" > /etc/vconsole.conf
 
 # ---==[ Set up hostname and hosts file ]==------------------------------------
 if [ ! -z "${HOSTNAME}" ]; then
-  echo "${HOSTNAME}" > /etc/hostname
-  hostname "${HOSTNAME}"  # update live environment too
-  echo "127.0.1.1  ${HOSTNAME}.localdomain  ${HOSTNAME}" >> /etc/hosts
+    HOSTNAME="cuckoo"
 fi
+if [ ! -z "${DOMAIN}" ]; then
+    DOMAIN="localdomain"
+fi
+
+echo "${HOSTNAME}" > /etc/hostname
+hostname "${HOSTNAME}"  # update live environment too
+echo "127.0.1.1  ${HOSTNAME}.${DOMAIN}  ${HOSTNAME}" >> /etc/hosts
 echo "ff02::1  ip6-allnodes" >> /etc/hosts
 echo "ff02::2  ip6-allrouters" >> /etc/hosts
 
