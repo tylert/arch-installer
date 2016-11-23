@@ -25,8 +25,8 @@ fi
 
 sed -i "/^#${LOCALE}.${ENCODING} ${ENCODING} /s/^#//" /etc/locale.gen
 locale-gen
-echo "LANG=${LOCALE}.${ENCODNIG}" > /etc/locale.conf
-export "LANG=${LOCALE}.${ENCODNIG}"  # update live environment too
+echo "LANG=${LOCALE}.${ENCODING}" > /etc/locale.conf
+export "LANG=${LOCALE}.${ENCODING}"  # update live environment too
 echo "KEYMAP=${KEYMAP}" > /etc/vconsole.conf
 
 # ---==[ Set up hostname and hosts file ]==------------------------------------
