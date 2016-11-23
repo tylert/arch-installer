@@ -1,57 +1,49 @@
 #!/usr/bin/env bash
 
 # https://wiki.archlinux.org/index.php/Installation_guide
+# https://github.com/bianjp/archlinux-installer
 
-# Check network
+# Check network and synchronize clock
 # XXX do stuff here XXX
-
-# Set time and date
 timedatectl set-ntp true
 
-# Set up partitions
-BOOT_PARTITION="/dev/sda1"
+# Set up partitions and mount them
 ROOT_PARTITION="/dev/mapper/primary-root"
+BOOT_PARTITION="/dev/sda1"
 # XXX do stuff here XXX
-
-# Mount partitions
 TARGET="/mnt"
 mount ${ROOT_PARTITION} ${TARGET}
 mkdir ${TARGET}/boot
 mount ${BOOT_PARTITION} ${TARGET}/boot
 
-# Package install
-# XXX do stuff here XXX
 # Select mirror
+# XXX do stuff here XXX
+
+# Base install
 pacstrap ${TARGET} base
 
 # Generate fstab
-genfstab -U ${TARGET} >> ${TARGET}/etc/fstab
+genfstab -U -p ${TARGET} >> ${TARGET}/etc/fstab
 
 # Enter chroot
-arch-chroot ${TARGET}
+arch-chroot ${TARGET}  # call script?
 
-# Configure timezone
+# ---==[ START OF CHROOT ]==---------------------------------------------------
+
+# Configure timezone and clock
 TIMEZONE="Canada/Eastern"
 ln -s /usr/share/zoneinfo/${TIMEZONE} /etc/localtime
+hwclock --systohc --utc
 
-# Set system clock to UTC
-hwclock --systohc
-
-# Set locale
-LOCALE="en_CA.UTF-8"
-ENCODING="UTF-8"
-sed -i "/^#${LOCALE} ${ENCODING} /s/^#//" /etc/locale.gen
-echo "LANG=${LOCALE}" > /etc/locale.conf
+# Set locale and key layout
+sed -i "/^#en_CA.UTF-8 UTF-8 /s/^#//" /etc/locale.gen
 locale-gen
-
-# Set keyboard layout
+echo "LANG=en_CA.UTF-8" > /etc/locale.conf
 echo "KEYMAP=us" > /etc/vconsole.conf
 
-# Set hostname
+# Set hostname and configure hosts
 HOSTNAME="buttercup"
 echo "${HOSTNAME}" > /etc/hostname
-
-# Configure hosts
 cat << EOF > /etc/hosts
 127.0.0.1  localhost.localdomain  localhost
 ::1  localhost.localdomain  localhost
@@ -71,31 +63,33 @@ EOF
 
 # Set up networking junk
 # XXX do stuff here XXX
+#pacman -S --noconfirm dhclient
+
+# Set up users and groups
+#PASSWORD="hello"
+# XXX do stuff here XXX
+#passwd
 
 # Build initrd
-yes | pacman -S lvm2
-#yes | pacman -S cryptsetup
+#pacman -Syy
+#pacman -S --noconfirm lvm2
+#pacman -S --noconfirm cryptsetup
 # XXX do stuff here XXX
 # /etc/mkinitcpio.conf
 # HOOKS="base udev ... block filesystems ..."
 # HOOKS="base udev ... block lvm2 filesystems ..."
-mkinitcpio -p linux
-
-# Set root password
-#PASSWORD="hello"
-#passwd
-# XXX do stuff here XXX
+#mkinitcpio -p linux
 
 # Boot loader stuff
 # If UEFI is enabled
 # ls /sys/firmware/efi/efivars
-yes | pacman -S grub
-grub-install --target=i386-pc /dev/sda
-grub-mkconfig -o /boot/grub/grub.cfg
+#pacman -S --noconfirm grub
+#grub-install --target=i386-pc /dev/sda
+#grub-mkconfig -o /boot/grub/grub.cfg
 # XXX do stuff here XXX
 
-# Exit chroot
-exit
+# ---==[ END OF CHROOT ]==-----------------------------------------------------
 
-# Reboot
-reboot
+# Exit chroot and reboot
+#exit
+#reboot
