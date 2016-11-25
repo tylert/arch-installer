@@ -26,7 +26,6 @@ fi
 sed -i "/^#${LOCALE}.${ENCODING} ${ENCODING} /s/^#//" /etc/locale.gen
 locale-gen
 echo "LANG=${LOCALE}.${ENCODING}" > /etc/locale.conf
-export "LANG=${LOCALE}.${ENCODING}"  # update live environment too
 echo "KEYMAP=${KEYMAP}" > /etc/vconsole.conf
 
 # ---==[ Set up hostname and hosts file ]==------------------------------------
@@ -38,7 +37,6 @@ if [ ! -z "${DOMAIN}" ]; then
 fi
 
 echo "${HOSTNAME}" > /etc/hostname
-hostname "${HOSTNAME}"  # update live environment too
 echo "127.0.1.1  ${HOSTNAME}.${DOMAIN}  ${HOSTNAME}" >> /etc/hosts
 echo "ff02::1  ip6-allnodes" >> /etc/hosts
 echo "ff02::2  ip6-allrouters" >> /etc/hosts
@@ -55,15 +53,12 @@ pacman -S --noconfirm sudo
 #passwd
 
 # ---==[ Build initrd ]==------------------------------------------------------
-#pacman -Syy  # update things?
-#pacman -S --noconfirm lvm2  # already in base
-#pacman -S --noconfirm cryptsetup  # already in base
 # XXX do more stuff here XXX
 # /etc/mkinitcpio.conf
 # HOOKS="base udev ... block filesystems ..."
 # HOOKS="base udev ... block lvm2 filesystems ..."
 # HOOKS="... encrypt ... filesystems ..."
-#mkinitcpio -p linux
+mkinitcpio -p linux
 
 # ---==[ Set up boot loader stuff ]==------------------------------------------
 # If UEFI is enabled
