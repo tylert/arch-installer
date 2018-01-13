@@ -18,8 +18,8 @@ ZFS
 ::
 
     sudo pacman -Syyu
-    sudo pacman -S linux-headers
-    sudo pacman -S git
+    sudo pacman --sync linux-headers
+    sudo pacman --sync git
 
     pushd ~
         git clone https://aur.archlinux.org/spl-dkms.git

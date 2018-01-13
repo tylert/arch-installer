@@ -9,7 +9,7 @@ if [ ! -z "${TIMEZONE}" ]; then
     TIMEZONE="UTC"
 else
 
-ln -s "/usr/share/zoneinfo/${TIMEZONE}" /etc/localtime
+ln -sf "/usr/share/zoneinfo/${TIMEZONE}" /etc/localtime
 hwclock --systohc --utc
 
 # ---==[ Set up locale and keymap ]==------------------------------------------
@@ -37,17 +37,19 @@ if [ ! -z "${DOMAIN}" ]; then
 fi
 
 echo "${HOSTNAME}" > /etc/hostname
-echo "127.0.1.1  ${HOSTNAME}.${DOMAIN}  ${HOSTNAME}" >> /etc/hosts
+echo "127.0.0.1  localhost" >> /etc/hosts
+echo "127.0.1.1  ${HOSTNAME} ${HOSTNAME}.${DOMAIN}" >> /etc/hosts
+echo "::1  localhost ip6-localhost ip6-loopback" >> /etc/hosts
 echo "ff02::1  ip6-allnodes" >> /etc/hosts
 echo "ff02::2  ip6-allrouters" >> /etc/hosts
 
 # ---==[ Set up networking junk ]==--------------------------------------------
+pacman --sync --noconfirm openssh
+systemctl enable sshd.service
 systemctl enable dhcpcd
-# XXX do more stuff here XXX
-#pacman -S --noconfirm dhclient
 
 # ---==[ Set up users and groups ]==-------------------------------------------
-pacman -S --noconfirm sudo
+pacman --sync --noconfirm sudo
 #PASSWORD="hello"
 # XXX do more stuff here XXX
 #passwd
@@ -64,6 +66,6 @@ mkinitcpio -p linux
 # If UEFI is enabled
 # XXX do more stuff here XXX
 # ls /sys/firmware/efi/efivars
-pacman -S --noconfirm grub
+pacman --sync --noconfirm grub
 grub-install --target=i386-pc "${BOOTDEVICE}"
 grub-mkconfig -o /boot/grub/grub.cfg
