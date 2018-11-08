@@ -1,14 +1,14 @@
 ::
 
     # Mount the main btrfs volume
-    mkfs.btrfs -f -L os /dev/sda1
+    mkfs.btrfs --force --label os /dev/sda1
     mkdir /mnt/btrfs
     mount -o defaults,relatime,discard,ssd /dev/sda1 /mnt/btrfs
 
     # Create the btrfs magic for snapshots and the / subvol
     mkdir /mnt/btrfs/_snapshot
     mkdir /mnt/btrfs/_current
-    btrfs subvol create /mnt/btrfs/_current/slash
+    btrfs subvolume create /mnt/btrfs/_current/slash
 
     # Mount the / subvol
     mkdir /mnt/arch
