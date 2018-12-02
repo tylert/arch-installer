@@ -24,8 +24,8 @@ mkfs.btrfs --force --label OS ${first_partition}  # XXX btrfs
 # Mount the drive and create the subvolume and snapshots location
 mkdir --parents --verbose ${mount_point}
 mount ${first_partition} ${mount_point}
-mkdir ${mount_point}/_snapshot  # XXX btrfs
-mkdir ${mount_point}/_current  # XXX btrfs
+mkdir --parents --verbose ${mount_point}/_snapshot  # XXX btrfs
+mkdir --parents --verbose ${mount_point}/_current  # XXX btrfs
 btrfs subvolume create ${mount_point}/_current/slash  # XXX btrfs
 
 # Remount the subvolume and extract the tarball
