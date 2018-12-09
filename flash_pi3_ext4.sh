@@ -23,16 +23,11 @@ sfdisk ${drive} << EOF
 ,
 EOF
 mkfs.vfat --force ${first_partition}
-mkfs.btrfs --force --label OS ${second_partition}
+mkfs.ext4 -L OS ${second_partition}
 
 # Mount the drive and create the necessary locations
 mkdir --parents --verbose ${mount_point}
 mount ${second_partition} ${mount_point}
-mkdir --parents --verbose ${mount_point}/_snapshot
-mkdir --parents --verbose ${mount_point}/_current
-btrfs subvolume create ${mount_point}/_current/slash
-umount ${mount_point}
-mount --options subvol=_current/slash ${second_partition} ${mount_point}
 mkdir --parents --verbose ${mount_point}/boot
 mount ${first_partition} ${mount_point}/boot
 

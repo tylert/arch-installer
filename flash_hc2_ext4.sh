@@ -21,11 +21,11 @@ sfdisk ${drive} << EOF
 EOF
 mkfs.ext4 -L OS ${first_partition}
 
-# Mount the drive and create the subvolume and snapshots location
+# Mount the drive and create the necessary locations
 mkdir --parents --verbose ${mount_point}
 mount ${first_partition} ${mount_point}
 
-# Remount the subvolume and extract the tarball
+# Extract the root filesystem tarball
 tar --warning=no-unknown-keyword --directory=${mount_point} \
     --extract --verbose --gunzip --file=${root_tarball_local}
 
