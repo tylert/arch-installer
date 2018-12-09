@@ -8,13 +8,13 @@
 drive=/dev/mmcblk0
 first_partition=${drive}p1
 second_partition=${drive}p2
-date=latest  # $(date +%Y-%m-%d)
-root_tarball=/tmp/ArchLinuxARM-rpi-2-${date}.tar.gz
+date=$(date +%Y-%m-%d)  # latest
+root_tarball_remote=http://os.archlinuxarm.org/os/ArchLinuxARM-rpi-2-latest.tar.gz
+root_tarball_local=/tmp/ArchLinuxARM-rpi-2-${date}.tar.gz
 mount_point=$(mktemp --dry-run)  # unsafeish
 
-# Fetch the tarball
-wget http://os.archlinuxarm.org/os/ArchLinuxARM-rpi-2-latest.tar.gz \
-    --continue --output-document=${root_tarball}
+# Fetch the root filesystem tarball
+wget ${root_tarball_remote} --continue --output-document=${root_tarball_local}
 
 # Format the drive
 dd if=/dev/zero of=${drive} bs=1M count=8
@@ -38,7 +38,7 @@ mount --options subvol=_current/slash ${second_partition} ${mount_point}  # XXX 
 mkdir --parents --verbose ${mount_point}/boot
 mount ${first_partition} ${mount_point}/boot
 tar --warning=no-unknown-keyword --directory=${mount_point} \
-    --extract --verbose --gunzip --file=${root_tarball}
+    --extract --verbose --gunzip --file=${root_tarball_local}
 
 # Clean up afterwards
 umount ${mount_point}/boot

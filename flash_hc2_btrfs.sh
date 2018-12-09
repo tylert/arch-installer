@@ -6,13 +6,13 @@
 
 drive=/dev/mmcblk0
 first_partition=${drive}p1
-date=latest  # $(date +%Y-%m-%d)
-root_tarball=/tmp/ArchLinuxARM-odroid-xu3-${date}.tar.gz
+date=$(date +%Y-%m-%d)  # latest
+root_tarball_remote=http://os.archlinuxarm.org/os/ArchLinuxARM-odroid-xu3-latest.tar.gz
+root_tarball_local=/tmp/ArchLinuxARM-odroid-xu3-${date}.tar.gz
 mount_point=$(mktemp --dry-run)  # unsafeish
 
-# Fetch the tarball
-wget http://os.archlinuxarm.org/os/ArchLinuxARM-odroid-xu3-latest.tar.gz \
-    --continue --output-document=${root_tarball}
+# Fetch the root filesystem tarball
+wget ${root_tarball_remote} --continue --output-document=${root_tarball_local}
 
 # Format the drive
 dd if=/dev/zero of=${drive} bs=1M count=8
@@ -32,7 +32,7 @@ btrfs subvolume create ${mount_point}/_current/slash  # XXX btrfs
 umount ${mount_point}
 mount --options subvol=_current/slash ${first_partition} ${mount_point}  # XXX btrfs
 tar --warning=no-unknown-keyword --directory=${mount_point} \
-    --extract --verbose --gunzip --file=${root_tarball}
+    --extract --verbose --gunzip --file=${root_tarball_local}
 
 # Flash the boot sector
 pushd ${mount_point}/boot
