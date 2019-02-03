@@ -23,7 +23,7 @@ sfdisk ${drive} << EOF
 ,100M
 ,
 EOF
-mkfs.vfat --force ${first_partition}
+mkfs.vfat ${first_partition}
 if [ ${root_filesystem_type} = btrfroot_filesystem_type ]; then
     mkfs.btrfs --force --label OS ${second_partition}
 else
