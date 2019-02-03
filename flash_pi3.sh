@@ -9,8 +9,8 @@ drive=/dev/mmcblk0
 first_partition=${drive}p1
 second_partition=${drive}p2
 date=$(date +%Y-%m-%d)  # latest
-root_tarball_remote=http://os.archlinuxarm.org/os/ArchLinuxARM-rpi-2-latest.tar.gz
-root_tarball_local=/tmp/ArchLinuxARM-rpi-2-${date}.tar.gz
+root_tarball_remote=http://os.archlinuxarm.org/os/ArchLinuxARM-rpi-3-latest.tar.gz
+root_tarball_local=/tmp/ArchLinuxARM-rpi-3-${date}.tar.gz
 root_filesystem_type=ext4
 mount_point=$(mktemp --dry-run)  # unsafeish
 
