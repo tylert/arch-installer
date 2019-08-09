@@ -2,17 +2,20 @@
 
     # Mount the main btrfs volume
     mkfs.btrfs --force --label os /dev/sda1
-    mkdir /mnt/btrfs
-    mount -o defaults,relatime,discard,ssd /dev/sda1 /mnt/btrfs
+    mkdir /mnt/target
+    mount /dev/sda1 /mnt/target --options defaults,ssd,discard
 
-    # Create the btrfs magic for snapshots and the / subvol
-    mkdir /mnt/btrfs/_snapshot
-    mkdir /mnt/btrfs/_current
-    btrfs subvolume create /mnt/btrfs/_current/slash
+    # Create the btrfs subvolume magic for snapshots and everything else
+    btrfs subvolume list /mnt/target
+    btrfs subvolume create /mnt/target/@
+    btrfs subvolume create /mnt/target/@snapshot
+    btrfs subvolume list /mnt/target
+    btrfs subvolume get-default /mnt/target
+    btrfs subvolume set-default 257 /mnt/target
+    umount /mnt/target
 
-    # Mount the / subvol
-    mkdir /mnt/arch
-    mount -o defaults,relatime,discard,ssd,nodev,subvol=_current/slash /dev/sda1 /mnt/arch
+    # Mount the subvolume
+    mount /dev/sda1 /mnt/target --options defaults,ssd,discard,subvol=@
 
 
 References
