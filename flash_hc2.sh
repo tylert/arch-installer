@@ -44,6 +44,8 @@ tar --warning=no-unknown-keyword --directory="${mount_point}" \
 # chroot "${mount_point}"
 # pacman-key --init
 # pacman-key --populate archlinuxarm
+# pacman -Syu --noconfirm sudo
+# echo "alarm ALL=(ALL) ALL" > /etc/sudoers.d/alarm
 # exit
 
 # Flash the boot sector
