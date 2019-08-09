@@ -31,7 +31,7 @@ mkfs.vfat -n boot "${first_partition}"
 if [ "${root_filesystem_type}" = 'btrfs' ]; then
     mkfs.btrfs --force --label os "${second_partition}"
 else
-    mkfs.ext4 -L os "${second_partition}"
+    mkfs.ext4 -F -L os "${second_partition}"
 fi
 
 # Mount the drive and create the necessary locations
