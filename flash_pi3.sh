@@ -7,6 +7,8 @@
 # https://archlinuxarm.org/platforms/armv7/broadcom/raspberry-pi-2
 # https://archlinuxarm.org/platforms/armv6/raspberry-pi
 
+set -e
+
 drive=/dev/mmcblk0
 first_partition="${drive}p1"
 second_partition="${drive}p2"
@@ -50,13 +52,12 @@ tar --warning=no-unknown-keyword --directory="${mount_point}" \
     --extract --verbose --gunzip --file="${root_tarball_local}"
 
 # Remove the need to perform manual steps after installation
-# XXX FIXME TODO Get arm chroot working on x86_64
-# chroot "${mount_point}"
-# pacman-key --init
-# pacman-key --populate archlinuxarm
-# pacman -Syu --noconfirm sudo
-# echo "alarm ALL=(ALL) ALL" > /etc/sudoers.d/alarm
-# exit
+# You need the appropriate binaries in order to run a arm64 chroot on x86_64
+# On Debian, "apt-get install qemu qemu-user-static binfmt-support"
+chroot "${mount_point}" pacman-key --init && \
+    pacman-key --populate archlinuxarm && \
+    pacman -Syu --noconfirm sudo && \
+    echo "alarm ALL=(ALL) ALL" > /etc/sudoers.d/alarm
 
 # Clean up afterwards
 umount ${mount_point}/boot
