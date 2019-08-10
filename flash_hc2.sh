@@ -44,10 +44,11 @@ tar --warning=no-unknown-keyword --directory="${mount_point}" \
 # Remove the need to perform manual steps after installation
 # You need the appropriate binaries in order to run a arm64 chroot on x86_64
 # On Debian, "apt-get install qemu qemu-user-static binfmt-support"
-chroot "${mount_point}" pacman-key --init && \
-    pacman-key --populate archlinuxarm && \
-    pacman -Syu --noconfirm sudo && \
-    echo "alarm ALL=(ALL) ALL" > /etc/sudoers.d/alarm
+# XXX FIXME TODO Get this part working to reduce the dumb, non-automated junk
+# chroot "${mount_point}" pacman-key --init && \
+#     pacman-key --populate archlinuxarm && \
+#     pacman -Syu --noconfirm sudo && \
+#     echo "alarm ALL=(ALL) ALL" > /etc/sudoers.d/alarm
 
 # Flash the boot sector
 pushd ${mount_point}/boot
