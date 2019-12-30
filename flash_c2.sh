@@ -24,7 +24,7 @@ EOF
 if [ "${root_filesystem_type}" = 'btrfs' ]; then
     mkfs.btrfs --force --label os "${first_partition}"
 else
-    mkfs.ext4 -F -L os "${first_partition}"
+    mkfs.ext4 -O ^metadata_csum,^64bit -F -L os "${first_partition}"
 fi
 
 # Mount the drive and create the necessary locations
