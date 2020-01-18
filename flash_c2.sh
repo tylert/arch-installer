@@ -20,6 +20,7 @@ wget "${root_tarball_remote}" --continue --output-document="${root_tarball_local
 # Format the drive
 dd if=/dev/zero of="${drive}" bs=1M count=8
 sfdisk "${drive}" << EOF
+,
 EOF
 if [ "${root_filesystem_type}" = 'btrfs' ]; then
     mkfs.btrfs --force --label os "${first_partition}"
