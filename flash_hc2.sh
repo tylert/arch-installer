@@ -6,7 +6,7 @@
 
 set -e
 
-drive=/dev/mmcblk0
+drive=/dev/mmcblk0  # uSD
 first_partition="${drive}p1"
 date="$(date +%Y-%m-%d)"  # latest
 root_tarball_remote=http://os.archlinuxarm.org/os/ArchLinuxARM-odroid-xu3-latest.tar.gz

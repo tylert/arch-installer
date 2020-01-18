@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 
-# This is a script for flashing a microSD card for an Odroid C2 as per the
+# This is a script for flashing a microSD/eMMC card for an Odroid C2 as per the
 # instructions found at:
 # https://archlinuxarm.org/platforms/armv8/amlogic/odroid-c2
 
 set -e
 
-drive=/dev/mmcblk0
-first_partition="${drive}p1"
+drive=/dev/sdb  # eMMC
+first_partition="${drive}1"
 date="$(date +%Y-%m-%d)"  # latest
 root_tarball_remote=http://os.archlinuxarm.org/os/ArchLinuxARM-odroid-c2-latest.tar.gz
 root_tarball_local="/tmp/ArchLinuxARM-odroid-c2-${date}.tar.gz"

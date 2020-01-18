@@ -9,7 +9,7 @@
 
 set -e
 
-drive=/dev/mmcblk0
+drive=/dev/mmcblk0  # uSD
 first_partition="${drive}p1"
 second_partition="${drive}p2"
 date="$(date +%Y-%m-%d)"  # latest
