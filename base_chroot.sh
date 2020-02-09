@@ -44,7 +44,7 @@ echo "ff02::1  ip6-allnodes" >> /etc/hosts
 echo "ff02::2  ip6-allrouters" >> /etc/hosts
 
 # ---==[ Set up networking junk ]==--------------------------------------------
-pacman --sync --noconfirm openssh
+pacman --sync --noconfirm openssh dhcpcd
 systemctl enable sshd.service
 systemctl enable dhcpcd
 

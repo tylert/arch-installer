@@ -11,7 +11,7 @@ timedatectl set-ntp true
 TARGET="/mnt/arch"
 # XXX do more stuff here XXX
 
-pacstrap ${TARGET} base base-devel
+pacstrap ${TARGET} base linux linux-firmware btrfs-progs wireguard-arch wireguard-tools
 
 # Select mirror and do base install
 # cp base_chroot.sh ${TARGET}/root/base_chroot.sh
