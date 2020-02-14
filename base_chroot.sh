@@ -4,36 +4,38 @@
 
 set -xe
 
-# ---==[ Set up timezone and clock ]==-----------------------------------------
+# ---==[ Set up the timezone and clock ]==-------------------------------------
 if [ ! -z "${TIMEZONE}" ]; then
-    TIMEZONE="UTC"
+    TIMEZONE='UTC'
 else
 
 ln -sf "/usr/share/zoneinfo/${TIMEZONE}" /etc/localtime
 hwclock --systohc --utc
 
-# ---==[ Set up locale and keymap ]==------------------------------------------
+# ---==[ Set up the system language, locale and keymap ]==---------------------
 if [ ! -z "${LOCALE}" ]; then
-    LOCALE="en_CA"
+    LOCALE='en_CA'
 fi
 if [ ! -z "${ENCODING}" ]; then
-    ENCODING="UTF-8"
+    ENCODING='UTF-8'
 fi
 if [ ! -z "${KEYMAP}" ]; then
-    KEYMAP="us"
+    KEYMAP='us'
 fi
 
 sed -i "/^#${LOCALE}.${ENCODING} ${ENCODING} /s/^#//" /etc/locale.gen
 locale-gen
 echo "LANG=${LOCALE}.${ENCODING}" > /etc/locale.conf
+echo "LANGUAGE=${LOCALE}" >> /etc/locale.conf
+echo "LC_ALL=C" >> /etc/locale.conf
 echo "KEYMAP=${KEYMAP}" > /etc/vconsole.conf
 
 # ---==[ Set up hostname and hosts file ]==------------------------------------
 if [ ! -z "${HOSTNAME}" ]; then
-    HOSTNAME="cuckoo"
+    HOSTNAME='cuckoo'
 fi
 if [ ! -z "${DOMAIN}" ]; then
-    DOMAIN="localdomain"
+    DOMAIN='localdomain'
 fi
 
 echo "${HOSTNAME}" > /etc/hostname
@@ -44,15 +46,13 @@ echo "ff02::1  ip6-allnodes" >> /etc/hosts
 echo "ff02::2  ip6-allrouters" >> /etc/hosts
 
 # ---==[ Set up networking junk ]==--------------------------------------------
-pacman --sync --noconfirm openssh dhcpcd
-systemctl enable sshd.service
+pacman --sync --noconfirm dhcpcd openssh
 systemctl enable dhcpcd
+systemctl enable sshd.service
 
 # ---==[ Set up users and groups ]==-------------------------------------------
 pacman --sync --noconfirm sudo
-#PASSWORD="hello"
 # XXX do more stuff here XXX
-#passwd
 
 # ---==[ Build initrd ]==------------------------------------------------------
 pacman --sync --noconfirm btrfs-progs
