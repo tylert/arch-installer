@@ -11,7 +11,7 @@
     btrfs subvolume create /mnt/target/@snapshot
     btrfs subvolume list /mnt/target
     btrfs subvolume get-default /mnt/target
-    btrfs subvolume set-default 257 /mnt/target
+    btrfs subvolume set-default 256 /mnt/target
     umount /mnt/target
 
     # Mount the subvolume
