@@ -12,28 +12,6 @@ First, boot the system from the ISO (via USB).  Second, enable ssh and give root
     passwd
 
 
-ZFS
----
-
-::
-
-    sudo pacman -Syyu
-    sudo pacman --sync linux-headers
-    sudo pacman --sync git
-
-    pushd ~
-        git clone https://aur.archlinux.org/spl-dkms.git
-        pushd spl-dkms
-            makepkg -si
-        popd
-
-        git clone https://aur.archlinux.org/zfs-dkms.git
-        pushd zfs-dkms
-            makepkg -si
-        popd
-    popd
-
-
 Links
 -----
 
