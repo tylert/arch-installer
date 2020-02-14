@@ -55,6 +55,7 @@ pacman --sync --noconfirm sudo
 #passwd
 
 # ---==[ Build initrd ]==------------------------------------------------------
+pacman --sync --noconfirm btrfs-progs
 # XXX do more stuff here XXX
 # /etc/mkinitcpio.conf
 # HOOKS="base udev ... block filesystems ..."
