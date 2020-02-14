@@ -12,6 +12,20 @@ First, boot the system from the ISO (via USB).  Second, enable ssh and give root
     passwd
 
 
+Partitioning
+------------
+
+::
+
+    BLOCK_DEVICE='/dev/sda'
+
+    # Dump the partition table
+    sfdisk --dump ${BLOCK_DEVICE} > sda.dump
+
+    # Restore the partition table
+    sfdisk ${BLOCK_DEVICE} < sda.dump
+
+
 Btrfs
 -----
 
