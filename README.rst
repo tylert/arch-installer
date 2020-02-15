@@ -17,6 +17,7 @@ Installing
 
 To start the install process (including some sample environment variables)::
 
+    DRIVE=/dev/sdx ./setup_x86_uefi_server.sh
     HOSTNAME=numuh USERNAME=sheen ./install_x86.sh
 
 

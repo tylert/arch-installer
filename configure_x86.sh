@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Do the things that must be done inside the arch-chroot
+# Do all the things that must be done inside the chroot
 
 set -xe
 
@@ -68,6 +68,7 @@ if [ -z "${PASSWORD}" ]; then
 fi
 
 useradd -m "${NEWUSERNAME}"
+# XXX TODO FIXME Set the password for the new user properly
 
 pacman --sync --noconfirm sudo
 echo "${NEWUSERNAME} ALL=(ALL) ALL" > "/etc/sudoers.d/${NEWUSERNAME}"
