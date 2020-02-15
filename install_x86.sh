@@ -14,7 +14,7 @@ set -xe
 # -----------------------------------------------------------------------------
 timedatectl set-ntp true
 
-# ---==[ Partition, format and mount the OS drive ]==--------------------------
+# ---==[ Repartition and format the OS drive ]==-------------------------------
 if [ -z "${DRIVE}" ]; then
     DRIVE='/dev/sda'
 fi
@@ -28,22 +28,31 @@ sfdisk "${DRIVE}" << EOF
 EOF
 mkfs.vfat -F32 "${DRIVE}1"
 mkswap "${DRIVE}2"
-mkfs.btrfs "${DRIVE}3"
+mkfs.btrfs --force --label os "${DRIVE}3"
 
-# ---==[ Install the base OS stuff ]==-----------------------------------------
+# ---==[ Create subvolumes and mount subordinate partitions ]==----------------
 if [ -z "${MOUNT}" ]; then
     MOUNT='/mnt'
 fi
 
+mount "${DRIVE}3" "${MOUNT}" --options defaults,ssd,discard
+btrfs subvolume create "${MOUNT}/@"
+btrfs subvolume create "${MOUNT}/@snapshot"
+btrfs subvolume set-default 256 "${MOUNT}"
+umount "${MOUNT}"
+mount "${DRIVE}3" "${MOUNT}" --options defaults,ssd,discard,subvol=@
+
+mkdir --parents "${MOUNT}/boot/EFI"
+mount "${DRIVE}1" "${MOUNT}/boot/EFI"
 swapon "${DRIVE}2"
-mount "${DRIVE}" "${MOUNT}" --options defaults,ssd,discard
-exit
+mkdir --parents "${MOUNT}/.snapshot"
+mount "${DRIVE}3" "${MOUNT}/.snapshot" --options defaults,ssd,discard,subvol=@snapshot
+
+# ---==[ Install the OS and build the fstab file ]==---------------------------
 pacstrap "${MOUNT}" base linux linux-firmware
+genfstab -p -t UUID "${MOUNT}" >> "${MOUNT}/etc/fstab"  # append
 
-# ---==[ Build the fstab for the new system ]==--------------------------------
-genfstab -p -t UUID "${MOUNT}" >> "${MOUNT}/etc/fstab"
-
-# -----------------------------------------------------------------------------
+# ---==[ Configure the new system ]==------------------------------------------
 if [ -z "${TIMEZONE}" ]; then
     TIMEZONE='UTC'
 else

@@ -12,48 +12,6 @@ First, boot the system from the ISO (via USB).  Second, enable ssh and give root
     passwd
 
 
-Partitioning
-------------
-
-::
-
-    BLOCK_DEVICE='/dev/sda'
-
-    # Dump the partition table
-    sfdisk --dump ${BLOCK_DEVICE} > sda.dump
-
-    # Restore the partition table
-    sfdisk ${BLOCK_DEVICE} < sda.dump
-
-
-Btrfs
------
-
-::
-
-    BLOCK_DEVICE='/dev/sda3'
-    MOUNT_POINT='/mnt'
-
-    # Mount the main btrfs volume
-    mkfs.btrfs --force --label os ${BLOCK_DEVICE}
-    mkdir --parents ${MOUNT_POINT}
-    mount ${BLOCK_DEVICE} ${MOUNT_POINT} --options defaults,ssd,discard
-
-    # Create the btrfs subvolume magic
-    btrfs subvolume list ${MOUNT_POINT}
-    btrfs subvolume create ${MOUNT_POINT}/@
-    btrfs subvolume create ${MOUNT_POINT}/@snapshot
-    btrfs subvolume list ${MOUNT_POINT}
-    btrfs subvolume get-default ${MOUNT_POINT}
-    btrfs subvolume set-default 256 ${MOUNT_POINT}
-    umount ${MOUNT_POINT}
-
-    # Mount the subvolumes
-    mount ${BLOCK_DEVICE} ${MOUNT_POINT} --options defaults,ssd,discard,subvol=@
-    mkdir --parents ${MOUNT_POINT}/.snapshot
-    mount ${BLOCK_DEVICE} ${MOUNT_POINT}/.snapshot --options defaults,ssd,discard,subvol=@snapshot
-
-
 References
 ----------
 

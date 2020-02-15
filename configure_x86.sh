@@ -25,7 +25,7 @@ fi
 
 sed -i "/^#${LOCALE}.${ENCODING} ${ENCODING} /s/^#//" /etc/locale.gen
 locale-gen
-echo "LANG=${LOCALE}.${ENCODING}" > /etc/locale.conf
+echo "LANG=${LOCALE}.${ENCODING}" > /etc/locale.conf  # create
 echo "LANGUAGE=${LOCALE}" >> /etc/locale.conf
 echo "LC_ALL=C" >> /etc/locale.conf
 echo "KEYMAP=${KEYMAP}" > /etc/vconsole.conf
@@ -39,7 +39,7 @@ if [ -z "${DOMAIN}" ]; then
 fi
 
 echo "${HOSTNAME}" > /etc/hostname
-echo "127.0.0.1  localhost" >> /etc/hosts
+echo "127.0.0.1  localhost" >> /etc/hosts  # append
 echo "127.0.1.1  ${HOSTNAME} ${HOSTNAME}.${DOMAIN}" >> /etc/hosts
 echo "::1  localhost ip6-localhost ip6-loopback" >> /etc/hosts
 echo "ff02::1  ip6-allnodes" >> /etc/hosts
