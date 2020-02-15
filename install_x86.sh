@@ -2,6 +2,13 @@
 
 # Kick off the install procedure from the Arch Linux LiveCD
 
+# Install assumptions:
+# - UEFI
+# - SSD >= (2 * RAM) + 1 GB + n GB
+# - unencrypted root
+# - unencrypted swap
+# - btrfs root
+
 set -xe
 
 # -----------------------------------------------------------------------------
@@ -19,21 +26,22 @@ sfdisk "${DRIVE}" << EOF
 ,20G,S
 ,
 EOF
-mkfs.vfat -F32 ${DRIVE}1
-mkswap ${DRIVE}2
-mkfs.btrfs ${DRIVE}3
+mkfs.vfat -F32 "${DRIVE}1"
+mkswap "${DRIVE}2"
+mkfs.btrfs "${DRIVE}3"
 
 # ---==[ Install the base OS stuff ]==-----------------------------------------
-if [ -z "${MOUNT_POINT}" ]; then
-    MOUNT_POINT='/mnt'
+if [ -z "${MOUNT}" ]; then
+    MOUNT='/mnt'
 fi
 
-swapon ${DRIVE}2
+swapon "${DRIVE}2"
+mount "${DRIVE}" "${MOUNT}" --options defaults,ssd,discard
 exit
-pacstrap ${MOUNT_POINT} base linux linux-firmware
+pacstrap "${MOUNT}" base linux linux-firmware
 
 # ---==[ Build the fstab for the new system ]==--------------------------------
-genfstab -p -t UUID "${MOUNT_POINT}" >> "${MOUNT_POINT}/etc/fstab"
+genfstab -p -t UUID "${MOUNT}" >> "${MOUNT}/etc/fstab"
 
 # -----------------------------------------------------------------------------
 if [ -z "${TIMEZONE}" ]; then
@@ -55,7 +63,7 @@ if [ -z "${DOMAIN}" ]; then
     DOMAIN='localdomain'
 fi
 
-cp configure_x86.sh "${MOUNT_POINT}/tmp/configure_x86.sh"
+cp configure_x86.sh "${MOUNT}/tmp/configure_x86.sh"
 arch-chroot "${MOUNT_POINT}" \
     DOMAIN="${DOMAIN}" \
     DRIVE="${DRIVE}" \
