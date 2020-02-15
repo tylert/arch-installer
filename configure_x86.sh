@@ -7,7 +7,7 @@ set -xe
 # ---==[ Set up the timezone and system clock ]==------------------------------
 if [ -z "${TIMEZONE}" ]; then
     TIMEZONE='UTC'
-else
+fi
 
 ln -sf "/usr/share/zoneinfo/${TIMEZONE}" /etc/localtime
 hwclock --systohc --utc
@@ -28,7 +28,7 @@ locale-gen
 echo "LANG=${LOCALE}.${ENCODING}" > /etc/locale.conf  # create
 echo "LANGUAGE=${LOCALE}" >> /etc/locale.conf
 echo "LC_ALL=C" >> /etc/locale.conf
-echo "KEYMAP=${KEYMAP}" > /etc/vconsole.conf
+echo "KEYMAP=${KEYMAP}" > /etc/vconsole.conf  # create
 
 # ---==[ Set up the new hostname and hosts file ]==----------------------------
 if [ -z "${HOSTNAME}" ]; then
@@ -38,7 +38,7 @@ if [ -z "${DOMAIN}" ]; then
     DOMAIN='localdomain'
 fi
 
-echo "${HOSTNAME}" > /etc/hostname
+echo "${HOSTNAME}" > /etc/hostname  # create
 echo "127.0.0.1  localhost" >> /etc/hosts  # append
 echo "127.0.1.1  ${HOSTNAME} ${HOSTNAME}.${DOMAIN}" >> /etc/hosts
 echo "::1  localhost ip6-localhost ip6-loopback" >> /etc/hosts
@@ -54,6 +54,9 @@ systemctl enable sshd.service
 pacman --sync --noconfirm sudo
 # echo "${USERNAME} ALL=(ALL) ALL" > "/etc/sudoers.d/${USERNAME}"
 # XXX do more stuff here XXX
+
+# ---==[ Install other things we can't live without ]==------------------------
+pacman --sync --noconfirm vim
 
 # ---==[ Build initrd ]==------------------------------------------------------
 pacman --sync --noconfirm btrfs-progs

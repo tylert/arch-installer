@@ -5,9 +5,11 @@
 # Install assumptions:
 # - UEFI
 # - SSD >= (2 * RAM) + 1 GB + n GB
+# - swap is RAM + "a bit" (hibernate)
 # - unencrypted root
 # - unencrypted swap
 # - btrfs root
+# - boot is inside root
 
 set -xe
 
@@ -72,7 +74,7 @@ if [ -z "${DOMAIN}" ]; then
     DOMAIN='localdomain'
 fi
 
-cp configure_x86.sh "${MOUNT}/tmp/configure_x86.sh"
+cp configure_x86.sh "${MOUNT}/tmp/"
 arch-chroot "${MOUNT}" \
     DOMAIN="${DOMAIN}" \
     DRIVE="${DRIVE}" \
