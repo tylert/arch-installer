@@ -25,10 +25,12 @@ fi
 
 sed -i "/^#${LOCALE}.${ENCODING} ${ENCODING} /s/^#//" /etc/locale.gen
 locale-gen
-echo "LANG=${LOCALE}.${ENCODING}" > /etc/locale.conf  # create
+
+echo "LANG=${LOCALE}.${ENCODING}" > /etc/locale.conf
 echo "LANGUAGE=${LOCALE}" >> /etc/locale.conf
 echo "LC_ALL=C" >> /etc/locale.conf
-echo "KEYMAP=${KEYMAP}" > /etc/vconsole.conf  # create
+
+echo "KEYMAP=${KEYMAP}" > /etc/vconsole.conf
 
 # ---==[ Set up the new hostname and hosts file ]==----------------------------
 if [ -z "${HOSTNAME}" ]; then
@@ -38,8 +40,11 @@ if [ -z "${DOMAIN}" ]; then
     DOMAIN='localdomain'
 fi
 
-echo "${HOSTNAME}" > /etc/hostname  # create
-echo "127.0.0.1  localhost" >> /etc/hosts  # append
+echo "${HOSTNAME}" > /etc/hostname
+
+echo "# Static table lookup for hostnames." > /etc/hosts
+echo "# See hosts(5) for details." >> /etc/hosts
+echo "127.0.0.1  localhost" >> /etc/hosts
 echo "127.0.1.1  ${HOSTNAME} ${HOSTNAME}.${DOMAIN}" >> /etc/hosts
 echo "::1  localhost ip6-localhost ip6-loopback" >> /etc/hosts
 echo "ff02::1  ip6-allnodes" >> /etc/hosts

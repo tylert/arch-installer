@@ -28,6 +28,7 @@ sfdisk "${DRIVE}" << EOF
 ,20G,S
 ,
 EOF
+
 mkfs.vfat -F32 "${DRIVE}1"
 mkswap "${DRIVE}2"
 mkfs.btrfs --force --label os "${DRIVE}3"
@@ -52,38 +53,16 @@ mount "${DRIVE}3" "${MOUNT}/.snapshot" --options defaults,ssd,discard,subvol=@sn
 
 # ---==[ Install the OS and build the fstab file ]==---------------------------
 pacstrap "${MOUNT}" base linux linux-firmware
-genfstab -p -t UUID "${MOUNT}" >> "${MOUNT}/etc/fstab"  # append
+
+echo "# Static information about the filesystems." > "${MOUNT}/etc/fstab"
+echo "# See fstab(5) for details." >> "${MOUNT}/etc/fstab"
+echo "" >> "${MOUNT}/etc/fstab"
+echo "# <file system> <dir> <type> <options> <dump> <pass>" >> "${MOUNT}/etc/fstab"
+genfstab -p -t UUID "${MOUNT}" >> "${MOUNT}/etc/fstab"
 
 # ---==[ Configure the new system ]==------------------------------------------
-if [ -z "${TIMEZONE}" ]; then
-    TIMEZONE='UTC'
-else
-if [ -z "${LOCALE}" ]; then
-    LOCALE='en_CA'
-fi
-if [ -z "${ENCODING}" ]; then
-    ENCODING='UTF-8'
-fi
-if [ -z "${KEYMAP}" ]; then
-    KEYMAP='us'
-fi
-if [ -z "${HOSTNAME}" ]; then
-    HOSTNAME='cuckoo'
-fi
-if [ -z "${DOMAIN}" ]; then
-    DOMAIN='localdomain'
-fi
-
 cp configure_x86.sh "${MOUNT}/root/"
-arch-chroot "${MOUNT}" \
-    DOMAIN="${DOMAIN}" \
-    DRIVE="${DRIVE}" \
-    ENCODING="${ENCODING}" \
-    HOSTNAME="${HOSTNAME}" \
-    KEYMAP="${KEYMAP}" \
-    LOCALE="${LOCALE}" \
-    TIMEZONE="${TIMEZONE}" \
-    /root/configure_x86.sh
+arch-chroot "${MOUNT}" /root/configure_x86.sh
 
 # -----------------------------------------------------------------------------
 # reboot
