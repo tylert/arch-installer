@@ -50,7 +50,7 @@ mount "${DRIVE}3" "${MOUNT}/.snapshot" --options defaults,ssd,discard,subvol=@sn
 
 # ---==[ Install the OS and build the fstab file ]==---------------------------
 timedatectl set-ntp true
-pacstrap "${MOUNT}" base linux linux-firmware
+pacstrap "${MOUNT}" base
 
 cat << EOF > "${MOUNT}/etc/fstab"
 # Static information about the filesystems.
@@ -61,6 +61,6 @@ EOF
 genfstab -p -t UUID "${MOUNT}" >> "${MOUNT}/etc/fstab"
 
 # ---==[ Configure the new system ]==------------------------------------------
-cp configure_x86.sh "${MOUNT}/root/"
-arch-chroot "${MOUNT}" /root/configure_x86.sh
-rm "${MOUNT}/root/configure_x86.sh"
+cp configure_x86_uefi.sh "${MOUNT}/root/"
+arch-chroot "${MOUNT}" /root/configure_x86_uefi.sh
+rm "${MOUNT}/root/configure_x86_uefi.sh"

@@ -17,7 +17,7 @@ Installing
 
 To start the install process (including some sample environment variables)::
 
-    NEWHOSTNAME=numuh NEWUSERNAME=sheen ./install_x86.sh
+    NEWHOSTNAME=numuh NEWUSERNAME=sheen ./install_x86_uefi.sh
 
 
 References
