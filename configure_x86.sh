@@ -38,8 +38,8 @@ echo "KEYMAP=${KEYMAP}" > /etc/vconsole.conf
 if [ -z "${NEWHOSTNAME}" ]; then
     NEWHOSTNAME='cuckoo'
 fi
-if [ -z "${DOMAIN}" ]; then
-    DOMAIN='localdomain'
+if [ -z "${NEWDOMAIN}" ]; then
+    NEWDOMAIN='localdomain'
 fi
 
 echo "${NEWHOSTNAME}" > /etc/hostname
@@ -48,7 +48,7 @@ cat << EOF > /etc/hosts
 # Static table lookup for hostnames.
 # See hosts(5) for details.
 127.0.0.1  localhost
-127.0.1.1  ${NEWHOSTNAME} ${NEWHOSTNAME}.${DOMAIN}
+127.0.1.1  ${NEWHOSTNAME} ${NEWHOSTNAME}.${NEWDOMAIN}
 ::1  localhost ip6-localhost ip6-loopback
 ff02::1  ip6-allnodes
 ff02::2  ip6-allrouters
@@ -71,12 +71,12 @@ systemctl enable sshd.service
 if [ -z "${NEWUSERNAME}" ]; then
     NEWUSERNAME='marvin'
 fi
-if [ -z "${PASSWORD}" ]; then
-    PASSWORD='youwontlikeit'
+if [ -z "${NEWPASSWORD}" ]; then
+    NEWPASSWORD='youwontlikeit'
 fi
 
 useradd -m "${NEWUSERNAME}"
-echo -e "${PASSWORD}\n${PASSWORD}" | passwd "${NEWUSERNAME}"
+echo -e "${NEWPASSWORD}\n${NEWPASSWORD}" | passwd "${NEWUSERNAME}"
 
 pacman --sync --noconfirm sudo
 echo "${NEWUSERNAME} ALL=(ALL) ALL" > "/etc/sudoers.d/${NEWUSERNAME}"
