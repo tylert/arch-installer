@@ -4,7 +4,7 @@
 
 set -xe
 
-# ---==[ Set up the timezone and clock ]==-------------------------------------
+# ---==[ Set up the timezone and system clock ]==------------------------------
 if [ -z "${TIMEZONE}" ]; then
     TIMEZONE='UTC'
 else
@@ -30,7 +30,7 @@ echo "LANGUAGE=${LOCALE}" >> /etc/locale.conf
 echo "LC_ALL=C" >> /etc/locale.conf
 echo "KEYMAP=${KEYMAP}" > /etc/vconsole.conf
 
-# ---==[ Set up hostname and hosts file ]==------------------------------------
+# ---==[ Set up the new hostname and hosts file ]==----------------------------
 if [ -z "${HOSTNAME}" ]; then
     HOSTNAME='cuckoo'
 fi
@@ -52,13 +52,13 @@ systemctl enable sshd.service
 
 # ---==[ Set up users and groups ]==-------------------------------------------
 pacman --sync --noconfirm sudo
-# echo "${USERNAME} ALL=(ALL) ALL" > /etc/sudoers.d/${USERNAME}
+# echo "${USERNAME} ALL=(ALL) ALL" > "/etc/sudoers.d/${USERNAME}"
 # XXX do more stuff here XXX
 
 # ---==[ Build initrd ]==------------------------------------------------------
 pacman --sync --noconfirm btrfs-progs
-# XXX do more stuff here XXX
 # /etc/mkinitcpio.conf
+# XXX do more stuff here XXX
 # HOOKS="base udev ... block filesystems ..."
 # HOOKS="base udev ... block lvm2 filesystems ..."
 # HOOKS="... encrypt ... filesystems ..."
@@ -69,5 +69,5 @@ mkinitcpio -p linux
 # XXX do more stuff here XXX
 # ls /sys/firmware/efi/efivars
 pacman --sync --noconfirm grub
-# grub-install --target=i386-pc "${BOOTDEVICE}"
+# grub-install --target=i386-pc "${DRIVE}"
 # grub-mkconfig -o /boot/grub/grub.cfg
