@@ -45,13 +45,14 @@ echo "::1  localhost ip6-localhost ip6-loopback" >> /etc/hosts
 echo "ff02::1  ip6-allnodes" >> /etc/hosts
 echo "ff02::2  ip6-allrouters" >> /etc/hosts
 
-# ---==[ Set up networking junk ]==--------------------------------------------
+# ---==[ Set up networking ]==-------------------------------------------------
 pacman --sync --noconfirm dhcpcd openssh
 systemctl enable dhcpcd
 systemctl enable sshd.service
 
 # ---==[ Set up users and groups ]==-------------------------------------------
 pacman --sync --noconfirm sudo
+# echo "${USERNAME} ALL=(ALL) ALL" > /etc/sudoers.d/${USERNAME}
 # XXX do more stuff here XXX
 
 # ---==[ Build initrd ]==------------------------------------------------------
@@ -68,5 +69,5 @@ mkinitcpio -p linux
 # XXX do more stuff here XXX
 # ls /sys/firmware/efi/efivars
 pacman --sync --noconfirm grub
-grub-install --target=i386-pc "${BOOTDEVICE}"
-grub-mkconfig -o /boot/grub/grub.cfg
+# grub-install --target=i386-pc "${BOOTDEVICE}"
+# grub-mkconfig -o /boot/grub/grub.cfg

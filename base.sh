@@ -8,24 +8,29 @@ set -xe
 timedatectl set-ntp true
 
 # ---==[ Partition, format and mount the OS drive ]==--------------------------
-TARGET='/mnt/arch'
+TARGET='/mnt'
 # XXX do more stuff here XXX
 
 # -----------------------------------------------------------------------------
 pacstrap ${TARGET} base linux linux-firmware btrfs-progs wireguard-arch wireguard-tools
 
-# Select mirror and do base install
-# cp base_chroot.sh ${TARGET}/root/base_chroot.sh
-
 # -----------------------------------------------------------------------------
 genfstab -p -t UUID ${TARGET} >> ${TARGET}/etc/fstab
+
+# -----------------------------------------------------------------------------
+# Select mirror and do base install
+# cp base_chroot.sh ${TARGET}/root/base_chroot.sh
 
 # -----------------------------------------------------------------------------
 arch-chroot ${TARGET}
 # arch-chroot ${TARGET} \
 #     BOOTDEVICE='/dev/sda' \
-#     LOCALE='en_CA' ENCODING='UTF-8' KEYMAP='us' TIMEZONE='Canada/Eastern' \
-#     HOSTNAME='cuckoo' DOMAIN='localdomain' \
+#     DOMAIN='localdomain' \
+#     ENCODING='UTF-8' \
+#     HOSTNAME='cuckoo' \
+#     KEYMAP='us' \
+#     LOCALE='en_CA' \
+#     TIMEZONE='Canada/Eastern' \
 #     /root/base_chroot.sh
 
 reboot
