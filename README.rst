@@ -2,14 +2,22 @@ Arch Linux Install
 ==================
 
 
-Starting
---------
+Remote Control
+--------------
 
-First, boot the system from the ISO (via USB).  Second, enable ssh and give root a password::
+First, boot the system from the ISO then configure a password for the root user
+and start the ssh server::
 
-    systemctl enable sshd.service
-    systemctl start sshd.service
     passwd
+    systemctl start sshd.service
+
+
+Installing
+----------
+
+To start the install process (including some sample environment variables)::
+
+    HOSTNAME=numuh USERNAME=sheen ./install_x86.sh
 
 
 References

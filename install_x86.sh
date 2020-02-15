@@ -54,10 +54,12 @@ mount "${DRIVE}3" "${MOUNT}/.snapshot" --options defaults,ssd,discard,subvol=@sn
 # ---==[ Install the OS and build the fstab file ]==---------------------------
 pacstrap "${MOUNT}" base linux linux-firmware
 
-echo "# Static information about the filesystems." > "${MOUNT}/etc/fstab"
-echo "# See fstab(5) for details." >> "${MOUNT}/etc/fstab"
-echo "" >> "${MOUNT}/etc/fstab"
-echo "# <file system> <dir> <type> <options> <dump> <pass>" >> "${MOUNT}/etc/fstab"
+cat << EOF > "${MOUNT}/etc/fstab"
+# Static information about the filesystems.
+# See fstab(5) for details.
+
+# <file system> <dir> <type> <options> <dump> <pass>
+EOF
 genfstab -p -t UUID "${MOUNT}" >> "${MOUNT}/etc/fstab"
 
 # ---==[ Configure the new system ]==------------------------------------------
