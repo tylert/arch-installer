@@ -74,7 +74,7 @@ if [ -z "${DOMAIN}" ]; then
     DOMAIN='localdomain'
 fi
 
-cp configure_x86.sh "${MOUNT}/tmp/"
+cp configure_x86.sh "${MOUNT}/root/"
 arch-chroot "${MOUNT}" \
     DOMAIN="${DOMAIN}" \
     DRIVE="${DRIVE}" \
@@ -83,7 +83,7 @@ arch-chroot "${MOUNT}" \
     KEYMAP="${KEYMAP}" \
     LOCALE="${LOCALE}" \
     TIMEZONE="${TIMEZONE}" \
-    /tmp/configure_x86.sh
+    /root/configure_x86.sh
 
 # -----------------------------------------------------------------------------
 # reboot
