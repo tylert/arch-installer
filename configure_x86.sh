@@ -56,9 +56,16 @@ systemctl enable dhcpcd
 systemctl enable sshd.service
 
 # ---==[ Set up a base user and group ]==--------------------------------------
+if [ -z "${USERNAME}" ]; then
+    USERNAME='marvin'
+fi
+if [ -z "${PASSWORD}" ]; then
+    PASSWORD='youwontlikeit'
+fi
+
 pacman --sync --noconfirm sudo
-# echo "${USERNAME} ALL=(ALL) ALL" > "/etc/sudoers.d/${USERNAME}"
-# XXX do more stuff here XXX
+echo "${USERNAME} ALL=(ALL) ALL" > "/etc/sudoers.d/${USERNAME}"
+echo "${PASSWORD}" | passwd "${USERNAME}"
 
 # ---==[ Install other things we can't live without ]==------------------------
 pacman --sync --noconfirm vim
@@ -77,5 +84,5 @@ mkinitcpio -p linux
 # XXX do more stuff here XXX
 # ls /sys/firmware/efi/efivars
 pacman --sync --noconfirm grub
-# grub-install --target=i386-pc "${DRIVE}"
-# grub-mkconfig -o /boot/grub/grub.cfg
+grub-install --target=i386-pc "${DRIVE}"
+grub-mkconfig -o /boot/grub/grub.cfg
