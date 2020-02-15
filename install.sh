@@ -31,8 +31,8 @@ pacstrap ${MOUNT_POINT} base linux linux-firmware
 genfstab -p -t UUID "${MOUNT_POINT}" >> "${MOUNT_POINT}/etc/fstab"
 
 # -----------------------------------------------------------------------------
-cp configure.sh ${MOUNT_POINT}/tmp/configure.sh
-arch-chroot ${MOUNT_POINT} \
+cp configure.sh "${MOUNT_POINT}/tmp/configure.sh"
+arch-chroot "${MOUNT_POINT}" \
     DOMAIN="${DOMAIN}" \
     DRIVE="${DRIVE}" \
     ENCODING="${ENCODING}" \
