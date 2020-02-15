@@ -73,7 +73,7 @@ if [ -z "${DOMAIN}" ]; then
 fi
 
 cp configure_x86.sh "${MOUNT}/tmp/configure_x86.sh"
-arch-chroot "${MOUNT_POINT}" \
+arch-chroot "${MOUNT}" \
     DOMAIN="${DOMAIN}" \
     DRIVE="${DRIVE}" \
     ENCODING="${ENCODING}" \
