@@ -1,10 +1,6 @@
 #!/usr/bin/env bash
 
-# Kick off the install procedure from the archiso CD
-
-# Pre-flight checklist:
-# 1.  Network is up.
-# 2.  OS drive is attached/available.
+# Kick off the install procedure from the Arch Linux LiveCD
 
 set -xe
 
@@ -15,17 +11,25 @@ timedatectl set-ntp true
 if [ -z "${DRIVE}" ]; then
     DRIVE='/dev/sda'
 fi
+
+dd if=/dev/zero of="${DRIVE}" bs=1M count=8
+echo 'label: gpt' | sfdisk "${DRIVE}"
+sfdisk "${DRIVE}" << EOF
+,256M,U
+,20G,S
+,
+EOF
+mkfs.vfat -F32 ${DRIVE}1
+mkswap ${DRIVE}2
+mkfs.btrfs ${DRIVE}3
+
+# ---==[ Install the base OS stuff ]==-----------------------------------------
 if [ -z "${MOUNT_POINT}" ]; then
     MOUNT_POINT='/mnt'
 fi
 
-dd if=/dev/zero of="${DRIVE}" bs=1M count=8
-sfdisk "${DRIVE}" << EOF
-,
-EOF
-# XXX do more stuff here XXX
-
-# ---==[ Install the base OS stuff ]==-----------------------------------------
+swapon ${DRIVE}2
+exit
 pacstrap ${MOUNT_POINT} base linux linux-firmware
 
 # ---==[ Build the fstab for the new system ]==--------------------------------
