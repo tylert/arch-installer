@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 
-# Things to run inside our arch-chroot
+# Do the things that must be done inside the arch-chroot
 
 set -xe
 
 # ---==[ Set up the timezone and clock ]==-------------------------------------
-if [ ! -z "${TIMEZONE}" ]; then
+if [ -z "${TIMEZONE}" ]; then
     TIMEZONE='UTC'
 else
 
@@ -13,13 +13,13 @@ ln -sf "/usr/share/zoneinfo/${TIMEZONE}" /etc/localtime
 hwclock --systohc --utc
 
 # ---==[ Set up the system language, locale and keymap ]==---------------------
-if [ ! -z "${LOCALE}" ]; then
+if [ -z "${LOCALE}" ]; then
     LOCALE='en_CA'
 fi
-if [ ! -z "${ENCODING}" ]; then
+if [ -z "${ENCODING}" ]; then
     ENCODING='UTF-8'
 fi
-if [ ! -z "${KEYMAP}" ]; then
+if [ -z "${KEYMAP}" ]; then
     KEYMAP='us'
 fi
 
@@ -31,10 +31,10 @@ echo "LC_ALL=C" >> /etc/locale.conf
 echo "KEYMAP=${KEYMAP}" > /etc/vconsole.conf
 
 # ---==[ Set up hostname and hosts file ]==------------------------------------
-if [ ! -z "${HOSTNAME}" ]; then
+if [ -z "${HOSTNAME}" ]; then
     HOSTNAME='cuckoo'
 fi
-if [ ! -z "${DOMAIN}" ]; then
+if [ -z "${DOMAIN}" ]; then
     DOMAIN='localdomain'
 fi
 
@@ -46,7 +46,7 @@ echo "ff02::1  ip6-allnodes" >> /etc/hosts
 echo "ff02::2  ip6-allrouters" >> /etc/hosts
 
 # ---==[ Set up networking ]==-------------------------------------------------
-pacman --sync --noconfirm dhcpcd openssh
+pacman --sync --noconfirm dhcpcd openssh wireguard-arch wireguard-tools
 systemctl enable dhcpcd
 systemctl enable sshd.service
 
