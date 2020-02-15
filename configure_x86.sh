@@ -50,7 +50,7 @@ pacman --sync --noconfirm dhcpcd openssh wireguard-arch wireguard-tools
 systemctl enable dhcpcd
 systemctl enable sshd.service
 
-# ---==[ Set up users and groups ]==-------------------------------------------
+# ---==[ Set up a base user and group ]==--------------------------------------
 pacman --sync --noconfirm sudo
 # echo "${USERNAME} ALL=(ALL) ALL" > "/etc/sudoers.d/${USERNAME}"
 # XXX do more stuff here XXX

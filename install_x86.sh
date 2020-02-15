@@ -18,6 +18,7 @@ fi
 if [ -z "${MOUNT_POINT}" ]; then
     MOUNT_POINT='/mnt'
 fi
+
 dd if=/dev/zero of="${DRIVE}" bs=1M count=8
 sfdisk "${DRIVE}" << EOF
 ,
@@ -31,7 +32,26 @@ pacstrap ${MOUNT_POINT} base linux linux-firmware
 genfstab -p -t UUID "${MOUNT_POINT}" >> "${MOUNT_POINT}/etc/fstab"
 
 # -----------------------------------------------------------------------------
-cp configure.sh "${MOUNT_POINT}/tmp/configure.sh"
+if [ -z "${TIMEZONE}" ]; then
+    TIMEZONE='UTC'
+else
+if [ -z "${LOCALE}" ]; then
+    LOCALE='en_CA'
+fi
+if [ -z "${ENCODING}" ]; then
+    ENCODING='UTF-8'
+fi
+if [ -z "${KEYMAP}" ]; then
+    KEYMAP='us'
+fi
+if [ -z "${HOSTNAME}" ]; then
+    HOSTNAME='cuckoo'
+fi
+if [ -z "${DOMAIN}" ]; then
+    DOMAIN='localdomain'
+fi
+
+cp configure_x86.sh "${MOUNT_POINT}/tmp/configure_x86.sh"
 arch-chroot "${MOUNT_POINT}" \
     DOMAIN="${DOMAIN}" \
     DRIVE="${DRIVE}" \
@@ -40,7 +60,7 @@ arch-chroot "${MOUNT_POINT}" \
     KEYMAP="${KEYMAP}" \
     LOCALE="${LOCALE}" \
     TIMEZONE="${TIMEZONE}" \
-    /tmp/configure.sh
+    /tmp/configure_x86.sh
 
 # -----------------------------------------------------------------------------
 # reboot
