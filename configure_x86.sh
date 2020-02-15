@@ -72,11 +72,11 @@ if [ -z "${NEWUSERNAME}" ]; then
     NEWUSERNAME='marvin'
 fi
 if [ -z "${PASSWORD}" ]; then
-    PASSWORD=''
+    PASSWORD='youwontlikeit'
 fi
 
 useradd -m "${NEWUSERNAME}"
-# XXX TODO FIXME Set the password for the new user properly
+echo -e "${PASSWORD}\n${PASSWORD}" | passwd "${NEWUSERNAME}"
 
 pacman --sync --noconfirm sudo
 echo "${NEWUSERNAME} ALL=(ALL) ALL" > "/etc/sudoers.d/${NEWUSERNAME}"
