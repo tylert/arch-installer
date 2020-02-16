@@ -19,8 +19,8 @@ if [ -z "${DRIVE}" ]; then
 fi
 
 dd if=/dev/zero of="${DRIVE}" bs=1M count=8
-echo 'label: gpt' | sfdisk "${DRIVE}"
-sfdisk "${DRIVE}" << EOF
+echo 'label: gpt' | sfdisk --force "${DRIVE}"
+sfdisk --force "${DRIVE}" << EOF
 ,256M,U
 ,20G,S
 ,
