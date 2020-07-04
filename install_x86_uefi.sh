@@ -13,6 +13,9 @@
 
 set -xe
 
+loadkeys "${KEYMAP}"
+# look in /usr/share/kbd/keymaps
+
 # ---==[ Repartition and format the OS drive ]==-------------------------------
 if [ -z "${DRIVE}" ]; then
     DRIVE='/dev/sda'
@@ -25,8 +28,10 @@ sfdisk --force "${DRIVE}" << EOF
 ,20G,S
 ,
 EOF
+partx "${DRIVE}"
+# might have to "dmsetup remove /dev/mapper/foo"
 
-mkfs.vfat -F32 "${DRIVE}1"
+mkfs.vfat -F 32 "${DRIVE}1"
 mkswap "${DRIVE}2"
 mkfs.btrfs --force --label os "${DRIVE}3"
 
@@ -35,22 +40,20 @@ if [ -z "${MOUNT}" ]; then
     MOUNT='/mnt'
 fi
 
-mount "${DRIVE}3" "${MOUNT}" --options defaults,ssd,discard
+mount "${DRIVE}3" "${MOUNT}" --options subvolid=5
 btrfs subvolume create "${MOUNT}/@"
-btrfs subvolume create "${MOUNT}/@snapshot"
-btrfs subvolume set-default 256 "${MOUNT}"
 umount "${MOUNT}"
-mount "${DRIVE}3" "${MOUNT}" --options defaults,ssd,discard,subvol=@
+mount "${DRIVE}3" "${MOUNT}" --options subvol=@
 
 mkdir --parents "${MOUNT}/boot/EFI"
 mount "${DRIVE}1" "${MOUNT}/boot/EFI"
 swapon "${DRIVE}2"
-mkdir --parents "${MOUNT}/.snapshot"
-mount "${DRIVE}3" "${MOUNT}/.snapshot" --options defaults,ssd,discard,subvol=@snapshot
 
 # ---==[ Install the OS and build the fstab file ]==---------------------------
 timedatectl set-ntp true
 pacstrap "${MOUNT}" base
+# basestrap "${MOUNT}" base
+# manjaro https://forum.manjaro.org/t/howto-install-manjaro-using-cli-only/108203
 
 cat << EOF > "${MOUNT}/etc/fstab"
 # Static information about the filesystems.
