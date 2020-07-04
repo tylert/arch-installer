@@ -13,6 +13,10 @@
 
 set -xe
 
+if [ -z "${KEYMAP}" ]; then
+    KEYMAP='us'
+fi
+
 loadkeys "${KEYMAP}"
 # look in /usr/share/kbd/keymaps
 

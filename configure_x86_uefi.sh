@@ -63,7 +63,7 @@ EOF
 # nameserver 192.168.0.1
 
 # ---==[ Set up networking ]==-------------------------------------------------
-pacman --sync --noconfirm dhcpcd openssh wireguard-arch wireguard-tools
+pacman --sync --noconfirm dhcpcd openssh wireguard-tools
 systemctl enable dhcpcd
 systemctl enable sshd.service
 
