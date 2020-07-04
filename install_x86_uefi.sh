@@ -13,6 +13,7 @@
 
 set -xe
 
+# ---==[ Make sure the keyboard is available ]==-------------------------------
 if [ -z "${KEYMAP}" ]; then
     KEYMAP='us'
 fi
@@ -71,3 +72,8 @@ genfstab -p -t UUID "${MOUNT}" >> "${MOUNT}/etc/fstab"
 cp configure_x86_uefi.sh "${MOUNT}/root/"
 arch-chroot "${MOUNT}" /root/configure_x86_uefi.sh
 rm "${MOUNT}/root/configure_x86_uefi.sh"
+
+# ---==[ Unmount everything ]==------------------------------------------------
+# swapoff "${DRIVE}2"
+# umount "${MOUNT}/boot/EFI"
+# umount "${MOUNT}"
