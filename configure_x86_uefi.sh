@@ -90,7 +90,7 @@ pacman --sync --noconfirm vim
 # HOOKS="base udev ... block filesystems ..."
 # HOOKS="base udev ... block lvm2 filesystems ..."
 # HOOKS="... encrypt ... filesystems ..."
-mkinitcpio -p
+mkinitcpio -p linux
 
 # ---==[ Set up boot loader stuff ]==------------------------------------------
 pacman --sync --noconfirm grub efibootmgr
