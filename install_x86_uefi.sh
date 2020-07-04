@@ -51,7 +51,7 @@ swapon "${DRIVE}2"
 
 # ---==[ Install the OS and build the fstab file ]==---------------------------
 timedatectl set-ntp true
-pacstrap "${MOUNT}" base
+pacstrap "${MOUNT}" base linux linux-firmware btrfs-progs
 # basestrap "${MOUNT}" base
 # manjaro https://forum.manjaro.org/t/howto-install-manjaro-using-cli-only/108203
 

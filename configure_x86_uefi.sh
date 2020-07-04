@@ -85,7 +85,6 @@ echo "${NEWUSERNAME} ALL=(ALL) ALL" > "/etc/sudoers.d/${NEWUSERNAME}"
 pacman --sync --noconfirm vim
 
 # ---==[ Build initrd ]==------------------------------------------------------
-pacman --sync --noconfirm linux linux-firmware btrfs-progs
 # /etc/mkinitcpio.conf
 # XXX Maybe do more stuff here XXX
 # HOOKS="base udev ... block filesystems ..."
