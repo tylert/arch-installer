@@ -30,11 +30,11 @@ sfdisk "${drive}" << EOF
 ,100M
 ,
 EOF
-mkfs.vfat -n boot "${first_partition}"
+mkfs.vfat -n BOOT "${first_partition}"
 if [ "${root_filesystem_type}" = 'btrfs' ]; then
-    mkfs.btrfs --force --label os "${second_partition}"
+    mkfs.btrfs --force --label OS "${second_partition}"
 else
-    mkfs.ext4 -F -L os "${second_partition}"
+    mkfs.ext4 -F -L OS "${second_partition}"
 fi
 
 # Mount the drive and create the necessary locations
