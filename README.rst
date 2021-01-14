@@ -17,24 +17,24 @@ Installing
 
 To start the install process (including some sample environment variables)::
 
-    NEWHOSTNAME=numuh NEWUSERNAME=sheen ./install_x86_uefi.sh
+    NEWHOSTNAME=numuh NEWUSERNAME=sheen NEWPASSWORD=awesome ./install_x86_uefi.sh
 
 
-AUR + ZFS
----------
+AUR ZFS
+-------
 
 ::
 
-    # Install the yay AUR helper
-    sudo pacman --sync --noconfim git base-devel
-    git clone https://aur.archlinux.org/yay.git
-    pushd yay
+    # Install ZFS
+    sudo pacman --sync --noconfirm git base-devel linux-headers
+    git clone https://aur.archlinux.org/zfs-utils.git
+    git clone https://aur.archlinux.org/zfs-dkms.git
+    pushd zfs-utils
     makepkg -si
     popd
-
-    # Install ZFS
-    sudo pacman --sync --noconfim linux-headers
-    yay -Syu zfs-dkms zfs-utils
+    pushd zfs-dkms
+    makepkg -si
+    popd
 
 
 References
