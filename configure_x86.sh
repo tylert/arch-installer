@@ -94,5 +94,5 @@ mkinitcpio -p linux
 
 # ---==[ Set up boot loader stuff ]==------------------------------------------
 pacman --sync --noconfirm grub
-grub-install --target=x86_64 "${DRIVE}"
+grub-install --target=i386-pc "${DRIVE}"
 grub-mkconfig -o /boot/grub/grub.cfg
