@@ -64,7 +64,7 @@ genfstab -p -t UUID "${MOUNT}" >> "${MOUNT}/etc/fstab"
 
 # ---==[ Configure the new system ]==------------------------------------------
 cp configure_x86.sh "${MOUNT}/root/"
-arch-chroot "${MOUNT}" /root/configure_x86.sh
+arch-chroot "${MOUNT}" /root/configure_x86.sh "${DRIVE}"
 rm "${MOUNT}/root/configure_x86.sh"
 
 # ---==[ Unmount everything ]==------------------------------------------------

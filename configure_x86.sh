@@ -4,6 +4,13 @@
 
 set -xe
 
+# ---==[ Pass in the MBR drive ]==---------------------------------------------
+if [ -z "${0}" ]; then
+    DRIVE="${0}"
+else
+    DRIVE='/dev/sda'
+fi
+
 # ---==[ Set up the timezone and system clock ]==------------------------------
 if [ -z "${TIMEZONE}" ]; then
     TIMEZONE='UTC'
