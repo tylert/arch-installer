@@ -47,7 +47,7 @@ tar --warning=no-unknown-keyword --directory="${mount_point}" \
 # XXX FIXME TODO Get this part working to reduce the dumb, non-automated junk
 # chroot "${mount_point}" pacman-key --init && \
 #     pacman-key --populate archlinuxarm && \
-#     pacman -Syu --noconfirm sudo && \
+#     pacman --sysupgrade --sync --refresh --noconfirm sudo && \
 #     echo "alarm ALL=(ALL) ALL" > /etc/sudoers.d/alarm
 
 # Flash the boot sector
