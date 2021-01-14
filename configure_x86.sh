@@ -93,5 +93,6 @@ pacman --sync --noconfirm vim
 mkinitcpio -p linux
 
 # ---==[ Set up boot loader stuff ]==------------------------------------------
+pacman --sync --noconfirm grub
 grub-install --target=x86_64-efi "${DRIVE}"
 grub-mkconfig -o /boot/grub/grub.cfg
