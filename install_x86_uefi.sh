@@ -19,7 +19,7 @@ if [ -z "${KEYMAP}" ]; then
 fi
 
 loadkeys "${KEYMAP}"
-# look in /usr/share/kbd/keymaps
+# look in /usr/share/kbd/keymaps for keymap names
 
 # ---==[ Repartition and format the OS drive ]==-------------------------------
 if [ -z "${DRIVE}" ]; then
@@ -58,7 +58,6 @@ swapon "${DRIVE}2"
 timedatectl set-ntp true
 pacstrap "${MOUNT}" base linux linux-firmware btrfs-progs
 # basestrap "${MOUNT}" base
-# manjaro https://forum.manjaro.org/t/howto-install-manjaro-using-cli-only/108203
 
 cat << EOF > "${MOUNT}/etc/fstab"
 # Static information about the filesystems.
@@ -74,6 +73,6 @@ arch-chroot "${MOUNT}" /root/configure_x86_uefi.sh
 rm "${MOUNT}/root/configure_x86_uefi.sh"
 
 # ---==[ Unmount everything ]==------------------------------------------------
-# swapoff "${DRIVE}2"
-# umount "${MOUNT}/boot/EFI"
-# umount "${MOUNT}"
+swapoff "${DRIVE}2"
+umount "${MOUNT}/boot/EFI"
+umount "${MOUNT}"

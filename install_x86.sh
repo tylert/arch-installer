@@ -18,7 +18,7 @@ if [ -z "${KEYMAP}" ]; then
 fi
 
 loadkeys "${KEYMAP}"
-# look in /usr/share/kbd/keymaps
+# look in /usr/share/kbd/keymaps for keymap names
 
 # ---==[ Repartition and format the OS drive ]==-------------------------------
 if [ -z "${DRIVE}" ]; then

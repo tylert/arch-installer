@@ -17,6 +17,10 @@ Installing
 
 To start the install process (including some sample environment variables)::
 
+    curl -Ol https://raw.githubusercontent.com/tylert/arch-installer/master/install_x86_uefi.sh
+    curl -Ol https://raw.githubusercontent.com/tylert/arch-installer/master/configure_x86_uefi.sh
+    chmod +x install_x86_uefi.sh
+    chmod +x configure_x86_uefi.sh
     NEWHOSTNAME=numuh NEWUSERNAME=sheen NEWPASSWORD=awesome ./install_x86_uefi.sh
 
 
@@ -49,3 +53,9 @@ References
 * https://blog.chendry.org/2015/02/06/automating-arch-linux-installation.html
 * https://github.com/helmuthdu/aui
 * https://turlucode.com/arch-linux-install-guide-step-1-basic-installation/
+
+
+TODO
+----
+
+* repair the non-UEFI x86_64 installer script so grub works properly
