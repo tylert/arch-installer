@@ -51,7 +51,16 @@ btrfs Bulk Storage
     btrfs subvolume create /somewhere/@quux
     ...
 
+    # Enable compression automatically
+    btrfs property set /somewhere compression zstd
+    btrfs property set /somewhere/@foo compression zstd
+    btrfs property set /somewhere/@bar compression zstd
+    btrfs property set /somewhere/@baz compression zstd
+    btrfs property set /somewhere/@quux compression zstd
+    ...
+
     # Mount all the new subvolumes (and the main drive for snapshotting)
+    # The compress-force=zstd options is not needed if the property has been set
     mount -o compress-force=zstd,subvolid=5 /dev/mapper/${FIRST_DRIVE} /somewhere
     mount -o compress-force=zstd,subvol=@foo /dev/mapper/${FIRST_DRIVE} /elsewhere/foo
     mount -o compress-force=zstd,subvol=@bar /dev/mapper/${FIRST_DRIVE} /elsewhere/bar
