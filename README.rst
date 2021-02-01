@@ -24,6 +24,42 @@ To start the install process (including some sample environment variables)::
     NEWHOSTNAME=numuh NEWUSERNAME=sheen NEWPASSWORD=awesome ./install_x86_uefi.sh
 
 
+btrfs Bulk Storage
+------------------
+
+::
+
+    # Encrypt the drive and bring it online (the "ata-*" ones)
+    for DRIVE in ${FIRST_DRIVE} ${SECOND_DRIVE}; do
+        cryptsetup luksFormat /dev/disk/by-id/${DRIVE}
+        cryptsetup luksOpen /dev/disk/by-id/${DRIVE} ${DRIVE}
+    done
+
+    # Format the drive
+    mkfs.btrfs \
+        -m raid1 \
+        -d raid1 \
+        -L megaarray \
+        /dev/mapper/${FIRST_DRIVE} \
+        /dev/mapper/${SECOND_DRIVE} ...
+    mount /dev/mapper/${FIRST_DRIVE} /somewhere
+
+    # Create a bunch of subvolumes
+    btrfs subvolume create /somewhere/@foo
+    btrfs subvolume create /somewhere/@bar
+    btrfs subvolume create /somewhere/@baz
+    btrfs subvolume create /somewhere/@quux
+    ...
+
+    # Mount all the new subvolumes (and the main drive for snapshotting)
+    mount -o compress-force=zstd,subvolid=5 /dev/mapper/${FIRST_DRIVE} /somewhere
+    mount -o compress-force=zstd,subvol=@foo /dev/mapper/${FIRST_DRIVE} /elsewhere/foo
+    mount -o compress-force=zstd,subvol=@bar /dev/mapper/${FIRST_DRIVE} /elsewhere/bar
+    mount -o compress-force=zstd,subvol=@baz /dev/mapper/${FIRST_DRIVE} /elsewhere/baz
+    mount -o compress-force=zstd,subvol=@quux /dev/mapper/${FIRST_DRIVE} /elsewhere/quux
+    ...
+
+
 AUR ZFS
 -------
 
