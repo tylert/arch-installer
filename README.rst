@@ -59,6 +59,8 @@ btrfs Bulk Storage
     mount -o compress-force=zstd,subvol=@quux /dev/mapper/${FIRST_DRIVE} /elsewhere/quux
     ...
 
+* https://markmcb.com/2020/01/07/five-years-of-btrfs/
+
 
 AUR ZFS
 -------
