@@ -61,11 +61,11 @@ btrfs Bulk Storage
 
     # Mount all the new subvolumes (and the main drive for snapshotting)
     # The compress-force=zstd options is not needed if the property has been set
-    mount -o compress-force=zstd,subvolid=5 /dev/mapper/${FIRST_DRIVE} /somewhere
-    mount -o compress-force=zstd,subvol=@foo /dev/mapper/${FIRST_DRIVE} /elsewhere/foo
-    mount -o compress-force=zstd,subvol=@bar /dev/mapper/${FIRST_DRIVE} /elsewhere/bar
-    mount -o compress-force=zstd,subvol=@baz /dev/mapper/${FIRST_DRIVE} /elsewhere/baz
-    mount -o compress-force=zstd,subvol=@quux /dev/mapper/${FIRST_DRIVE} /elsewhere/quux
+    mount -o compress=zstd,subvolid=5 /dev/mapper/${FIRST_DRIVE} /somewhere
+    mount -o compress=zstd,subvol=@foo /dev/mapper/${FIRST_DRIVE} /elsewhere/foo
+    mount -o compress=zstd,subvol=@bar /dev/mapper/${FIRST_DRIVE} /elsewhere/bar
+    mount -o compress=zstd,subvol=@baz /dev/mapper/${FIRST_DRIVE} /elsewhere/baz
+    mount -o compress=zstd,subvol=@quux /dev/mapper/${FIRST_DRIVE} /elsewhere/quux
     ...
 
 * https://markmcb.com/2020/01/07/five-years-of-btrfs/
