@@ -74,6 +74,7 @@ btrfs Bulk Storage
 * http://snapper.io/
 * https://btrfs.wiki.kernel.org/index.php/Incremental_Backup#Available_Backup_Tools
 * https://github.com/AmesCornish/buttersink
+* https://crashingdaily.wordpress.com/2007/06/29/rsync-and-sudo-over-ssh/
 
 
 AUR ZFS
