@@ -77,6 +77,17 @@ btrfs Bulk Storage
 * https://crashingdaily.wordpress.com/2007/06/29/rsync-and-sudo-over-ssh/
 
 
+Rsync Over SSH With Sudo
+------------------------
+
+::
+
+    bubba ALL=NOPASSWD: /usr/bin/rsync
+
+    nohup rsync -avc --delete -e ssh --rsync-path='sudo rsync' /elsewhere/foo/ wickedserver:/elsewhere/foo/ &
+    disown
+
+
 AUR ZFS
 -------
 
