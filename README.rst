@@ -69,6 +69,11 @@ btrfs Bulk Storage
     ...
 
 * https://markmcb.com/2020/01/07/five-years-of-btrfs/
+* https://ownyourbits.com/2018/03/09/easy-sync-of-btrfs-snapshots-with-btrfs-sync/
+* https://ramsdenj.com/2016/04/05/using-btrfs-for-easy-backup-and-rollback.html
+* http://snapper.io/
+* https://btrfs.wiki.kernel.org/index.php/Incremental_Backup#Available_Backup_Tools
+* https://github.com/AmesCornish/buttersink
 
 
 AUR ZFS
