@@ -38,7 +38,7 @@ partx "${DRIVE}"
 
 mkfs.vfat -F 32 "${DRIVE}1"
 mkswap "${DRIVE}2"
-mkfs.btrfs --force --label os "${DRIVE}3"
+mkfs.btrfs --force --label OS "${DRIVE}3"
 
 # ---==[ Create subvolumes and mount subordinate partitions ]==----------------
 if [ -z "${MOUNT}" ]; then

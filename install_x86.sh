@@ -35,7 +35,7 @@ partx "${DRIVE}"
 # might have to "dmsetup remove /dev/mapper/foo"
 
 mkswap "${DRIVE}1"
-mkfs.btrfs --force --label os "${DRIVE}2"
+mkfs.btrfs --force --label OS "${DRIVE}2"
 
 # ---==[ Create subvolumes and mount subordinate partitions ]==----------------
 if [ -z "${MOUNT}" ]; then
