@@ -29,6 +29,9 @@ btrfs Bulk Storage
 
 ::
 
+    # Install required packages
+    pacman -S cryptsetup btrfs-progs smartmontools
+
     # Encrypt the drive and bring it online (the "ata-*" ones)
     for DRIVE in ${FIRST_DRIVE} ${SECOND_DRIVE}; do
         cryptsetup luksFormat /dev/disk/by-id/${DRIVE}
