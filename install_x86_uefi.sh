@@ -18,13 +18,15 @@ if [ -z "${KEYMAP}" ]; then
     KEYMAP='us'
 fi
 
+# Look in /usr/share/kbd/keymaps for keymap names
 loadkeys "${KEYMAP}"
-# look in /usr/share/kbd/keymaps for keymap names
 
 # ---==[ Repartition and format the OS drive ]==-------------------------------
 if [ -z "${DRIVE}" ]; then
     DRIVE='/dev/sda'
 fi
+
+# XXX FIXME TODO  Calculate size of swap partition based on amount of RAM
 
 dd if=/dev/zero of="${DRIVE}" bs=1M count=8
 echo 'label: gpt' | sfdisk --no-reread --force "${DRIVE}"

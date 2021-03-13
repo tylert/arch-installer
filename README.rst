@@ -27,10 +27,13 @@ To start the install process (including some sample environment variables)::
 btrfs Bulk Storage
 ------------------
 
-::
+Prepare all the data drives and mount them::
+
+    # Update the entire system to the latest versions
+    pacman --sync --refresh --upgrade
 
     # Install required packages
-    pacman -S cryptsetup btrfs-progs smartmontools
+    pacman --sync --noconfirm btrfs-progs cryptsetup rsync smartmontools
 
     # Encrypt the drive and bring it online (the "ata-*" ones)
     for DRIVE in ${FIRST_DRIVE} ${SECOND_DRIVE}; do
@@ -38,7 +41,7 @@ btrfs Bulk Storage
         cryptsetup luksOpen /dev/disk/by-id/${DRIVE} ${DRIVE}
     done
 
-    # Format the drive
+    # Format the drives
     mkfs.btrfs \
         -m raid1 \
         -d raid1 \
@@ -50,25 +53,19 @@ btrfs Bulk Storage
     # Create a bunch of subvolumes
     btrfs subvolume create /somewhere/@foo
     btrfs subvolume create /somewhere/@bar
-    btrfs subvolume create /somewhere/@baz
-    btrfs subvolume create /somewhere/@quux
     ...
 
     # Enable compression automatically
     btrfs property set /somewhere compression zstd
     btrfs property set /somewhere/@foo compression zstd
     btrfs property set /somewhere/@bar compression zstd
-    btrfs property set /somewhere/@baz compression zstd
-    btrfs property set /somewhere/@quux compression zstd
     ...
 
-    # Mount all the new subvolumes (and the main drive for snapshotting)
+    # Mount all the new subvolumes and the main drive for snapshotting
     # The compress-force=zstd options is not needed if the property has been set
     mount -o compress=zstd,subvolid=5 /dev/mapper/${FIRST_DRIVE} /somewhere
     mount -o compress=zstd,subvol=@foo /dev/mapper/${FIRST_DRIVE} /elsewhere/foo
     mount -o compress=zstd,subvol=@bar /dev/mapper/${FIRST_DRIVE} /elsewhere/bar
-    mount -o compress=zstd,subvol=@baz /dev/mapper/${FIRST_DRIVE} /elsewhere/baz
-    mount -o compress=zstd,subvol=@quux /dev/mapper/${FIRST_DRIVE} /elsewhere/quux
     ...
 
 * https://markmcb.com/2020/01/07/five-years-of-btrfs/
@@ -78,6 +75,18 @@ btrfs Bulk Storage
 * https://btrfs.wiki.kernel.org/index.php/Incremental_Backup#Available_Backup_Tools
 * https://github.com/AmesCornish/buttersink
 * https://crashingdaily.wordpress.com/2007/06/29/rsync-and-sudo-over-ssh/
+
+
+Other Awesome Packages
+----------------------
+
+::
+
+    # Update the entire system to the latest versions
+    pacman --sync --refresh --upgrade
+
+    # Install new essential packages
+    pacman --sync --noconfirm git man-db tree
 
 
 Rsync Over SSH With Sudo
@@ -96,8 +105,13 @@ AUR ZFS
 
 ::
 
-    # Install ZFS
-    sudo pacman --sync --noconfirm git base-devel linux-headers
+    # Update the entire system to the latest versions
+    pacman --sync --refresh --upgrade
+
+    # Prepare the build environment
+    pacman --sync --noconfirm base-devel git linux-headers
+
+    # Install ZFS packages
     git clone https://aur.archlinux.org/zfs-utils.git
     git clone https://aur.archlinux.org/zfs-dkms.git
     pushd zfs-utils
