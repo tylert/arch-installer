@@ -6,20 +6,20 @@
 
 set -e
 
-drive=/dev/sdb  # eMMC
+drive='/dev/sdb'  # eMMC
 first_partition="${drive}1"
-date="$(date +%Y-%m-%d)"  # latest
-root_tarball_remote=http://os.archlinuxarm.org/os/ArchLinuxARM-odroid-c2-latest.tar.gz
-root_tarball_local="/tmp/ArchLinuxARM-odroid-c2-${date}.tar.gz"
-root_filesystem_type=ext4
+date='latest'
+# root_tarball_remote=http://os.archlinuxarm.org/os/ArchLinuxARM-odroid-c2-latest.tar.gz
+root_tarball_local="/tmp/archlinux-${date}-odroid-c2.tar.gz"
+root_filesystem_type='ext4'
 mount_point="$(mktemp --dry-run)"  # unsafeish
 
 # Fetch the root filesystem tarball
-wget "${root_tarball_remote}" --continue --output-document="${root_tarball_local}"
+# wget "${root_tarball_remote}" --continue --output-document="${root_tarball_local}"
 
 # Format the drive
 dd if=/dev/zero of="${drive}" bs=1M count=8
-sfdisk "${drive}" << EOF
+sfdisk --force "${drive}" << EOF
 ,
 EOF
 if [ "${root_filesystem_type}" = 'btrfs' ]; then
@@ -45,7 +45,8 @@ tar --warning=no-unknown-keyword --directory="${mount_point}" \
 # You need the appropriate binaries in order to run a arm64 chroot on x86_64
 # On Debian, "apt-get install qemu qemu-user-static binfmt-support"
 # XXX FIXME TODO Get this part working to reduce the dumb, non-automated junk
-# chroot "${mount_point}" pacman-key --init && \
+# chroot "${mount_point}" && \
+#     pacman-key --init && \
 #     pacman-key --populate archlinuxarm && \
 #     pacman --sysupgrade --sync --refresh --noconfirm sudo && \
 #     echo "alarm ALL=(ALL) ALL" > /etc/sudoers.d/alarm

@@ -9,24 +9,24 @@
 
 set -e
 
-drive=/dev/mmcblk0  # uSD
+drive='/dev/mmcblk0'  # uSD
 first_partition="${drive}p1"
 second_partition="${drive}p2"
-date="$(date +%Y-%m-%d)"  # latest
+date='latest'
 # root_tarball_remote=http://os.archlinuxarm.org/os/ArchLinuxARM-rpi-4-latest.tar.gz
-root_tarball_remote=http://os.archlinuxarm.org/os/ArchLinuxARM-rpi-3-latest.tar.gz
+# root_tarball_remote=http://os.archlinuxarm.org/os/ArchLinuxARM-rpi-3-latest.tar.gz
 # root_tarball_remote=http://os.archlinuxarm.org/os/ArchLinuxARM-rpi-2-latest.tar.gz
 # root_tarball_remote=http://os.archlinuxarm.org/os/ArchLinuxARM-rpi-latest.tar.gz
-root_tarball_local="/tmp/ArchLinuxARM-rpi-3-${date}.tar.gz"
-root_filesystem_type=ext4
+root_tarball_local="/tmp/archlinux-${date}-rpi-4.tar.gz"
+root_filesystem_type='ext4'
 mount_point="$(mktemp --dry-run)"  # unsafeish
 
 # Fetch the root filesystem tarball
-wget "${root_tarball_remote}" --continue --output-document="${root_tarball_local}"
+# wget "${root_tarball_remote}" --continue --output-document="${root_tarball_local}"
 
 # Format the drive
 dd if=/dev/zero of="${drive}" bs=1M count=8
-sfdisk "${drive}" << EOF
+sfdisk --force "${drive}" << EOF
 ,100M
 ,
 EOF
@@ -56,7 +56,8 @@ tar --warning=no-unknown-keyword --directory="${mount_point}" \
 # You need the appropriate binaries in order to run a arm64 chroot on x86_64
 # On Debian, "apt-get install qemu qemu-user-static binfmt-support"
 # XXX FIXME TODO Get this part working to reduce the dumb, non-automated junk
-# chroot "${mount_point}" pacman-key --init && \
+# chroot "${mount_point}" && \
+#     pacman-key --init && \
 #     pacman-key --populate archlinuxarm && \
 #     pacman --sysupgrade --sync --refresh --noconfirm sudo && \
 #     echo "alarm ALL=(ALL) ALL" > /etc/sudoers.d/alarm
