@@ -13,11 +13,10 @@ drive='/dev/mmcblk0'  # uSD
 first_partition="${drive}p1"
 second_partition="${drive}p2"
 date='latest'
-# root_tarball_remote=http://os.archlinuxarm.org/os/ArchLinuxARM-rpi-4-latest.tar.gz
-# root_tarball_remote=http://os.archlinuxarm.org/os/ArchLinuxARM-rpi-3-latest.tar.gz
-# root_tarball_remote=http://os.archlinuxarm.org/os/ArchLinuxARM-rpi-2-latest.tar.gz
-# root_tarball_remote=http://os.archlinuxarm.org/os/ArchLinuxARM-rpi-latest.tar.gz
-root_tarball_local="/tmp/archlinux-${date}-rpi-4.tar.gz"
+# root_tarball_remote='http://os.archlinuxarm.org/os/ArchLinuxARM-rpi-4-latest.tar.gz'
+# root_tarball_remote='http://os.archlinuxarm.org/os/ArchLinuxARM-rpi-3-latest.tar.gz'
+# root_tarball_remote='http://os.archlinuxarm.org/os/ArchLinuxARM-rpi-aarch64-latest.tar.gz'
+root_tarball_local="/tmp/archlinux-${date}-rpi-aarch64.tar.gz"
 root_filesystem_type='ext4'
 mount_point="$(mktemp --dry-run)"  # unsafeish
 
@@ -27,7 +26,7 @@ mount_point="$(mktemp --dry-run)"  # unsafeish
 # Format the drive
 dd if=/dev/zero of="${drive}" bs=1M count=8
 sfdisk --force "${drive}" << EOF
-,100M
+,200M
 ,
 EOF
 mkfs.vfat -n BOOT "${first_partition}"

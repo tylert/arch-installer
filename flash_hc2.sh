@@ -9,7 +9,7 @@ set -e
 drive='/dev/mmcblk0'  # uSD
 first_partition="${drive}p1"
 date='latest'
-# root_tarball_remote=http://os.archlinuxarm.org/os/ArchLinuxARM-odroid-xu3-latest.tar.gz
+# root_tarball_remote='http://os.archlinuxarm.org/os/ArchLinuxARM-odroid-xu3-latest.tar.gz'
 root_tarball_local="/tmp/archlinux-${date}-odroid-xu3.tar.gz"
 root_filesystem_type='ext4'
 mount_point="$(mktemp --dry-run)"  # unsafeish

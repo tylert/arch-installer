@@ -9,7 +9,7 @@ set -e
 drive='/dev/sdb'  # eMMC
 first_partition="${drive}1"
 date='latest'
-# root_tarball_remote=http://os.archlinuxarm.org/os/ArchLinuxARM-odroid-c2-latest.tar.gz
+# root_tarball_remote='http://os.archlinuxarm.org/os/ArchLinuxARM-odroid-c2-latest.tar.gz'
 root_tarball_local="/tmp/archlinux-${date}-odroid-c2.tar.gz"
 root_filesystem_type='ext4'
 mount_point="$(mktemp --dry-run)"  # unsafeish
