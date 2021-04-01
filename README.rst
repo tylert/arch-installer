@@ -11,6 +11,8 @@ and start the ssh server::
     passwd
     systemctl start sshd.service
 
+* https://wiki.archlinux.org/index.php/Install_Arch_Linux_via_SSH
+
 
 Installing
 ----------
