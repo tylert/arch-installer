@@ -127,6 +127,7 @@ AUR ZFS
 References
 ----------
 
+* https://github.com/elasticdog/packer-arch/blob/master/arch-template.json
 * http://blog.redit.name/posts/2014/arch-linux-install-btrfs-root-with-snapshots.html
 * http://blog.fabio.mancinelli.me/2012/12/28/Arch_Linux_on_BTRFS.html
 * https://github.com/egara/arch-btrfs-installation
