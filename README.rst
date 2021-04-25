@@ -88,7 +88,7 @@ Other Awesome Packages
     pacman --sync --refresh --upgrade
 
     # Install new essential packages
-    pacman --sync --noconfirm git man-db tree
+    pacman --sync --noconfirm git man-db tree samba
 
 
 Rsync Over SSH With Sudo
@@ -114,6 +114,7 @@ AUR ZFS
     pacman --sync --noconfirm base-devel git linux-headers
 
     # Install ZFS packages
+    gpg --keyserver keys.gnupg.net --recv-keys 6AD860EED4598027
     git clone https://aur.archlinux.org/zfs-utils.git
     git clone https://aur.archlinux.org/zfs-dkms.git
     pushd zfs-utils
