@@ -90,12 +90,22 @@ Other Awesome Packages
     # Install new essential packages
     pacman --sync --noconfirm git man-db tree samba
 
+    # Prepare samba
+    # Copy config file over first into /etc/samba/smb.conf
+    systemctl start smb.service
+
+    # Set samba password for a user and list samba users
+    useradd --create-home --groups users bubba
+    smbpasswd -a bubba
+    pdbedit --list
+
 
 Rsync Over SSH With Sudo
 ------------------------
 
 ::
 
+    # Make certain tools available to a user without a password
     bubba ALL=NOPASSWD: /usr/bin/rsync
 
     nohup rsync -avc --delete -e ssh --rsync-path='sudo rsync' /elsewhere/foo/ wickedserver:/elsewhere/foo/ &
