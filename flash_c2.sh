@@ -29,7 +29,6 @@ else
 fi
 
 # Mount the drive and create the necessary locations
-sync
 mkdir --parents --verbose "${first_mount_point}"
 mount "${first_partition}" "${first_mount_point}"
 if [ 'btrfs' = "${root_filesystem_type}" ]; then
@@ -43,7 +42,6 @@ tar --warning=no-unknown-keyword --directory="${first_mount_point}" \
     --extract --verbose --gunzip --file="${root_tarball_local}"
 
 # Fix up the boot magic
-sync
 pushd "${first_mount_point}/boot"
 sh sd_fusing.sh "${drive}"
 popd
@@ -59,6 +57,6 @@ popd
 #     echo "alarm ALL=(ALL) ALL" > /etc/sudoers.d/alarm
 
 # Clean up afterwards
-sync
 umount "${first_mount_point}"
-rm --recursive --force "${first_mount_point}"
+rm --force --recursive --verbose "${first_mount_point}"
+sync

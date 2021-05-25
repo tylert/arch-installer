@@ -38,7 +38,6 @@ else
 fi
 
 # Mount the drive and create the necessary locations
-sync
 mkdir --parents --verbose "${first_mount_point}"
 mkdir --parents --verbose "${second_mount_point}"
 mount "${first_partition}" "${first_mount_point}"
@@ -54,9 +53,9 @@ tar --warning=no-unknown-keyword --directory="${second_mount_point}" \
     --extract --verbose --gunzip --file="${root_tarball_local}"
 
 # Fix up the boot magic
-sync
-sed -i 's/mmcblk0/mmcblk1/g' "${second_mount_point}/etc/fstab"
-mv "${second_mount_point}/boot/*" "${first_mount_point}"
+sed --in-place 's/mmcblk0/mmcblk1/g' "${second_mount_point}/etc/fstab"
+cp --preserve=mode,ownership,timestamps --recursive --verbose "${second_mount_point}/boot/"* "${first_mount_point}"
+rm --force --recursive --verbose "${second_mount_point}/boot/"*
 
 # Remove the need to perform manual steps after installation
 # You need the appropriate binaries in order to run a arm64 chroot on x86_64
@@ -69,8 +68,8 @@ mv "${second_mount_point}/boot/*" "${first_mount_point}"
 #     echo "alarm ALL=(ALL) ALL" > /etc/sudoers.d/alarm
 
 # Clean up afterwards
-sync
 umount "${first_mount_point}"
 umount "${second_mount_point}"
-rm --recursive --force "${first_mount_point}"
-rm --recursive --force "${second_mount_point}"
+rm --force --recursive --verbose "${first_mount_point}"
+rm --force --recursive --verbose "${second_mount_point}"
+sync
