@@ -22,7 +22,7 @@ dd if=/dev/zero of="${drive}" bs=1M count=8
 sfdisk --force "${drive}" << EOF
 ,
 EOF
-if [ "${root_filesystem_type}" = 'btrfs' ]; then
+if [ 'btrfs' = "${root_filesystem_type}" ]; then
     mkfs.btrfs --force --label OS "${first_partition}"
 else
     mkfs.ext4 -O ^metadata_csum,^64bit -F -L OS "${first_partition}"
@@ -31,7 +31,7 @@ fi
 # Mount the drive and create the necessary locations
 mkdir --parents --verbose "${mount_point}"
 mount "${first_partition}" "${mount_point}"
-if [ "${root_filesystem_type}" = 'btrfs' ]; then
+if [ 'btrfs' = "${root_filesystem_type}" ]; then
     # XXX FIXME TODO Get btrfs root working
     echo "btrfs booting doesn't work at the moment"
     exit 2
@@ -52,7 +52,7 @@ tar --warning=no-unknown-keyword --directory="${mount_point}" \
 #     echo "alarm ALL=(ALL) ALL" > /etc/sudoers.d/alarm
 
 # Flash the boot sector
-pushd ${mount_point}/boot
+pushd "${mount_point}/boot"
 sh sd_fusing.sh "${drive}"
 popd
 

@@ -30,7 +30,7 @@ sfdisk --force "${drive}" << EOF
 ,
 EOF
 mkfs.vfat -n BOOT "${first_partition}"
-if [ "${root_filesystem_type}" = 'btrfs' ]; then
+if [ 'btrfs' = "${root_filesystem_type}" ]; then
     mkfs.btrfs --force --label OS "${second_partition}"
 else
     mkfs.ext4 -F -L OS "${second_partition}"
@@ -39,17 +39,20 @@ fi
 # Mount the drive and create the necessary locations
 mkdir --parents --verbose "${mount_point}"
 mount "${second_partition}" "${mount_point}"
-if [ "${root_filesystem_type}" = 'btrfs' ]; then
+if [ 'btrfs' = "${root_filesystem_type}" ]; then
     # XXX FIXME TODO Get btrfs root working
     echo "btrfs booting doesn't work at the moment"
     exit 2
 fi
-mkdir --parents --verbose ${mount_point}/boot
-mount "${first_partition}" ${mount_point}/boot
+mkdir --parents --verbose "${mount_point}/boot"
+mount "${first_partition}" "${mount_point}/boot"
 
 # Extract the root filesystem tarball
 tar --warning=no-unknown-keyword --directory="${mount_point}" \
     --extract --verbose --gunzip --file="${root_tarball_local}"
+
+# Do an additional step to force a change of block device
+sed -i 's/mmcblk0/mmcblk1/g' "${mount_point}/etc/fstab"
 
 # Remove the need to perform manual steps after installation
 # You need the appropriate binaries in order to run a arm64 chroot on x86_64
