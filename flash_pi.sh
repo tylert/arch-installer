@@ -18,7 +18,8 @@ date='latest'
 # root_tarball_remote='http://os.archlinuxarm.org/os/ArchLinuxARM-rpi-aarch64-latest.tar.gz'
 root_tarball_local="/tmp/archlinux-${date}-rpi-aarch64.tar.gz"
 root_filesystem_type='ext4'
-mount_point="$(mktemp --dry-run)"  # unsafeish
+first_mount_point="$(mktemp --dry-run)"  # unsafeish
+second_mount_point="$(mktemp --dry-run)"  # unsafeish
 
 # Fetch the root filesystem tarball
 # wget "${root_tarball_remote}" --continue --output-document="${root_tarball_local}"
@@ -37,35 +38,39 @@ else
 fi
 
 # Mount the drive and create the necessary locations
-mkdir --parents --verbose "${mount_point}"
-mount "${second_partition}" "${mount_point}"
+sync
+mkdir --parents --verbose "${first_mount_point}"
+mkdir --parents --verbose "${second_mount_point}"
+mount "${first_partition}" "${first_mount_point}"
+mount "${second_partition}" "${second_mount_point}"
 if [ 'btrfs' = "${root_filesystem_type}" ]; then
     # XXX FIXME TODO Get btrfs root working
     echo "btrfs booting doesn't work at the moment"
     exit 2
 fi
-mkdir --parents --verbose "${mount_point}/boot"
-mount "${first_partition}" "${mount_point}/boot"
 
 # Extract the root filesystem tarball
-tar --warning=no-unknown-keyword --directory="${mount_point}" \
+tar --warning=no-unknown-keyword --directory="${second_mount_point}" \
     --extract --verbose --gunzip --file="${root_tarball_local}"
 
-# Do an additional step to force a change of block device
-sed -i 's/mmcblk0/mmcblk1/g' "${mount_point}/etc/fstab"
+# Fix up the boot magic
+sync
+sed -i 's/mmcblk0/mmcblk1/g' "${second_mount_point}/etc/fstab"
+mv "${second_mount_point}/boot/*" "${first_mount_point}"
 
 # Remove the need to perform manual steps after installation
 # You need the appropriate binaries in order to run a arm64 chroot on x86_64
 # On Debian, "apt-get install qemu qemu-user-static binfmt-support"
 # XXX FIXME TODO Get this part working to reduce the dumb, non-automated junk
-# chroot "${mount_point}" && \
+# chroot "${first_mount_point}" && \
 #     pacman-key --init && \
 #     pacman-key --populate archlinuxarm && \
 #     pacman --sysupgrade --sync --refresh --noconfirm sudo && \
 #     echo "alarm ALL=(ALL) ALL" > /etc/sudoers.d/alarm
 
 # Clean up afterwards
-umount ${mount_point}/boot
-umount "${mount_point}"
-rm --recursive --force "${mount_point}"
 sync
+umount "${first_mount_point}"
+umount "${second_mount_point}"
+rm --recursive --force "${first_mount_point}"
+rm --recursive --force "${second_mount_point}"
