@@ -42,11 +42,6 @@ mkdir --parents --verbose "${first_mount_point}"
 mkdir --parents --verbose "${second_mount_point}"
 mount "${first_partition}" "${first_mount_point}"
 mount "${second_partition}" "${second_mount_point}"
-if [ 'btrfs' = "${root_filesystem_type}" ]; then
-    # XXX FIXME TODO Get btrfs root working
-    echo "btrfs booting doesn't work at the moment"
-    exit 2
-fi
 
 # Extract the root filesystem tarball
 tar --warning=no-unknown-keyword --directory="${second_mount_point}" \

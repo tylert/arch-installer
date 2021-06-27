@@ -31,11 +31,6 @@ fi
 # Mount the drive and create the necessary locations
 mkdir --parents --verbose "${first_mount_point}"
 mount "${first_partition}" "${first_mount_point}"
-if [ 'btrfs' = "${root_filesystem_type}" ]; then
-    # XXX FIXME TODO Get btrfs root working
-    echo "btrfs booting doesn't work at the moment"
-    exit 2
-fi
 
 # Extract the root filesystem tarball
 tar --warning=no-unknown-keyword --directory="${first_mount_point}" \
