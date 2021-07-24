@@ -112,6 +112,28 @@ Rsync Over SSH With Sudo
     disown
 
 
+Btrfs Maintenance
+-----------------
+
+You might want to have a look at the btrfsmaintenance package at https://github.com/kdave/btrfsmaintenance.
+
+::
+
+    # Start a scrubbing operation
+    btrfs scrub start /somewhere
+    btrfs scrub status /somewhere
+
+    # Start a rebalancing operation
+    btrfs balance start --background --full-balance /somewhere
+    btrfs balance status /somewhere
+
+    # Start a trim operation
+    # TBD
+
+    # Start a defragment operation
+    # TBD
+
+
 AUR ZFS
 -------
 
