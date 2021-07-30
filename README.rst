@@ -77,10 +77,11 @@ Prepare all the data drives and mount them::
 * https://btrfs.wiki.kernel.org/index.php/Incremental_Backup#Available_Backup_Tools
 * https://github.com/AmesCornish/buttersink
 * https://crashingdaily.wordpress.com/2007/06/29/rsync-and-sudo-over-ssh/
+* https://www.unixsheikh.com/articles/how-i-store-my-files-and-why-you-should-not-rely-on-fancy-tools-for-backup.html
 
 
-Other Awesome Packages
-----------------------
+Samba Mount Setup
+-----------------
 
 ::
 
@@ -93,6 +94,7 @@ Other Awesome Packages
     # Prepare samba
     # Copy config file over first into /etc/samba/smb.conf
     systemctl start smb.service
+    systemctl enable smb.service
 
     # Set samba password for a user and list samba users
     useradd --create-home --groups users bubba
