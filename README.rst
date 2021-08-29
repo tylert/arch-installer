@@ -126,6 +126,8 @@ You might want to have a look at the btrfsmaintenance package at https://github.
     btrfs scrub status /somewhere
 
     # Start a rebalancing operation
+    btrfs balance start -musage=10 -dusage=10 -v /somewhere
+    btrfs balance start -mlimit=10 -dlimit=10 -v /somewhere
     btrfs balance start --background --full-balance /somewhere
     btrfs balance status /somewhere
 
@@ -134,6 +136,11 @@ You might want to have a look at the btrfsmaintenance package at https://github.
 
     # Start a defragment operation
     # TBD
+
+* https://btrfs.wiki.kernel.org/index.php/Manpage/btrfs-balance
+* https://btrfs.wiki.kernel.org/index.php/FAQ
+* http://marc.merlins.org/linux/scripts/btrfs-scrub
+* http://marc.merlins.org/perso/btrfs/post_2014-05-04_Fixing-Btrfs-Filesystem-Full-Problems.html
 
 
 AUR ZFS
