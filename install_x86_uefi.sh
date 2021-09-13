@@ -29,8 +29,8 @@ fi
 # XXX FIXME TODO  Calculate size of swap partition based on amount of RAM
 
 dd if=/dev/zero of="${DRIVE}" bs=1M count=8
-echo 'label: gpt' | sfdisk --no-reread --force "${DRIVE}"
-sfdisk --no-reread --force "${DRIVE}" << EOF
+echo 'label: gpt' | sfdisk --force --no-reread "${DRIVE}"
+sfdisk --force --no-reread "${DRIVE}" << EOF
 ,256M,U
 ,17G,S
 ,

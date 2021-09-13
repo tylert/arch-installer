@@ -19,7 +19,7 @@ first_mount_point="$(mktemp --dry-run)"  # unsafeish
 
 # Format the drive
 dd if=/dev/zero of="${drive}" bs=1M count=8
-sfdisk --force "${drive}" << EOF
+sfdisk --force --no-reread "${drive}" << EOF
 ,
 EOF
 if [ 'btrfs' = "${root_filesystem_type}" ]; then

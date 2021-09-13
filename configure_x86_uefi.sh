@@ -88,13 +88,13 @@ pacman --noconfirm --sync git man-db vim
 
 # ---==[ Build initrd ]==------------------------------------------------------
 # /etc/mkinitcpio.conf
-# XXX Maybe do more stuff here XXX
+# XXX FIXME TODO Maybe do more stuff here :)
 # HOOKS="base udev ... block filesystems ..."
-# HOOKS="base udev ... block lvm2 filesystems ..."
-# HOOKS="... encrypt ... filesystems ..."
+# HOOKS="base udev ... block lvm2 filesystems ..."  # Add lvm2 before 'filesystems'
+# HOOKS="... encrypt ... filesystems ..."  # Add 'encrypt' before 'filesystems'
 mkinitcpio -p linux
 
 # ---==[ Set up boot loader stuff ]==------------------------------------------
-pacman --noconfirm --sync grub efibootmgr
+pacman --noconfirm --sync efibootmgr grub
 grub-install --target=x86_64-efi
 grub-mkconfig -o /boot/grub/grub.cfg

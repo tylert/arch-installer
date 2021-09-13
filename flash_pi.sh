@@ -26,7 +26,7 @@ second_mount_point="$(mktemp --dry-run)"  # unsafeish
 
 # Format the drive
 dd if=/dev/zero of="${drive}" bs=1M count=8
-sfdisk --force "${drive}" << EOF
+sfdisk --force --no-reread "${drive}" << EOF
 ,200M
 ,
 EOF

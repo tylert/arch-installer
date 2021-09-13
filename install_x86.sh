@@ -3,8 +3,9 @@
 # Kick off the full install procedure and then configure the chroot
 
 # Install assumptions:
-# - SSD >= (2 * RAM) + 1 GB + n GB
-# - swap is RAM + "a bit" (hibernate)
+# - no UEFI
+# - SSD >= swap size + OS requirements
+# - swap size is RAM + "a bit" (hibernate)
 # - unencrypted root
 # - unencrypted swap
 # - btrfs root
@@ -17,18 +18,20 @@ if [ -z "${KEYMAP}" ]; then
     KEYMAP='us'
 fi
 
+# Look in /usr/share/kbd/keymaps for valid keymap names
 loadkeys "${KEYMAP}"
-# look in /usr/share/kbd/keymaps for keymap names
 
 # ---==[ Repartition and format the OS drive ]==-------------------------------
 if [ -z "${DRIVE}" ]; then
     DRIVE='/dev/sda'
 fi
 
+# XXX FIXME TODO  Calculate size of swap partition based on amount of RAM
+
 dd if=/dev/zero of="${DRIVE}" bs=1M count=8
-echo 'label: gpt' | sfdisk --no-reread --force "${DRIVE}"
-sfdisk --no-reread --force "${DRIVE}" << EOF
-,20G,S
+echo 'label: dos' | sfdisk --force --no-reread "${DRIVE}"
+sfdisk --force --no-reread "${DRIVE}" << EOF
+,17G,S
 ,
 EOF
 partx "${DRIVE}"
@@ -51,7 +54,7 @@ swapon "${DRIVE}1"
 
 # ---==[ Install the OS and build the fstab file ]==---------------------------
 timedatectl set-ntp true
-pacstrap "${MOUNT}" base linux linux-firmware btrfs-progs
+pacstrap "${MOUNT}" base btrfs-progs linux linux-firmware
 # basestrap "${MOUNT}" base
 
 cat << EOF > "${MOUNT}/etc/fstab"
@@ -68,6 +71,6 @@ arch-chroot "${MOUNT}" /root/configure_x86.sh "${DRIVE}"
 rm "${MOUNT}/root/configure_x86.sh"
 
 # ---==[ Unmount everything ]==------------------------------------------------
-# swapoff "${DRIVE}2"
-# umount "${MOUNT}/boot/EFI"
-# umount "${MOUNT}"
+swapoff "${DRIVE}2"
+umount "${MOUNT}/boot"
+umount "${MOUNT}"
