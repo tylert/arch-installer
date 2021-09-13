@@ -62,11 +62,11 @@ EOF
 # nameserver 10.0.0.1
 # # /etc/resolv.conf.tail can replace this line
 
-pacman --sync --noconfirm dhcpcd openssh wireguard-tools
+pacman --noconfirm --sync dhcpcd openssh wireguard-tools
 systemctl enable dhcpcd
 systemctl enable sshd.service
 
-# Send new hostname when doing DHCP stuff
+# Send desired hostname when doing DHCP stuff
 sed -i '/^#hostname/ s/^#//' /etc/dhcpcd.conf
 
 # ---==[ Set up a base user and group ]==--------------------------------------
@@ -80,11 +80,11 @@ fi
 useradd -m "${NEWUSERNAME}"
 echo -e "${NEWPASSWORD}\n${NEWPASSWORD}" | passwd "${NEWUSERNAME}"
 
-pacman --sync --noconfirm sudo
-echo "${NEWUSERNAME} ALL=(ALL) ALL" > "/etc/sudoers.d/${NEWUSERNAME}"
+pacman --noconfirm --sync sudo
+echo "${NEWUSERNAME} ALL=(ALL:ALL) ALL" > "/etc/sudoers.d/${NEWUSERNAME}"
 
 # ---==[ Install other things we can't live without ]==------------------------
-pacman --sync --noconfirm vim
+pacman --noconfirm --sync git man-db vim
 
 # ---==[ Build initrd ]==------------------------------------------------------
 # /etc/mkinitcpio.conf
@@ -95,6 +95,6 @@ pacman --sync --noconfirm vim
 mkinitcpio -p linux
 
 # ---==[ Set up boot loader stuff ]==------------------------------------------
-pacman --sync --noconfirm grub efibootmgr
+pacman --noconfirm --sync grub efibootmgr
 grub-install --target=x86_64-efi
 grub-mkconfig -o /boot/grub/grub.cfg

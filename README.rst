@@ -32,10 +32,10 @@ btrfs Bulk Storage
 Prepare all the data drives and mount them::
 
     # Update the entire system to the latest versions
-    pacman --sync --refresh --upgrade
+    pacman --refresh --sync --upgrade
 
     # Install required packages
-    pacman --sync --noconfirm btrfs-progs cryptsetup rsync smartmontools
+    pacman --noconfirm --sync btrfs-progs cryptsetup rsync smartmontools
 
     # Encrypt the drive and bring it online (the "ata-*" ones)
     for DRIVE in ${FIRST_DRIVE} ${SECOND_DRIVE}; do
@@ -86,10 +86,10 @@ Samba Mount Setup
 ::
 
     # Update the entire system to the latest versions
-    pacman --sync --refresh --upgrade
+    pacman --refresh --sync --upgrade
 
     # Install new essential packages
-    pacman --sync --noconfirm git man-db tree samba
+    pacman --noconfirm --sync git man-db tree samba
 
     # Prepare samba
     # Copy config file over first into /etc/samba/smb.conf
@@ -108,7 +108,7 @@ Rsync Over SSH With Sudo
 ::
 
     # Make certain tools available to a user without a password
-    bubba ALL=NOPASSWD: /usr/bin/rsync
+    echo 'bubba ALL=NOPASSWD: /usr/bin/rsync' >> /etc/sudoers.d/bubba
 
     nohup rsync -avc --delete -e ssh --rsync-path='sudo rsync' /elsewhere/foo/ wickedserver:/elsewhere/foo/ &
     disown
@@ -149,10 +149,10 @@ AUR ZFS
 ::
 
     # Update the entire system to the latest versions
-    pacman --sync --refresh --upgrade
+    pacman --refresh --sync --upgrade
 
     # Prepare the build environment
-    pacman --sync --noconfirm base-devel git linux-headers
+    pacman --noconfirm --sync base-devel git linux-headers
 
     # Install ZFS packages
     gpg --keyserver keys.gnupg.net --recv-keys 6AD860EED4598027

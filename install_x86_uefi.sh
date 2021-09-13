@@ -4,8 +4,8 @@
 
 # Install assumptions:
 # - UEFI
-# - SSD >= (2 * RAM) + 1 GB + n GB
-# - swap is RAM + "a bit" (hibernate)
+# - SSD >= swap size + OS requirements
+# - swap size is RAM + "a bit" (hibernate)
 # - unencrypted root
 # - unencrypted swap
 # - btrfs root
@@ -18,7 +18,7 @@ if [ -z "${KEYMAP}" ]; then
     KEYMAP='us'
 fi
 
-# Look in /usr/share/kbd/keymaps for keymap names
+# Look in /usr/share/kbd/keymaps for valid keymap names
 loadkeys "${KEYMAP}"
 
 # ---==[ Repartition and format the OS drive ]==-------------------------------
@@ -32,7 +32,7 @@ dd if=/dev/zero of="${DRIVE}" bs=1M count=8
 echo 'label: gpt' | sfdisk --no-reread --force "${DRIVE}"
 sfdisk --no-reread --force "${DRIVE}" << EOF
 ,256M,U
-,20G,S
+,17G,S
 ,
 EOF
 partx "${DRIVE}"
@@ -58,7 +58,7 @@ swapon "${DRIVE}2"
 
 # ---==[ Install the OS and build the fstab file ]==---------------------------
 timedatectl set-ntp true
-pacstrap "${MOUNT}" base linux linux-firmware btrfs-progs
+pacstrap "${MOUNT}" base btrfs-progs linux linux-firmware
 # basestrap "${MOUNT}" base
 
 cat << EOF > "${MOUNT}/etc/fstab"
