@@ -126,8 +126,12 @@ You might want to have a look at the btrfsmaintenance package at https://github.
     btrfs scrub status /somewhere
 
     # Start a rebalancing operation
-    btrfs balance start -musage=10 -dusage=10 -v /somewhere
-    btrfs balance start -mlimit=10 -dlimit=10 -v /somewhere
+    for ((i=0; i<100; i+=10)); do
+        btrfs balance start -musage=${i} -dusage=${i} -v /somewhere
+    done
+    for ((i=0; i<100; i+=10)); do
+        btrfs balance start -mlimit=${i} -dlimit=${i} -v /somewhere
+    done
     btrfs balance start --background --full-balance /somewhere
     btrfs balance status /somewhere
 
