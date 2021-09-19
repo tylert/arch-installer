@@ -8,7 +8,7 @@
 # - swap size is RAM + "a bit" (hibernate)
 # - unencrypted root
 # - unencrypted swap
-# - btrfs root
+# - btrfs for everything
 # - boot is inside root
 
 set -xe
@@ -25,6 +25,9 @@ loadkeys "${KEYMAP}"
 if [ -z "${DRIVE}" ]; then
     DRIVE='/dev/sda'
 fi
+if [ -z "${SUFFIX}" ]; then
+    SUFFIX=''
+fi
 
 # XXX FIXME TODO  Calculate size of swap partition based on amount of RAM
 
@@ -32,29 +35,29 @@ dd if=/dev/zero of="${DRIVE}" bs=1M count=8
 echo 'label: gpt' | sfdisk --force --no-reread "${DRIVE}"
 sfdisk --force --no-reread "${DRIVE}" << EOF
 ,256M,U
-,17G,S
+,33G,S
 ,
 EOF
 partx "${DRIVE}"
 # might have to "dmsetup remove /dev/mapper/foo"
 
-mkfs.vfat -F 32 "${DRIVE}1"
-mkswap "${DRIVE}2"
-mkfs.btrfs --force --label OS "${DRIVE}3"
+mkfs.vfat -F 32 "${DRIVE}${SUFFIX}1"
+mkswap "${DRIVE}${SUFFIX}2"
+mkfs.btrfs --force --label OS "${DRIVE}${SUFFIX}3"
 
 # ---==[ Create subvolumes and mount subordinate partitions ]==----------------
 if [ -z "${MOUNT}" ]; then
     MOUNT='/mnt'
 fi
 
-mount "${DRIVE}3" "${MOUNT}" --options subvolid=5
+mount "${DRIVE}${SUFFIX}3" "${MOUNT}" --options subvolid=5
 btrfs subvolume create "${MOUNT}/@"
 umount "${MOUNT}"
-mount "${DRIVE}3" "${MOUNT}" --options subvol=@
+mount "${DRIVE}${SUFFIX}3" "${MOUNT}" --options subvol=@
 
 mkdir --parents "${MOUNT}/boot/EFI"
-mount "${DRIVE}1" "${MOUNT}/boot/EFI"
-swapon "${DRIVE}2"
+mount "${DRIVE}${SUFFIX}1" "${MOUNT}/boot/EFI"
+swapon "${DRIVE}${SUFFIX}2"
 
 # ---==[ Install the OS and build the fstab file ]==---------------------------
 timedatectl set-ntp true
@@ -75,6 +78,6 @@ arch-chroot "${MOUNT}" /root/configure_x86_uefi.sh
 rm "${MOUNT}/root/configure_x86_uefi.sh"
 
 # ---==[ Unmount everything ]==------------------------------------------------
-swapoff "${DRIVE}2"
+swapoff "${DRIVE}${SUFFIX}2"
 umount "${MOUNT}/boot/EFI"
 umount "${MOUNT}"

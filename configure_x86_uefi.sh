@@ -23,6 +23,7 @@ if [ -z "${KEYMAP}" ]; then
     KEYMAP='us'
 fi
 
+# Uncomment desired locale and regenerate
 sed -i "/^#${LOCALE}.${ENCODING} ${ENCODING}/ s/^#//" /etc/locale.gen
 locale-gen
 
@@ -66,10 +67,10 @@ pacman --noconfirm --sync dhcpcd openssh wireguard-tools
 systemctl enable dhcpcd
 systemctl enable sshd.service
 
-# Send desired hostname when doing DHCP stuff
+# Send hostname when doing DHCP stuff
 sed -i '/^#hostname/ s/^#//' /etc/dhcpcd.conf
 
-# ---==[ Set up a base user and group ]==--------------------------------------
+# ---==[ Set up an administrator user ]==--------------------------------------
 if [ -z "${NEWUSERNAME}" ]; then
     NEWUSERNAME='marvin'
 fi
@@ -77,16 +78,18 @@ if [ -z "${NEWPASSWORD}" ]; then
     NEWPASSWORD='youwontlikeit'
 fi
 
+# Create the new user and set their console password
 useradd -m "${NEWUSERNAME}"
 echo -e "${NEWPASSWORD}\n${NEWPASSWORD}" | passwd "${NEWUSERNAME}"
 
+# Bestow sudo privileges on the new user
 pacman --noconfirm --sync sudo
 echo "${NEWUSERNAME} ALL=(ALL:ALL) ALL" > "/etc/sudoers.d/${NEWUSERNAME}"
 
 # ---==[ Install other things we can't live without ]==------------------------
 pacman --noconfirm --sync git man-db vim
 
-# ---==[ Build initrd ]==------------------------------------------------------
+# ---==[ Build the initrd ]==--------------------------------------------------
 # /etc/mkinitcpio.conf
 # XXX FIXME TODO Maybe do more stuff here :)
 # HOOKS="base udev ... block filesystems ..."
@@ -94,7 +97,7 @@ pacman --noconfirm --sync git man-db vim
 # HOOKS="... encrypt ... filesystems ..."  # Add 'encrypt' before 'filesystems'
 mkinitcpio -p linux
 
-# ---==[ Set up boot loader stuff ]==------------------------------------------
+# ---==[ Install the boot loader ]==-------------------------------------------
 pacman --noconfirm --sync efibootmgr grub
 grub-install --target=x86_64-efi
 grub-mkconfig -o /boot/grub/grub.cfg
