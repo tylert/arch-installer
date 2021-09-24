@@ -78,6 +78,7 @@ Prepare all the data drives and mount them::
 * https://github.com/AmesCornish/buttersink
 * https://crashingdaily.wordpress.com/2007/06/29/rsync-and-sudo-over-ssh/
 * https://www.unixsheikh.com/articles/how-i-store-my-files-and-why-you-should-not-rely-on-fancy-tools-for-backup.html
+* https://arstechnica.com/gadgets/2021/09/examining-btrfs-linuxs-perpetually-half-finished-filesystem/
 
 
 Samba Mount Setup
