@@ -71,7 +71,8 @@ systemctl enable sshd.service
 sed -i '/^#hostname/ s/^#//' /etc/dhcpcd.conf
 
 # Replace legacy iptables with netfilter iptables
-pacman --noconfirm --sync iptables-nft
+# pacman --noconfirm --sync iptables-nft
+# XXX FIXME TODO  Apparently there is no good way to automate this!!!
 
 # ---==[ Set up an administrator user ]==--------------------------------------
 if [ -z "${NEWUSERNAME}" ]; then
