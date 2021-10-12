@@ -26,7 +26,7 @@ To start the install process (including some sample environment variables)::
     NEWHOSTNAME=numuh NEWUSERNAME=sheen NEWPASSWORD=awesome ./install_x86_uefi.sh
 
 
-btrfs Bulk Storage
+Btrfs Bulk Storage
 ------------------
 
 Prepare all the data drives and mount them::
@@ -186,6 +186,26 @@ Cinnamon Desktop
 
     # Install other stuff???
     systemctl enable NetworkManager  # NetworkManager.service
+
+
+VM Host
+-------
+
+::
+
+    pacman -S qemu-headless libvirt
+    pacman -S dnsmasq iptables-nft
+    pacman -S bridge-utils
+    pacman -S openbsd-netcat
+    # pacman -S vde2
+
+
+Ugly Stuff
+----------
+
+::
+
+    pacman -S amd-ucode
 
 
 References
