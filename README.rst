@@ -177,11 +177,11 @@ Cinnamon Desktop
 ::
 
     # Install the desktop environment and prerequisites
-    pacman -S xorg
-    pacman -S cinnamon gnome-terminal
+    pacman --sync xorg
+    pacman --sync cinnamon gnome-terminal
 
     # Install a graphical login screen
-    pacman -S lightdm lightdm-gtk-greeter  # gdm
+    pacman --sync lightdm lightdm-gtk-greeter  # gdm
     systemctl enable lightdm  # gdm.service
 
     # Install other stuff???
@@ -193,11 +193,11 @@ VM Host
 
 ::
 
-    pacman -S qemu-headless libvirt
-    pacman -S dnsmasq iptables-nft
-    pacman -S bridge-utils
-    pacman -S openbsd-netcat
-    # pacman -S vde2
+    pacman --sync qemu-headless libvirt
+    pacman --sync dnsmasq iptables-nft
+    pacman --sync bridge-utils
+    pacman --sync openbsd-netcat
+    # pacman --sync vde2
 
 
 Ugly Stuff
@@ -205,7 +205,7 @@ Ugly Stuff
 
 ::
 
-    pacman -S amd-ucode
+    pacman --sync amd-ucode
 
 
 References
