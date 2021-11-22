@@ -35,12 +35,16 @@ Prepare all the data drives and mount them::
     pacman --refresh --sync --upgrade
 
     # Install required packages
-    pacman --noconfirm --sync btrfs-progs cryptsetup rsync smartmontools
+    pacman --noconfirm --sync btrfs-progs cryptsetup smartmontools
 
     # Encrypt the drive and bring it online (the "ata-*" ones)
-    for DRIVE in ${FIRST_DRIVE} ${SECOND_DRIVE}; do
-        cryptsetup luksFormat /dev/disk/by-id/${DRIVE}
-        cryptsetup luksOpen /dev/disk/by-id/${DRIVE} ${DRIVE}
+    drives='
+    FIRST_DRIVE
+    SECOND_DRIVE
+    '
+    for drive in ${drives}; do
+        cryptsetup luksFormat /dev/disk/by-id/${drive}
+        cryptsetup luksOpen /dev/disk/by-id/${drive} ${drive}
     done
 
     # Format the drives
@@ -81,19 +85,70 @@ Prepare all the data drives and mount them::
 * https://arstechnica.com/gadgets/2021/09/examining-btrfs-linuxs-perpetually-half-finished-filesystem/
 
 
+SMART Checking
+--------------
+
+::
+
+    for drive in $(ls /dev/disk/by-id/{nvme,ata}* 2>&1 | grep -v 'No such' | grep -v eui | grep -v part); do
+        echo -n "${drive} "
+        smartctl -H ${drive} | grep result | sed 's/SMART overall-health self-assessment test result//'
+    done
+
+
 Samba Mount Setup
 -----------------
+
+Build up a new /etc/samba/smb.conf.stub file containing your desired shares::
+
+    [foo]
+        path = /elsewhere/foo
+        writable = yes
+        browsable = yes
+        guest ok = no
+        create mask = 0664
+        directory mask = 0775
+        force group = marsupials
+
+    [foo_ro]
+        path = /elsewhere/foo
+        writable = no
+        browsable = yes
+        guest ok = yes
+        create mask = 0664
+        directory mask = 0775
+        force group = marsupials
+
+    [bar]
+        path = /elsewhere/bar
+        writable = yes
+        browsable = yes
+        guest ok = no
+        create mask = 0664
+        directory mask = 0775
+        force group = marsupials
+
+    [bar_ro]
+        path = /elsewhere/bar
+        writable = no
+        browsable = yes
+        guest ok = yes
+        create mask = 0664
+        directory mask = 0775
+        force group = marsupials
+
+    # ...
 
 ::
 
     # Update the entire system to the latest versions
     pacman --refresh --sync --upgrade
 
-    # Install new essential packages
-    pacman --noconfirm --sync git man-db tree samba
+    # Install some essential packages for file servers
+    pacman --noconfirm --sync git man-db tree rsync samba
 
     # Prepare samba
-    # Copy config file over first into /etc/samba/smb.conf
+    # Make sure to create the new /etc/samba/smb.conf file first
     systemctl start smb.service
     systemctl enable smb.service
 
@@ -122,6 +177,18 @@ You might want to have a look at the btrfsmaintenance package at https://github.
 
 ::
 
+    # Create new snapshots for today
+    btrfs subvolume snapshot -r /somewhere/@foo /somewhere/@foo-$(date +%Y-%m-%d)
+    btrfs subvolume snapshot -r /somewhere/@bar /somewhere/@bar-$(date +%Y-%m-%d)
+    # ...
+
+    # Delete all old snapshots from January through June
+    btrfs subvolume delete /somewhere/@foo-2021-{01,02,03,04,05,06}-??
+    btrfs subvolume delete /somewhere/@bar-2021-{01,02,03,04,05,06}-??
+    # ...
+
+::
+
     # Start a scrubbing operation
     btrfs scrub start /somewhere
     btrfs scrub status /somewhere
@@ -130,10 +197,10 @@ You might want to have a look at the btrfsmaintenance package at https://github.
     for ((i=0; i<100; i+=10)); do
         btrfs balance start -musage=${i} -dusage=${i} -v /somewhere
     done
-    for ((i=0; i<100; i+=10)); do
-        btrfs balance start -mlimit=${i} -dlimit=${i} -v /somewhere
-    done
-    btrfs balance start --background --full-balance /somewhere
+    # for ((i=0; i<100; i+=10)); do
+    #     btrfs balance start -mlimit=${i} -dlimit=${i} -v /somewhere
+    # done
+    # btrfs balance start --background --full-balance /somewhere
     btrfs balance status /somewhere
 
     # Start a trim operation
