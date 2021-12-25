@@ -23,10 +23,10 @@ loadkeys "${KEYMAP}"
 
 # ---==[ Repartition and format the OS drive ]==-------------------------------
 if [ -z "${DRIVE}" ]; then
-    DRIVE='/dev/sda'
+    DRIVE='/dev/nvme0n1'
 fi
 if [ -z "${SUFFIX}" ]; then
-    SUFFIX=''
+    SUFFIX='p'
 fi
 
 # XXX FIXME TODO  Calculate size of swap partition based on amount of RAM

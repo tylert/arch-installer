@@ -24,6 +24,7 @@ To start the install process (including some sample environment variables)::
     chmod +x install_x86_uefi.sh
     chmod +x configure_x86_uefi.sh
     DRIVE=/dev/nvme0n1 SUFFIX=p NEWHOSTNAME=numuh NEWUSERNAME=sheen NEWPASSWORD=awesome ./install_x86_uefi.sh
+    DRIVE=/dev/sda SUFFIX='' NEWHOSTNAME=numuh NEWUSERNAME=sheen NEWPASSWORD=awesome ./install_x86_uefi.sh
 
 
 Btrfs Bulk Storage
@@ -274,7 +275,7 @@ Ugly Stuff
 
 ::
 
-    pacman --noconfirm --sync amd-ucode
+    pacman --noconfirm --sync amd-ucode  # or intel-ucode
 
 
 References
