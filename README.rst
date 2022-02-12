@@ -33,7 +33,7 @@ Btrfs Bulk Storage
 Prepare all the data drives and mount them::
 
     # Update the entire system to the latest versions
-    pacman --refresh --sync --upgrade
+    pacman --noconfirm --refresh --sync --upgrade
 
     # Install required packages
     pacman --noconfirm --sync btrfs-progs cryptsetup smartmontools
@@ -142,7 +142,7 @@ Build up a new /etc/samba/smb.conf.stub file containing your desired shares::
 ::
 
     # Update the entire system to the latest versions
-    pacman --refresh --sync --upgrade
+    pacman --noconfirm --refresh --sync --upgrade
 
     # Install some essential packages for file servers
     pacman --noconfirm --sync git man-db tree rsync samba
@@ -224,7 +224,7 @@ AUR ZFS
 ::
 
     # Update the entire system to the latest versions
-    pacman --refresh --sync --upgrade
+    pacman --noconfirm --refresh --sync --upgrade
 
     # Prepare the build environment
     pacman --noconfirm --sync base-devel git linux-headers
