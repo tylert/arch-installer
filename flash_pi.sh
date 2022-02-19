@@ -44,7 +44,7 @@ mount "${first_partition}" "${first_mount_point}"
 mount "${second_partition}" "${second_mount_point}"
 
 # Extract the root filesystem tarball
-bsdtar -xpf "${root_tarball_local}" -C "${first_mount_point}"
+bsdtar -xpf "${root_tarball_local}" -C "${second_mount_point}"
 
 # Fix up the boot magic
 sed --in-place 's/mmcblk0/mmcblk1/g' "${second_mount_point}/etc/fstab"
