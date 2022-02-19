@@ -33,8 +33,7 @@ mkdir --parents --verbose "${first_mount_point}"
 mount "${first_partition}" "${first_mount_point}"
 
 # Extract the root filesystem tarball
-tar --warning=no-unknown-keyword --directory="${first_mount_point}" \
-    --extract --verbose --gunzip --file="${root_tarball_local}"
+bsdtar -xpf "${root_tarball_local}" -C "${first_mount_point}"
 
 # Fix up the boot magic
 pushd "${first_mount_point}/boot"
