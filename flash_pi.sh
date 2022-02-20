@@ -4,8 +4,7 @@
 # the instructions found at:
 # https://archlinuxarm.org/platforms/armv8/broadcom/raspberry-pi-4
 # https://archlinuxarm.org/platforms/armv8/broadcom/raspberry-pi-3
-# https://archlinuxarm.org/platforms/armv7/broadcom/raspberry-pi-2
-# https://archlinuxarm.org/platforms/armv6/raspberry-pi
+# https://archlinuxarm.org/platforms/armv8/broadcom/raspberry-pi-zero-2
 
 set -e
 
@@ -13,8 +12,6 @@ drive='/dev/mmcblk0'  # uSD
 first_partition="${drive}p1"
 second_partition="${drive}p2"
 date='latest'
-# root_tarball_remote='http://os.archlinuxarm.org/os/ArchLinuxARM-rpi-4-latest.tar.gz'
-# root_tarball_remote='http://os.archlinuxarm.org/os/ArchLinuxARM-rpi-3-latest.tar.gz'
 # root_tarball_remote='http://os.archlinuxarm.org/os/ArchLinuxARM-rpi-aarch64-latest.tar.gz'
 root_tarball_local="/tmp/archlinux-${date}-rpi-aarch64.tar.gz"
 root_filesystem_type='ext4'
