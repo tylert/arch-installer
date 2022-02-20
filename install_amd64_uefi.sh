@@ -74,9 +74,9 @@ EOF
 genfstab -p -t UUID "${MOUNT}" >> "${MOUNT}/etc/fstab"
 
 # ---==[ Configure the new system ]==------------------------------------------
-cp configure_x86_uefi.sh "${MOUNT}/root/"
-arch-chroot "${MOUNT}" /root/configure_x86_uefi.sh
-rm "${MOUNT}/root/configure_x86_uefi.sh"
+cp configure_amd64_uefi.sh "${MOUNT}/root/"
+arch-chroot "${MOUNT}" /root/configure_amd64_uefi.sh
+rm "${MOUNT}/root/configure_amd64_uefi.sh"
 
 # ---==[ Unmount everything ]==------------------------------------------------
 swapoff "${DRIVE}${SUFFIX}2"

@@ -19,12 +19,12 @@ Installing
 
 To start the install process (including some sample environment variables)::
 
-    curl -Ol https://raw.githubusercontent.com/tylert/arch-installer/master/install_x86_uefi.sh
-    curl -Ol https://raw.githubusercontent.com/tylert/arch-installer/master/configure_x86_uefi.sh
-    chmod +x install_x86_uefi.sh
-    chmod +x configure_x86_uefi.sh
-    DRIVE=/dev/nvme0n1 SUFFIX=p NEWHOSTNAME=numuh NEWUSERNAME=sheen NEWPASSWORD=awesome ./install_x86_uefi.sh
-    DRIVE=/dev/sda SUFFIX='' NEWHOSTNAME=numuh NEWUSERNAME=sheen NEWPASSWORD=awesome ./install_x86_uefi.sh
+    curl -Ol https://raw.githubusercontent.com/tylert/arch-installer/master/install_amd64_uefi.sh
+    curl -Ol https://raw.githubusercontent.com/tylert/arch-installer/master/configure_amd64_uefi.sh
+    chmod +x install_amd64_uefi.sh
+    chmod +x configure_amd64_uefi.sh
+    DRIVE=/dev/nvme0n1 SUFFIX=p NEWHOSTNAME=numuh NEWUSERNAME=sheen NEWPASSWORD=awesome ./install_amd64_uefi.sh
+    DRIVE=/dev/sda SUFFIX='' NEWHOSTNAME=numuh NEWUSERNAME=sheen NEWPASSWORD=awesome ./install_amd64_uefi.sh
 
 
 Btrfs Bulk Storage
@@ -296,4 +296,5 @@ References
 TODO
 ----
 
-* repair the non-UEFI x86_64 installer script so grub works properly
+* Provide a working enrypted filesystem/swap option
+* Repair the non-UEFI amd64 installer script so grub works properly
