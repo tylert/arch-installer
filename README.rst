@@ -171,6 +171,10 @@ Rsync Over SSH With Sudo
 
 * https://crashingdaily.wordpress.com/2007/06/29/rsync-and-sudo-over-ssh/
 * https://www.techrepublic.com/article/how-to-run-a-command-that-requires-sudo-via-ssh/
+* https://blog.zazu.berlin/software/a-almost-perfect-rsync-over-ssh-backup-script.html
+* http://duplicity.nongnu.org/features.html
+* http://www.mikerubel.org/computers/rsync_snapshots/
+* https://blog.interlinked.org/tutorials/rsync_time_machine.html
 
 
 Btrfs Maintenance
