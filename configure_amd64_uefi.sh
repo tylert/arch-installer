@@ -63,7 +63,7 @@ EOF
 # nameserver 10.0.0.1
 # # /etc/resolv.conf.tail can replace this line
 
-pacman --noconfirm --sync dhcpcd openssh wireguard-tools
+pacman --noconfirm --sync dhcpcd net-tools openssh wireguard-tools
 systemctl enable dhcpcd
 systemctl enable sshd.service
 
