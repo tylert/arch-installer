@@ -166,7 +166,9 @@ Rsync Over SSH With Sudo
     # Make certain tools available to a user without a password
     echo 'bubba ALL=NOPASSWD: /usr/bin/rsync' >> /etc/sudoers.d/bubba
 
-    nohup rsync -avc --delete -e ssh --rsync-path='sudo rsync' /elsewhere/foo/ wickedserver:/elsewhere/foo/ &
+    nohup rsync -avc --delete -e ssh --rsync-path='sudo rsync' \
+        /elsewhere/foo/ wickedserver:/elsewhere/foo/ &
+
     disown
 
 * https://crashingdaily.wordpress.com/2007/06/29/rsync-and-sudo-over-ssh/
@@ -260,6 +262,10 @@ Cinnamon Desktop
 
     # Install other stuff???
     systemctl enable NetworkManager  # NetworkManager.service
+
+    pacman --noconfirm --sync pulseaudio pulseaudio-alsa pavucontrol firefox \
+        vlc gimp xfburn thunderbird gedit gnome-system-monitor
+    pacman --noconfirm --sync faenza-icon-theme
 
 
 VM Host
