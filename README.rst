@@ -308,3 +308,10 @@ TODO
 
 * Provide a working enrypted filesystem/swap option
 * Repair the non-UEFI amd64 installer script so grub works properly
+
+
+Encryption Magic
+----------------
+
+* http://0pointer.net/blog/unlocking-luks2-volumes-with-tpm2-fido2-pkcs11-security-hardware-on-systemd-248.html
+* https://www.freedesktop.org/software/systemd/man/systemd-cryptenroll.html
