@@ -264,8 +264,8 @@ Cinnamon Desktop
     systemctl enable NetworkManager  # NetworkManager.service
 
     pacman --noconfirm --sync pulseaudio pulseaudio-alsa pavucontrol firefox \
-        thunderbird gnome-system-monitor
-    pacman --noconfirm --sync faenza-icon-theme
+        thunderbird gnome-system-monitor libreoffice
+    pacman --noconfirm --sync mate-icon-theme-faenza
 
 
 VM Host
