@@ -265,7 +265,7 @@ Cinnamon Desktop
 
     pacman --noconfirm --sync pulseaudio pulseaudio-alsa pavucontrol firefox \
         thunderbird gnome-system-monitor libreoffice
-    pacman --noconfirm --sync mate-icon-theme-faenza
+    pacman --noconfirm --sync mate-icon-theme
 
 
 VM Host
