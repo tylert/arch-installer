@@ -247,27 +247,6 @@ AUR ZFS
     popd
 
 
-Cinnamon Desktop
-----------------
-
-::
-
-    # Install the desktop environment and prerequisites
-    pacman --noconfirm --sync xorg
-    pacman --noconfirm --sync cinnamon gnome-terminal
-
-    # Install a graphical login screen
-    pacman --noconfirm --sync lightdm lightdm-gtk-greeter  # gdm
-    systemctl enable lightdm  # gdm.service
-
-    # Install other stuff???
-    systemctl enable NetworkManager  # NetworkManager.service
-
-    pacman --noconfirm --sync pulseaudio pulseaudio-alsa pavucontrol firefox \
-        thunderbird gnome-system-monitor libreoffice gvfs-smb
-    pacman --noconfirm --sync mate-icon-theme
-
-
 VM Host
 -------
 
