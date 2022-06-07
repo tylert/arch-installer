@@ -252,10 +252,18 @@ VM Host
 
 ::
 
-    pacman --noconfirm --sync qemu-headless libvirt
+    # Get virtualization stuff going
+    pacman --noconfirm --sync qemu-headless
+
+    # Get libvirt working
+    pacman --noconfirm --sync libvirt
+    service systemctl start libvirtd
+    usermod -aG libvirt ${USER}
+
+    # Get network stuff working
     pacman --noconfirm --sync dnsmasq iptables-nft
-    pacman --noconfirm --sync bridge-utils
-    pacman --noconfirm --sync openbsd-netcat
+    # pacman --noconfirm --sync bridge-utils
+    # pacman --noconfirm --sync openbsd-netcat
     # pacman --noconfirm --sync vde2
 
 
@@ -265,6 +273,14 @@ Ugly Stuff
 ::
 
     pacman --noconfirm --sync amd-ucode  # or intel-ucode
+
+
+Orphaned Packages
+-----------------
+
+To remove packages that were brought in by installing other packages that are no longer needed::
+
+    pacman -Rns $(pacman -Qtdq)
 
 
 References
