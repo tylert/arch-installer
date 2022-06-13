@@ -298,6 +298,9 @@ References
 * https://turlucode.com/arch-linux-install-guide-step-1-basic-installation/
 * https://github.com/kimono-koans/httm
 * https://github.com/ChrisTitusTech/ArchTitus
+* https://people.math.rochester.edu/faculty/akrish11/2015/04/10/lenovo-thinkpad-t450s-review-and-linux-arch-and-ubuntu-install.html
+* https://wiki.archlinux.org/title/Lenovo_ThinkPad_T450(s)
+* https://thcc.name/static/model?id=205  Lenovo ThinkPad T560 Linux compatability
 
 
 TODO
