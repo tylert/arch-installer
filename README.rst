@@ -9,7 +9,7 @@ First, boot the system from the ISO then configure a password for the root user
 and start the ssh server::
 
     passwd
-    systemctl start sshd.service
+    systemctl start sshd
 
 * https://wiki.archlinux.org/index.php/Install_Arch_Linux_via_SSH
 
@@ -147,13 +147,12 @@ Build up a new /etc/samba/smb.conf.stub file containing your desired shares::
     # Install some essential packages for file servers
     pacman --noconfirm --sync git man-db tree rsync samba
 
-    # Prepare samba
     # Make sure to create the new /etc/samba/smb.conf file first
-    systemctl start smb.service
-    systemctl enable smb.service
+    systemctl start smb
+    systemctl enable smb
 
     # Set samba password for a user and list samba users
-    useradd --create-home --groups users bubba
+    useradd --create-home --groups marsupials bubba
     smbpasswd -a bubba
     pdbedit --list
 
