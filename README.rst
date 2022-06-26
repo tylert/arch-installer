@@ -157,6 +157,14 @@ Build up a new /etc/samba/smb.conf.stub file containing your desired shares::
     pdbedit --list
 
 
+Update Groups Without Logging Out
+---------------------------------
+
+::
+
+    exec newgrp $(id --group --name)
+
+
 Rsync Over SSH With Sudo
 ------------------------
 
