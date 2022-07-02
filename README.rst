@@ -279,7 +279,13 @@ Ugly Stuff
 
 ::
 
+    # Ensure the CPU microcode gunk is doing it's mysterious thing
     pacman --noconfirm --sync amd-ucode  # or intel-ucode
+
+    # Ensure NTP is running
+    pacman --noconfirm --sync ntp
+    systemctl enable ntpd
+    systemctl start ntpd
 
 
 Orphaned Packages
