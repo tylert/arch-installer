@@ -186,6 +186,12 @@ Rsync Over SSH With Sudo
 * https://blog.interlinked.org/tutorials/rsync_time_machine.html
 
 
+Container Image Storage
+-----------------------
+
+* https://github.com/jpetazzo/registrish#hosting-your-images-with-registrish
+
+
 Btrfs Maintenance
 -----------------
 
@@ -328,3 +334,4 @@ Encryption Magic
 
 * http://0pointer.net/blog/unlocking-luks2-volumes-with-tpm2-fido2-pkcs11-security-hardware-on-systemd-248.html
 * https://www.freedesktop.org/software/systemd/man/systemd-cryptenroll.html
+* https://github.com/gandalfb/openmediavault-full-disk-encryption#create-derived-keys-and-crypttab
