@@ -223,7 +223,7 @@ You might want to have a look at the btrfsmaintenance package at https://github.
     #     btrfs balance start -mlimit=${i} -dlimit=${i} -v /somewhere
     # done
     # btrfs balance start --background --full-balance /somewhere
-    btrfs balance status /somewhere
+    # btrfs balance status /somewhere
 
     # Start a trim operation
     # TBD
@@ -235,6 +235,31 @@ You might want to have a look at the btrfsmaintenance package at https://github.
 * https://btrfs.wiki.kernel.org/index.php/FAQ
 * http://marc.merlins.org/linux/scripts/btrfs-scrub
 * http://marc.merlins.org/perso/btrfs/post_2014-05-04_Fixing-Btrfs-Filesystem-Full-Problems.html
+
+
+ZFS Maintenance
+---------------
+
+Mounting::
+
+    zpool import -d /dev/disk/by-id tank1
+
+Scrubbing::
+
+    zpool scrub tank1
+
+Snapshots::
+
+    zfSnap -s -S -v \
+        -a 6m tank1/set1 \
+        -a 6m tank1/set2  # keep for 6 months
+    # -s = Don't do anything on pools running resilver
+    # -S = Don't do anything on pools running scrub
+    # -v = Verbose output
+    # -a ttl = Set how long snapshot should be kept
+
+    zfSnap -d  # delete expired snapshots
+    # -d = Delete old snapshots
 
 
 AUR ZFS
