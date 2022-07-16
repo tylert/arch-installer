@@ -27,6 +27,12 @@ To start the install process (including some sample environment variables)::
     DRIVE=/dev/sda SUFFIX='' NEWHOSTNAME=numuh NEWUSERNAME=sheen NEWPASSWORD=awesome ./install_amd64_uefi.sh
 
 
+Caching Proxy Server For Packages
+---------------------------------
+
+* https://github.com/anatol/pacoloco
+
+
 Btrfs Bulk Storage
 ------------------
 
