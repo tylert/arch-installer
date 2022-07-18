@@ -197,8 +197,24 @@ Rsync Over SSH With Sudo
 Container Stuff
 ---------------
 
+::
+
+    pacman --noconfirm --sync nerdctl containerd
+
+    # Ensure the sub?id stuff is there (weird that usermod can't generate these files)
+    echo "${USER}:100000:65536" | sudo tee -a /etc/subgid
+    echo "${USER}:100000:65536" | sudo tee -a /etc/subuid
+    echo "${OTHER_USER}:165536:65536" | sudo tee -a /etc/subgid
+    echo "${OTHER_USER}:165536:65536" | sudo tee -a /etc/subuid
+    # ...
+
+    containerd-rootless-setuptool.sh install
+
 * https://github.com/jpetazzo/registrish#hosting-your-images-with-registrish
 * https://keloran.dev/post/nerdctl_archlinux/
+* https://github.com/lxc/lxc/issues/3545
+* https://github.com/containers/crun/issues/704
+* https://unix.stackexchange.com/questions/624428/cgroups-v2-cgroup-controllers-not-delegated-to-non-privileged-users-on-centos-s
 
 
 Btrfs Maintenance
