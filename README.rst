@@ -162,6 +162,8 @@ Build up a new /etc/samba/smb.conf.stub file containing your desired shares::
     smbpasswd -a bubba
     pdbedit --list
 
+* https://wiki.archlinux.org/title/Xdg-utils#xdg-open  mounting by clients
+
 
 Update Groups Without Logging Out
 ---------------------------------
