@@ -199,7 +199,13 @@ Container Stuff
 
 ::
 
-    pacman --noconfirm --sync nerdctl containerd
+    # Update the entire system to the latest versions
+    pacman --noconfirm --refresh --sync --upgrade
+
+    # Install essential packages for container hosts and users
+    pacman --noconfirm --sync containerd nerdctl
+
+    echo 'kernel.unprivileged_userns_clone=1' | sudo tee -a /etc/sysctl.d/userns.conf
 
     # Ensure the sub?id stuff is there (weird that usermod can't generate these files)
     echo "${USER}:100000:65536" | sudo tee -a /etc/subgid
@@ -211,10 +217,7 @@ Container Stuff
     containerd-rootless-setuptool.sh install
 
 * https://github.com/jpetazzo/registrish#hosting-your-images-with-registrish
-* https://keloran.dev/post/nerdctl_archlinux/
-* https://github.com/lxc/lxc/issues/3545
-* https://github.com/containers/crun/issues/704
-* https://unix.stackexchange.com/questions/624428/cgroups-v2-cgroup-controllers-not-delegated-to-non-privileged-users-on-centos-s
+* https://vadosware.io/post/rootless-containers-in-2020-on-arch-linux/
 
 
 Btrfs Maintenance
