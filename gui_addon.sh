@@ -1,24 +1,24 @@
 #!/usr/bin/env bash
 
 core_packages='
-xorg
 cinnamon
 gnome-terminal
+gvfs-smb
 lightdm
 lightdm-gtk-greeter
+pavucontrol
 pulseaudio
 pulseaudio-alsa
-pavucontrol
-gvfs-smb
+xorg
 '
 # gnome-system-monitor
 # mate-icon-theme
 
 extra_applications='
-firefox
-thunderbird
-libreoffice
 eog
+firefox
+libreoffice
+thunderbird
 totem
 '
 
