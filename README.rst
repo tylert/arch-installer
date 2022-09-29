@@ -192,7 +192,7 @@ Rsync Over SSH With Sudo
 * https://blog.zazu.berlin/software/a-almost-perfect-rsync-over-ssh-backup-script.html
 * http://duplicity.nongnu.org/features.html
 * http://www.mikerubel.org/computers/rsync_snapshots/
-* https://blog.interlinked.org/tutorials/rsync_time_machine.html
+* https://samdoran.com/rsync-time-machine/
 
 
 Container Stuff
