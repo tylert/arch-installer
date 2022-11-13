@@ -261,6 +261,10 @@ You might want to have a look at the btrfsmaintenance package at https://github.
     # Start a defragment operation
     # TBD
 
+Show which files are corrupted (those uncorrectable errors found during a scrub operation)::
+
+    dmesg | grep "checksum error at" | tail -4 | cut -d\  -f24- | sed 's/.$//'
+
 * https://btrfs.wiki.kernel.org/index.php/Manpage/btrfs-balance
 * https://btrfs.wiki.kernel.org/index.php/FAQ
 * http://marc.merlins.org/linux/scripts/btrfs-scrub
