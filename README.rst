@@ -263,7 +263,6 @@ You might want to have a look at the btrfsmaintenance package at https://github.
 
 Show which files are corrupted (those uncorrectable errors found during a scrub operation)::
 
-    dmesg | grep "checksum error at" | tail -4 | cut -d\  -f24- | sed 's/.$//'
     dmesg | grep "checksum error at" | cut -d\  -f24- | sed 's/.$//' | sort | uniq
 
 * https://btrfs.wiki.kernel.org/index.php/Manpage/btrfs-balance
