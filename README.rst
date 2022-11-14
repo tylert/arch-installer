@@ -103,6 +103,8 @@ SMART Checking
         smartctl -H ${drive} | grep result | sed 's/SMART overall-health self-assessment test result//'
     done
 
+* https://github.com/AnalogJ/scrutiny#scrutiny  Go web UI???
+
 
 Samba Mount Setup
 -----------------
