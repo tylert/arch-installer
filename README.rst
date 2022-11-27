@@ -213,7 +213,7 @@ Container Stuff
     pacman --noconfirm --refresh --sync --upgrade
 
     # Install essential packages for container hosts and users
-    pacman --noconfirm --sync containerd nerdctl
+    pacman --noconfirm --sync containerd nerdctl cni-plugins
 
     echo 'kernel.unprivileged_userns_clone=1' | sudo tee -a /etc/sysctl.d/userns.conf
 
