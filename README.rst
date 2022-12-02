@@ -38,9 +38,6 @@ Btrfs Bulk Storage
 
 Prepare all the data drives and mount them::
 
-    # Update the entire system to the latest versions
-    pacman --noconfirm --refresh --sync --upgrade
-
     # Install required packages
     pacman --noconfirm --sync btrfs-progs cryptsetup smartmontools
 
@@ -157,9 +154,6 @@ Build up a new /etc/samba/smb.conf.stub file containing your desired shares::
 
 ::
 
-    # Update the entire system to the latest versions
-    pacman --noconfirm --refresh --sync --upgrade
-
     # Install some essential packages for file servers
     pacman --noconfirm --sync git man-db tree rsync samba
 
@@ -208,9 +202,6 @@ Container Stuff
 ---------------
 
 ::
-
-    # Update the entire system to the latest versions
-    pacman --noconfirm --refresh --sync --upgrade
 
     # Install essential packages for container hosts and users
     pacman --noconfirm --sync containerd nerdctl cni-plugins
@@ -309,9 +300,6 @@ AUR ZFS
 
 ::
 
-    # Update the entire system to the latest versions
-    pacman --noconfirm --refresh --sync --upgrade
-
     # Prepare the build environment
     pacman --noconfirm --sync base-devel git linux-headers
 
@@ -403,3 +391,13 @@ Encryption Magic
 * https://www.freedesktop.org/software/systemd/man/systemd-cryptenroll.html
 * https://github.com/gandalfb/openmediavault-full-disk-encryption#create-derived-keys-and-crypttab
 * https://unix.stackexchange.com/questions/392284/using-a-single-passphrase-to-unlock-multiple-encrypted-disks-at-boot/392286#392286
+
+
+Network Manager Annoyances
+--------------------------
+
+::
+
+    gsettings set org.gnome.nm-applet disable-connected-notifications true
+    gsettings set org.gnome.nm-applet disable-disconnected-notifications true
+    gsettings set org.gnome.nm-applet disable-vpn-notifications true
