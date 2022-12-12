@@ -85,9 +85,9 @@ Prepare all the data drives and mount them::
 * https://btrfs.wiki.kernel.org/index.php/Incremental_Backup#Available_Backup_Tools
 * https://github.com/AmesCornish/buttersink
 * https://www.unixsheikh.com/articles/how-i-store-my-files-and-why-you-should-not-rely-on-fancy-tools-for-backup.html
+* https://github.com/eamonnsullivan/backup-scripts
 * https://arstechnica.com/gadgets/2021/09/examining-btrfs-linuxs-perpetually-half-finished-filesystem/
 * https://wiki.tnonline.net/w/Btrfs/Replacing_a_disk
-* https://www.complang.tuwien.ac.at/anton/failing-memory.html  B550-based server RAM?
 * https://ask.fedoraproject.org/t/btrfs-drive-logging-csum-failed-errors-time-to-replace/14116/2  csum won't go away?
 
 ::
