@@ -12,11 +12,6 @@ and start the ssh server::
     systemctl start sshd
 
 * https://wiki.archlinux.org/index.php/Install_Arch_Linux_via_SSH
-* https://forum.endeavouros.com/t/timezone-setting-during-install/29184
-
-::
-
-    # Set "useSystemTimezone: true" in /etc/calamares/modules/locale.conf
 
 
 Installing
