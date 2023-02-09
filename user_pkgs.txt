@@ -1,0 +1,23 @@
+keepassxc
+tmux
+handbrake
+handbrake-cli
+libdvdcss
+
+# systemctl enable sshd.service
+# systemctl start sshd.service
+
+# dark theme enabled
+# window behaviour "focus follows mouse" enabled
+# date/time applet settings updated (show week numbers, custom date format)
+# battery applet settings updated (show all batteries, show percentage)
+# grouped window applet settings updated
+# remove pinned icons from bottom panel
+# reorder icons on left-hand side of "start menu"
+# desktop icons settings updated (show trash and mounted drives)
+# network settings updated (join wireless network)
+
+# gthumb settings updated
+# nemo settings updated
+# firefox settings updated
+# keepassxc settings updated
