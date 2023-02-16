@@ -1,11 +1,14 @@
-keepassxc
-tmux
 handbrake
 handbrake-cli
+keepassxc
 libdvdcss
+tmux
 
-# systemctl enable sshd.service
-# systemctl start sshd.service
+# gsettings set org.gnome.nm-applet disable-connected-notifications true
+# gsettings set org.gnome.nm-applet disable-disconnected-notifications true
+# gsettings set org.gnome.nm-applet disable-vpn-notifications true
+# sudo systemctl enable sshd.service
+# sudo systemctl start sshd.service
 
 # dark theme enabled
 # window behaviour "focus follows mouse" enabled
@@ -16,7 +19,6 @@ libdvdcss
 # reorder icons on left-hand side of "start menu"
 # desktop icons settings updated (show trash and mounted drives)
 # network settings updated (join wireless network)
-
 # gthumb settings updated
 # nemo settings updated
 # firefox settings updated
