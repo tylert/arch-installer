@@ -270,6 +270,25 @@ Show which files are corrupted (those uncorrectable errors found during a scrub 
 * http://marc.merlins.org/perso/btrfs/post_2014-05-04_Fixing-Btrfs-Filesystem-Full-Problems.html
 
 
+Calculations
+------------
+
+::
+
+    pacman -S python-btrfs
+    btrfs-space-calculator -m raid1 -d raid1 16TB 10TB 6TB | grep --after-context=3 'Device sizes'
+    btrfs-space-calculator -m raid1 -d raid1 16TB 10TB 6TB | grep 'Total unallocatable'
+
+::
+
+    Device sizes:
+      Device 1: 14.55TiB
+      Device 2: 9.09TiB
+      Device 3: 5.46TiB
+
+    Total unallocatable raw amount: 0.00B
+
+
 ZFS Maintenance
 ---------------
 
