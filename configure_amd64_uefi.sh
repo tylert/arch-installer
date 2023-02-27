@@ -46,8 +46,7 @@ fi
 echo "${NEWHOSTNAME}" > /etc/hostname
 
 cat << EOF > /etc/hosts
-# Static table lookup for hostnames.
-# See hosts(5) for details.
+# Host addresses
 127.0.0.1  localhost
 127.0.1.1  ${NEWHOSTNAME} ${NEWHOSTNAME}.${NEWDOMAIN}
 ::1  localhost ip6-localhost ip6-loopback
