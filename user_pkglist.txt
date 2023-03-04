@@ -10,6 +10,7 @@ libdvdcss
 libreoffice-fresh
 myrepos
 pdftk
+perl-rename
 python-btrfs
 tk
 tmux
