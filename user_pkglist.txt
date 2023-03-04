@@ -1,5 +1,6 @@
 ditaa
 figlet
+gnome-disk-utility
 gvim
 handbrake
 handbrake-cli
