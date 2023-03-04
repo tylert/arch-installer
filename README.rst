@@ -367,6 +367,10 @@ Ugly Stuff
     systemctl enable ntpd
     systemctl start ntpd
 
+Dump Bluetooth MAC address::
+
+    sudo cat /sys/kernel/debug/bluetooth/hci0/identity | cut -d' ' -f1
+
 
 Orphaned Packages
 -----------------
