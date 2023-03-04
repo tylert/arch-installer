@@ -3,6 +3,16 @@ handbrake-cli
 keepassxc
 libdvdcss
 tmux
+gvim
+inkscape
+libreoffice-fresh
+tree
+ditaa
+figlet
+jhead
+myrepos
+python-btrfs
+wireguard-tools
 
 # gsettings set org.gnome.nm-applet disable-connected-notifications true
 # gsettings set org.gnome.nm-applet disable-disconnected-notifications true
