@@ -12,6 +12,7 @@ myrepos
 pdftk
 perl-rename
 python-btrfs
+thunderbird
 tk
 tmux
 tree
