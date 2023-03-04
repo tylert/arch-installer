@@ -1,17 +1,19 @@
-handbrake
-handbrake-cli
-keepassxc
-libdvdcss
-tmux
-gvim
-inkscape
-libreoffice-fresh
-tree
 ditaa
 figlet
+gvim
+handbrake
+handbrake-cli
+inkscape
 jhead
+keepassxc
+libdvdcss
+libreoffice-fresh
 myrepos
+pdftk
 python-btrfs
+tk
+tmux
+tree
 wireguard-tools
 
 # gsettings set org.gnome.nm-applet disable-connected-notifications true
