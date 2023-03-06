@@ -2,6 +2,7 @@ android-tools
 ditaa
 figlet
 gnome-disk-utility
+go
 gvim
 handbrake
 handbrake-cli
