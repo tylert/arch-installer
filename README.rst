@@ -33,6 +33,15 @@ Caching Proxy Server For Packages
 * https://github.com/anatol/pacoloco
 
 
+3-2-1 Rule
+----------
+
+2 is 1 and 1 is none...
+
+* https://www.msp360.com/resources/blog/3-2-1-1-0-backup-rule/
+* https://community.veeam.com/blogs-and-podcasts-57/3-2-1-1-0-golden-backup-rule-569
+
+
 Btrfs Bulk Storage
 ------------------
 
