@@ -423,11 +423,16 @@ Encryption Magic
 * https://unix.stackexchange.com/questions/392284/using-a-single-passphrase-to-unlock-multiple-encrypted-disks-at-boot/392286#392286
 
 
-Network Manager Annoyances
---------------------------
+Desktop Linux Annoyances
+------------------------
 
-::
+Network Manager::
 
     gsettings set org.gnome.nm-applet disable-connected-notifications true
     gsettings set org.gnome.nm-applet disable-disconnected-notifications true
     gsettings set org.gnome.nm-applet disable-vpn-notifications true
+
+Firefox::
+
+    # about:config
+    privacy.resistFingerprinting = true
