@@ -436,3 +436,11 @@ Firefox::
 
     # about:config
     privacy.resistFingerprinting = true
+
+
+FAT Rsync
+---------
+
+When working with FAT filesystems and trying to rsync stuff over (e.g:  USB drives)::
+
+    rsync -rtcvP --delete foo/ bar/
