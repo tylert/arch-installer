@@ -228,6 +228,9 @@ Container Stuff
 
 * https://github.com/jpetazzo/registrish#hosting-your-images-with-registrish
 * https://vadosware.io/post/rootless-containers-in-2020-on-arch-linux/
+* https://pet2cattle.com/2022/02/nerdctl-rootless-buildkit
+* https://github.com/containerd/nerdctl/blob/main/docs/config.md#properties
+* https://blog.mobyproject.org/containerd-namespaces-for-docker-kubernetes-and-beyond-d6c43f565084
 
 
 Btrfs Maintenance
