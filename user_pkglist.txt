@@ -1,7 +1,8 @@
+pkgs='
+age
 android-tools
 ditaa
 figlet
-gnome-disk-utility
 go
 gvim
 handbrake
@@ -14,12 +15,15 @@ libreoffice-fresh
 myrepos
 pdftk
 perl-rename
-python-btrfs
 thunderbird
 tk
 tmux
 tree
+unison
 wireguard-tools
+'
+# gnome-disk-utility
+# python-btrfs
 
 # gsettings set org.gnome.nm-applet disable-connected-notifications true
 # gsettings set org.gnome.nm-applet disable-disconnected-notifications true
