@@ -28,8 +28,8 @@ wireguard-tools
 # gsettings set org.gnome.nm-applet disable-connected-notifications true
 # gsettings set org.gnome.nm-applet disable-disconnected-notifications true
 # gsettings set org.gnome.nm-applet disable-vpn-notifications true
-# sudo systemctl enable sshd.service
-# sudo systemctl start sshd.service
+# sudo systemctl enable sshd
+# sudo systemctl start sshd
 
 # dark theme enabled
 # window behaviour "focus follows mouse" enabled
