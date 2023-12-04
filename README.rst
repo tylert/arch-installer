@@ -67,24 +67,17 @@ Prepare all the data drives and mount them::
         -L megaarray \
         /dev/mapper/${FIRST_DRIVE} \
         /dev/mapper/${SECOND_DRIVE} ...
-    mount /dev/mapper/${FIRST_DRIVE} /somewhere
 
     # Create a bunch of subvolumes
+    mount /dev/mapper/${FIRST_DRIVE} /somewhere
     btrfs subvolume create /somewhere/@foo
     btrfs subvolume create /somewhere/@bar
     ...
 
-    # Enable compression automatically
-    btrfs property set /somewhere compression zstd
-    btrfs property set /somewhere/@foo compression zstd
-    btrfs property set /somewhere/@bar compression zstd
-    ...
-
     # Mount all the new subvolumes and the main drive for snapshotting
-    # The compress-force=zstd options is not needed if the property has been set
-    mount -o compress=zstd,subvolid=5 /dev/mapper/${FIRST_DRIVE} /somewhere
-    mount -o compress=zstd,subvol=@foo /dev/mapper/${FIRST_DRIVE} /elsewhere/foo
-    mount -o compress=zstd,subvol=@bar /dev/mapper/${FIRST_DRIVE} /elsewhere/bar
+    mount -o subvolid=5 /dev/mapper/${FIRST_DRIVE} /somewhere
+    mount -o subvol=@foo /dev/mapper/${FIRST_DRIVE} /elsewhere/foo
+    mount -o subvol=@bar /dev/mapper/${FIRST_DRIVE} /elsewhere/bar
     ...
 
 * https://markmcb.com/2020/01/07/five-years-of-btrfs/
