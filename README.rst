@@ -38,7 +38,7 @@ Caching Proxy Server For Packages
 
 2 is 1 and 1 is none...
 
-* https://www.msp360.com/resources/blog/3-2-1-1-0-backup-rule/
+* https://www.msp360.com/resources/blog/3-2-1-1-0-backup-rule
 * https://community.veeam.com/blogs-and-podcasts-57/3-2-1-1-0-golden-backup-rule-569
 
 
@@ -80,17 +80,15 @@ Prepare all the data drives and mount them::
     mount -o subvol=@bar /dev/mapper/${FIRST_DRIVE} /elsewhere/bar
     ...
 
-* https://markmcb.com/2020/01/07/five-years-of-btrfs/
-* https://ownyourbits.com/2018/03/09/easy-sync-of-btrfs-snapshots-with-btrfs-sync/
+* https://markmcb.com/2020/01/07/five-years-of-btrfs
+* https://ownyourbits.com/2018/03/09/easy-sync-of-btrfs-snapshots-with-btrfs-sync
 * https://ramsdenj.com/2016/04/05/using-btrfs-for-easy-backup-and-rollback.html
-* http://snapper.io/
+* http://snapper.io
 * https://btrfs.wiki.kernel.org/index.php/Incremental_Backup#Available_Backup_Tools
 * https://github.com/AmesCornish/buttersink
 * https://www.unixsheikh.com/articles/how-i-store-my-files-and-why-you-should-not-rely-on-fancy-tools-for-backup.html
 * https://github.com/eamonnsullivan/backup-scripts
-* https://arstechnica.com/gadgets/2021/09/examining-btrfs-linuxs-perpetually-half-finished-filesystem/
-* https://wiki.tnonline.net/w/Btrfs/Replacing_a_disk
-* https://ask.fedoraproject.org/t/btrfs-drive-logging-csum-failed-errors-time-to-replace/14116/2  csum won't go away?
+* https://arstechnica.com/gadgets/2021/09/examining-btrfs-linuxs-perpetually-half-finished-filesystem
 
 ::
 
@@ -192,12 +190,12 @@ Rsync Over SSH With Sudo
 
     disown
 
-* https://crashingdaily.wordpress.com/2007/06/29/rsync-and-sudo-over-ssh/
-* https://www.techrepublic.com/article/how-to-run-a-command-that-requires-sudo-via-ssh/
+* https://crashingdaily.wordpress.com/2007/06/29/rsync-and-sudo-over-ssh
+* https://www.techrepublic.com/article/how-to-run-a-command-that-requires-sudo-via-ssh
 * https://blog.zazu.berlin/software/a-almost-perfect-rsync-over-ssh-backup-script.html
 * http://duplicity.nongnu.org/features.html
-* http://www.mikerubel.org/computers/rsync_snapshots/
-* https://samdoran.com/rsync-time-machine/
+* http://www.mikerubel.org/computers/rsync_snapshots
+* https://samdoran.com/rsync-time-machine
 
 
 Container Stuff
@@ -220,7 +218,7 @@ Container Stuff
     containerd-rootless-setuptool.sh install
 
 * https://github.com/jpetazzo/registrish#hosting-your-images-with-registrish
-* https://vadosware.io/post/rootless-containers-in-2020-on-arch-linux/
+* https://vadosware.io/post/rootless-containers-in-2020-on-arch-linux
 * https://pet2cattle.com/2022/02/nerdctl-rootless-buildkit
 * https://github.com/containerd/nerdctl/blob/main/docs/config.md#properties
 * https://blog.mobyproject.org/containerd-namespaces-for-docker-kubernetes-and-beyond-d6c43f565084
@@ -267,12 +265,16 @@ You might want to have a look at the btrfsmaintenance package at https://github.
 
 Show which files are corrupted (those uncorrectable errors found during a scrub operation)::
 
-    dmesg -T | grep "checksum error at"
+    dmesg | grep "checksum error at" | cut -d\  -f24- | sed 's/.$//' | sort | uniq > csums_errs.txt
 
 * https://btrfs.wiki.kernel.org/index.php/Manpage/btrfs-balance
 * https://btrfs.wiki.kernel.org/index.php/FAQ
 * http://marc.merlins.org/linux/scripts/btrfs-scrub
 * http://marc.merlins.org/perso/btrfs/post_2014-05-04_Fixing-Btrfs-Filesystem-Full-Problems.html
+* https://wiki.tnonline.net/w/Btrfs/Replacing_a_disk
+* https://ask.fedoraproject.org/t/btrfs-drive-logging-csum-failed-errors-time-to-replace/14116/2  csum won't go away?
+* https://superuser.com/questions/858237/finding-files-with-btrfs-uncorrectable-errors
+* https://serverfault.com/questions/1111998/btrfs-check-shows-checksum-verify-failed-even-after-scrub
 
 
 Calculations
@@ -397,10 +399,10 @@ References
 * https://github.com/bianjp/archlinux-installer
 * https://blog.chendry.org/2015/02/06/automating-arch-linux-installation.html
 * https://github.com/helmuthdu/aui
-* https://turlucode.com/arch-linux-install-guide-step-1-basic-installation/
+* https://turlucode.com/arch-linux-install-guide-step-1-basic-installation
 * https://github.com/kimono-koans/httm
 * https://github.com/ChrisTitusTech/ArchTitus
-* https://maximiliangolia.com/blog/2022-10-wol-plex-server/
+* https://maximiliangolia.com/blog/2022-10-wol-plex-server
 
 
 TODO
