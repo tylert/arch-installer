@@ -89,6 +89,7 @@ Prepare all the data drives and mount them::
 * https://www.unixsheikh.com/articles/how-i-store-my-files-and-why-you-should-not-rely-on-fancy-tools-for-backup.html
 * https://github.com/eamonnsullivan/backup-scripts
 * https://arstechnica.com/gadgets/2021/09/examining-btrfs-linuxs-perpetually-half-finished-filesystem
+* https://unixsheikh.com/articles/battle-testing-zfs-btrfs-and-mdadm-dm.html
 
 ::
 
