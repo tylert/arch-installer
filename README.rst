@@ -276,6 +276,7 @@ Show which files are corrupted (those uncorrectable errors found during a scrub 
 * https://ask.fedoraproject.org/t/btrfs-drive-logging-csum-failed-errors-time-to-replace/14116/2  csum won't go away?
 * https://superuser.com/questions/858237/finding-files-with-btrfs-uncorrectable-errors
 * https://serverfault.com/questions/1111998/btrfs-check-shows-checksum-verify-failed-even-after-scrub
+* https://github.com/tinyzimmer/btrsync  Golang stuff???
 
 
 Calculations
