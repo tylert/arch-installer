@@ -107,6 +107,11 @@ SMART Checking
         smartctl -H ${drive} | grep result | sed 's/SMART overall-health self-assessment test result//'
     done
 
+::
+
+    smartctl -l selftest --json /dev/blablabla    # JSON output
+    smartctl -l selftest --json=y /dev/blablabla  # YAML output
+
 * https://github.com/AnalogJ/scrutiny#scrutiny  Go web UI???
 
 
@@ -266,7 +271,7 @@ You might want to have a look at the btrfsmaintenance package at https://github.
 
 Show which files are corrupted (those uncorrectable errors found during a scrub operation)::
 
-    dmesg | grep "checksum error at" | cut -d\  -f24- | sed 's/.$//' | sort | uniq > csums_errs.txt
+    dmesg | grep "checksum error"
 
 * https://btrfs.wiki.kernel.org/index.php/Manpage/btrfs-balance
 * https://btrfs.wiki.kernel.org/index.php/FAQ
@@ -275,8 +280,9 @@ Show which files are corrupted (those uncorrectable errors found during a scrub 
 * https://wiki.tnonline.net/w/Btrfs/Replacing_a_disk
 * https://ask.fedoraproject.org/t/btrfs-drive-logging-csum-failed-errors-time-to-replace/14116/2  csum won't go away?
 * https://superuser.com/questions/858237/finding-files-with-btrfs-uncorrectable-errors
-* https://serverfault.com/questions/1111998/btrfs-check-shows-checksum-verify-failed-even-after-scrub
 * https://github.com/tinyzimmer/btrsync  Golang stuff???
+* https://serverfault.com/questions/1111998/btrfs-check-shows-checksum-verify-failed-even-after-scrub
+* https://discussion.fedoraproject.org/t/btrfs-scrub-find-one-error-then-aborted-cannot-resumed/77445/6
 
 
 Calculations
