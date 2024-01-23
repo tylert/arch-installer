@@ -173,6 +173,8 @@ Build up a new /etc/samba/smb.conf.stub file containing your desired shares::
     pdbedit --list
 
 * https://wiki.archlinux.org/title/Xdg-utils#xdg-open  mounting by clients
+* https://serverfault.com/questions/913504/samba-smb-encryption-how-safe-is-it
+* https://unix.stackexchange.com/questions/761491/securing-samba-smb-conf-best-parameters
 
 
 Update Groups Without Logging Out
