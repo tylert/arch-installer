@@ -445,6 +445,8 @@ Firefox::
     # about:config
     privacy.resistFingerprinting = true
 
+* https://mudkip.me/2024/03/28/Notes-on-EndeavourOS  fancy stuff?
+
 
 FAT Rsync
 ---------
