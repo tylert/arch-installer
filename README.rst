@@ -285,6 +285,7 @@ Show which files are corrupted (those uncorrectable errors found during a scrub 
 * https://github.com/tinyzimmer/btrsync  Golang stuff???
 * https://serverfault.com/questions/1111998/btrfs-check-shows-checksum-verify-failed-even-after-scrub
 * https://discussion.fedoraproject.org/t/btrfs-scrub-find-one-error-then-aborted-cannot-resumed/77445/6
+* https://www.funtoo.org/BTRFS_Fun
 
 
 Calculations
@@ -306,8 +307,8 @@ Calculations
     Total unallocatable raw amount: 0.00B
 
 
-ZFS Maintenance
----------------
+ZFS Stuff
+---------
 
 Mounting::
 
@@ -330,11 +331,7 @@ Snapshots::
     zfSnap -d  # delete expired snapshots
     # -d = Delete old snapshots
 
-
-AUR ZFS
--------
-
-::
+AUR::
 
     # Prepare the build environment
     pacman --noconfirm --sync base-devel git linux-headers
@@ -349,6 +346,11 @@ AUR ZFS
     pushd zfs-dkms
     makepkg -si
     popd
+
+* https://github.com/stevleibelt/arch-linux-live-cd-iso-with-zfs  ready-made live CD
+* https://github.com/eoli3n/archiso-zf  script to yank ZFS onto running live CDs
+* https://eoli3n.github.io/2020/04/25/recovery.htm  script to yank ZFS onto running live CDl
+* https://eoli3n.github.io/2020/05/01/zfs-install.html  script to yank ZFS onto running live CD
 
 
 VM Host
@@ -446,6 +448,7 @@ Firefox::
     privacy.resistFingerprinting = true
 
 * https://mudkip.me/2024/03/28/Notes-on-EndeavourOS  fancy stuff?
+* https://github.com/vmavromatis/gnome-layout-manager  Unity, macOS, Winderz look-alikes using GNOME???
 
 
 FAT Rsync
