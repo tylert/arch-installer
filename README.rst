@@ -347,10 +347,11 @@ AUR::
     makepkg -si
     popd
 
+* https://archzfs.leibelt.de  script to yank ZFS onto running live CD
 * https://github.com/stevleibelt/arch-linux-live-cd-iso-with-zfs  ready-made live CD
-* https://github.com/eoli3n/archiso-zf  script to yank ZFS onto running live CDs
-* https://eoli3n.github.io/2020/04/25/recovery.htm  script to yank ZFS onto running live CDl
-* https://eoli3n.github.io/2020/05/01/zfs-install.html  script to yank ZFS onto running live CD
+* https://github.com/eoli3n/archiso-zf  another script to yank ZFS onto running live CD
+* https://eoli3n.github.io/2020/04/25/recovery.htm  another script to yank ZFS onto running live CD
+* https://eoli3n.github.io/2020/05/01/zfs-install.html  another script to yank ZFS onto running live CD
 
 
 VM Host
