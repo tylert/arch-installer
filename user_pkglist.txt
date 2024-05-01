@@ -3,6 +3,7 @@ age
 android-tools
 chromium
 ditaa
+fdupes
 figlet
 go
 gvim
@@ -22,6 +23,7 @@ tmux
 tree
 unison
 wireguard-tools
+yt-dlp
 '
 # gnome-disk-utility
 # python-btrfs
