@@ -15,8 +15,10 @@ inkscape
 jhead
 keepassxc
 libdvdcss
+librecad
 libreoffice-fresh
 myrepos
+openscad
 pdftk
 perl-rename
 thunderbird
@@ -25,6 +27,7 @@ tmux
 tree
 unison
 wireguard-tools
+yggdrasil
 yt-dlp
 '
 # gnome-disk-utility
