@@ -5,6 +5,7 @@ chromium
 ditaa
 fdupes
 figlet
+gimp
 git
 go
 gvim
