@@ -450,6 +450,7 @@ Firefox::
 
 * https://mudkip.me/2024/03/28/Notes-on-EndeavourOS  fancy stuff?
 * https://github.com/vmavromatis/gnome-layout-manager  Unity, macOS, Winderz look-alikes using GNOME???
+* https://www.theregister.com/2023/02/27/lomiri_desktop_on_debian  Lomiri == Unity == meh
 
 
 FAT Rsync
