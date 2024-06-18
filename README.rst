@@ -220,16 +220,18 @@ Container Stuff
     containerd-rootless-setuptool.sh install
     containerd-rootless-setuptool.sh install-buildkit
 
-Not if these are needed anymore::
+::
 
-    echo 'kernel.unprivileged_userns_clone=1' | sudo tee -a /etc/sysctl.d/userns.conf
-
-    # Ensure the sub?id stuff is there (weird that usermod can't generate these files)
+    # Ensure the sub?id stuff is there for each user
     echo "${USER}:100000:65536" | sudo tee -a /etc/subgid
     echo "${USER}:100000:65536" | sudo tee -a /etc/subuid
     echo "${OTHER_USER}:165536:65536" | sudo tee -a /etc/subgid
     echo "${OTHER_USER}:165536:65536" | sudo tee -a /etc/subuid
     # ...
+
+::
+
+    echo 'kernel.unprivileged_userns_clone=1' | sudo tee -a /etc/sysctl.d/userns.conf
 
 * https://github.com/jpetazzo/registrish#hosting-your-images-with-registrish
 * https://vadosware.io/post/rootless-containers-in-2020-on-arch-linux
