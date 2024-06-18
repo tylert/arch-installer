@@ -211,8 +211,16 @@ Container Stuff
 
 ::
 
-    # Install essential packages for container hosts and users
-    pacman --noconfirm --sync containerd nerdctl cni-plugins
+    # Install essential packages for container hosts
+    pacman --noconfirm --sync nerdctl                  # do "container stuff"
+    pacman --noconfirm --sync buildkit cni-plugins     # ensure "build" works
+    pacman --noconfirm --sync rootlesskit slirp4netns  # ensure "run" works
+
+    # Prepare to actually "build" and "run" containers
+    containerd-rootless-setuptool.sh install
+    containerd-rootless-setuptool.sh install-buildkit
+
+Not if these are needed anymore::
 
     echo 'kernel.unprivileged_userns_clone=1' | sudo tee -a /etc/sysctl.d/userns.conf
 
@@ -222,8 +230,6 @@ Container Stuff
     echo "${OTHER_USER}:165536:65536" | sudo tee -a /etc/subgid
     echo "${OTHER_USER}:165536:65536" | sudo tee -a /etc/subuid
     # ...
-
-    containerd-rootless-setuptool.sh install
 
 * https://github.com/jpetazzo/registrish#hosting-your-images-with-registrish
 * https://vadosware.io/post/rootless-containers-in-2020-on-arch-linux
