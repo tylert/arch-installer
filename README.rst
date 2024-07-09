@@ -445,6 +445,11 @@ Encryption Magic
 Desktop Linux Annoyances
 ------------------------
 
+Mouse cursor::
+
+    # Ensure package 'adwaita-cursors' is installed, then...
+    gsettings set org.cinnamon.desktop.interface cursor-theme Adwaita
+
 Network Manager::
 
     gsettings set org.gnome.nm-applet disable-connected-notifications true
