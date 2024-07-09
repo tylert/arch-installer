@@ -27,6 +27,15 @@ To start the install process (including some sample environment variables)::
     DRIVE=/dev/sda SUFFIX='' NEWHOSTNAME=numuh NEWUSERNAME=sheen NEWPASSWORD=awesome ./install_amd64_uefi.sh
 
 
+UEFI Stuff
+----------
+
+::
+
+    efibootmgr  # list the entries
+    efibootmgr --delete-bootnum --bootnum 0000  # delete the Boot0000 entry
+
+
 Caching Proxy Server For Packages
 ---------------------------------
 
