@@ -26,6 +26,8 @@ To start the install process (including some sample environment variables)::
     DRIVE=/dev/nvme0n1 SUFFIX=p NEWHOSTNAME=numuh NEWUSERNAME=sheen NEWPASSWORD=awesome ./install_amd64_uefi.sh
     DRIVE=/dev/sda SUFFIX='' NEWHOSTNAME=numuh NEWUSERNAME=sheen NEWPASSWORD=awesome ./install_amd64_uefi.sh
 
+* https://mags.zone/help/arch-usb.html
+
 
 UEFI Stuff
 ----------
