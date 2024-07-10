@@ -451,6 +451,13 @@ Encryption Magic
 * https://www.freedesktop.org/software/systemd/man/systemd-cryptenroll.html
 * https://github.com/gandalfb/openmediavault-full-disk-encryption#create-derived-keys-and-crypttab
 * https://unix.stackexchange.com/questions/392284/using-a-single-passphrase-to-unlock-multiple-encrypted-disks-at-boot/392286#392286
+* https://gist.github.com/vms20591/b8b17b3c44fc9b62ff734c0b588014db
+
+::
+
+    dd if=/dev/zero of=header.img bs=16M count=1
+    cryptsetup luksFormat --header header.img --offset 32768 /dev/sda1
+    cryptsetup open --header header.img /dev/sda1 moo
 
 
 Desktop Linux Annoyances
@@ -475,6 +482,14 @@ Firefox::
 * https://mudkip.me/2024/03/28/Notes-on-EndeavourOS  fancy stuff?
 * https://github.com/vmavromatis/gnome-layout-manager  Unity, macOS, Winderz look-alikes using GNOME???
 * https://www.theregister.com/2023/02/27/lomiri_desktop_on_debian  Lomiri == Unity == meh
+* https://forum.endeavouros.com/t/manual-partitioning-with-luks-and-btrfs/51483
+
+Adjust the automatic partition layouts::
+
+    # Boot the liveCD
+    # Edit /etc/calamares/modules/partition.conf
+    # Replace "100%" with some other value, change the size of the EFI partition, etc.
+    # Then run the installer
 
 
 FAT Rsync
