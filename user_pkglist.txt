@@ -10,9 +10,12 @@ git
 gnome-disk-utility
 go
 gvim
+handbrake
+handbrake-cli
 inkscape
 jhead
 keepassxc
+libdvdcss
 librecad
 libreoffice-fresh
 myrepos
@@ -26,14 +29,12 @@ tmux
 tree
 yt-dlp
 '
-# handbrake
-# handbrake-cli
-# libdvdcss
 # unison
 # wireguard-tools
 # yggdrasil
 pacman -S ${pkgs}
 
+# gsettings set org.cinnamon.desktop.interface cursor-theme Adwaita
 # gsettings set org.gnome.nm-applet disable-connected-notifications true
 # gsettings set org.gnome.nm-applet disable-disconnected-notifications true
 # gsettings set org.gnome.nm-applet disable-vpn-notifications true
