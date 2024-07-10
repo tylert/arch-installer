@@ -2,6 +2,7 @@ pkgs='
 age
 android-tools
 chromium
+ditaa
 fdupes
 figlet
 gimp
@@ -16,6 +17,7 @@ librecad
 libreoffice-fresh
 myrepos
 openscad
+pdftk
 perl-rename
 rsync
 thunderbird
@@ -24,11 +26,9 @@ tmux
 tree
 yt-dlp
 '
-# ditaa  # jabba app
 # handbrake
 # handbrake-cli
 # libdvdcss
-# pdftk  # jabba app
 # unison
 # wireguard-tools
 # yggdrasil
