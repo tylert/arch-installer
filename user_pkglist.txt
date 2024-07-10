@@ -2,36 +2,37 @@ pkgs='
 age
 android-tools
 chromium
-ditaa
 fdupes
 figlet
 gimp
 git
+gnome-disk-utility
 go
 gvim
-handbrake
-handbrake-cli
 inkscape
 jhead
 keepassxc
-libdvdcss
 librecad
 libreoffice-fresh
 myrepos
 openscad
-pdftk
 perl-rename
+rsync
 thunderbird
 tk
 tmux
 tree
-unison
-wireguard-tools
-yggdrasil
 yt-dlp
 '
-# gnome-disk-utility
-# python-btrfs
+# ditaa  # jabba app
+# handbrake
+# handbrake-cli
+# libdvdcss
+# pdftk  # jabba app
+# unison
+# wireguard-tools
+# yggdrasil
+pacman -S ${pkgs}
 
 # gsettings set org.gnome.nm-applet disable-connected-notifications true
 # gsettings set org.gnome.nm-applet disable-disconnected-notifications true
