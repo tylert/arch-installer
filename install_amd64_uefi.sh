@@ -35,7 +35,7 @@ fi
 dd if=/dev/zero of="${DRIVE}" bs=1M count=8
 echo 'label: gpt' | sfdisk --force --no-reread "${DRIVE}"
 sfdisk --force --no-reread "${DRIVE}" << EOF
-,256M,U
+,1G,U
 ,33G,S
 ,
 EOF
