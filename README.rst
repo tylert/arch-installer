@@ -222,6 +222,15 @@ Container Stuff
 
 ::
 
+    # Ensure the sub?id stuff is there for each user
+    echo "${USER}:100000:65536" | sudo tee -a /etc/subgid
+    echo "${USER}:100000:65536" | sudo tee -a /etc/subuid
+    echo "${OTHER_USER}:165536:65536" | sudo tee -a /etc/subgid
+    echo "${OTHER_USER}:165536:65536" | sudo tee -a /etc/subuid
+    # ...
+
+::
+
     # Install essential packages for container hosts
     pacman --noconfirm --sync nerdctl                  # do "container stuff"
     pacman --noconfirm --sync buildkit cni-plugins     # ensure "build" works
@@ -233,15 +242,6 @@ Container Stuff
 
 ::
 
-    # Ensure the sub?id stuff is there for each user
-    echo "${USER}:100000:65536" | sudo tee -a /etc/subgid
-    echo "${USER}:100000:65536" | sudo tee -a /etc/subuid
-    echo "${OTHER_USER}:165536:65536" | sudo tee -a /etc/subgid
-    echo "${OTHER_USER}:165536:65536" | sudo tee -a /etc/subuid
-    # ...
-
-::
-
     echo 'kernel.unprivileged_userns_clone=1' | sudo tee -a /etc/sysctl.d/userns.conf
 
 * https://github.com/jpetazzo/registrish#hosting-your-images-with-registrish
@@ -249,6 +249,7 @@ Container Stuff
 * https://pet2cattle.com/2022/02/nerdctl-rootless-buildkit
 * https://github.com/containerd/nerdctl/blob/main/docs/config.md#properties
 * https://blog.mobyproject.org/containerd-namespaces-for-docker-kubernetes-and-beyond-d6c43f565084
+* https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1030928  nerdctl horribly broken in Debian
 
 
 Btrfs Maintenance
