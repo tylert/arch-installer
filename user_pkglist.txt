@@ -1,6 +1,7 @@
 pkgs='
 age
 android-tools
+aria2
 chromium
 ditaa
 fdupes
