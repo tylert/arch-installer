@@ -501,3 +501,11 @@ FAT Rsync
 When working with FAT filesystems and trying to rsync stuff over (e.g:  USB drives)::
 
     rsync -rtcvP --delete foo/ bar/
+
+
+Debian Live Installer
+---------------------
+
+* https://forums.debian.net/viewtopic.php?t=155802  Calamares setup for btrfs subvolumes
+* https://chaos.tomaskral.eu/guides/debian-encrypted-btrfs-root
+* https://www.paritybit.ca/blog/debian-with-btrfs
