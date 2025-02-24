@@ -486,6 +486,7 @@ Firefox::
 * https://github.com/vmavromatis/gnome-layout-manager  Unity, macOS, Winderz look-alikes using GNOME???
 * https://www.theregister.com/2023/02/27/lomiri_desktop_on_debian  Lomiri == Unity == meh
 * https://forum.endeavouros.com/t/manual-partitioning-with-luks-and-btrfs/51483
+* https://github.com/vinceliuice/WhiteSur-gtk-theme  macOS theme
 
 Adjust the automatic partition layouts::
 
