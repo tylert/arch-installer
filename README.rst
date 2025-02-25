@@ -455,6 +455,7 @@ Encryption Magic
 * https://github.com/gandalfb/openmediavault-full-disk-encryption#create-derived-keys-and-crypttab
 * https://unix.stackexchange.com/questions/392284/using-a-single-passphrase-to-unlock-multiple-encrypted-disks-at-boot/392286#392286
 * https://gist.github.com/vms20591/b8b17b3c44fc9b62ff734c0b588014db
+* https://wiki.archlinux.org/title/Dm-crypt/Specialties#Encrypted_system_using_a_detached_LUKS_header
 
 ::
 
