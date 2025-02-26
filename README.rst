@@ -488,6 +488,7 @@ Firefox::
 * https://www.theregister.com/2023/02/27/lomiri_desktop_on_debian  Lomiri == Unity == meh
 * https://forum.endeavouros.com/t/manual-partitioning-with-luks-and-btrfs/51483
 * https://github.com/vinceliuice/WhiteSur-gtk-theme  macOS theme
+* https://support.mozilla.org/en-US/questions/1426184  timezone fix if you use fingerprint protection
 
 Adjust the automatic partition layouts::
 
