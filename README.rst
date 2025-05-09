@@ -295,6 +295,9 @@ Show which files are corrupted (those uncorrectable errors found during a scrub 
 
     dmesg | grep "checksum error"
 
+    # Read the offending inode numbers and pass them to...
+    btrfs inspect-internal inode-resolve ${inode} ${btrfs_root}
+
 * https://btrfs.wiki.kernel.org/index.php/Manpage/btrfs-balance
 * https://btrfs.wiki.kernel.org/index.php/FAQ
 * http://marc.merlins.org/linux/scripts/btrfs-scrub
