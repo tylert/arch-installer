@@ -21,7 +21,6 @@ librecad
 libreoffice-fresh
 myrepos
 openscad
-pdftk
 perl-rename
 rsync
 thunderbird
@@ -35,6 +34,21 @@ yt-dlp
 # yggdrasil
 pacman -S ${pkgs}
 
+# Foreign packages (pacman -Qn -q)
+# brlaser
+# electron30-bin
+# filespooler
+# geteltorito
+# gojq
+# infnoise
+# infnoise-tools
+# libinfnoise
+# nncp
+# pdfcpu
+# ptouch-print-git
+# reticulum-meshchat-bin
+# tncattach
+
 # gsettings set org.cinnamon.desktop.interface cursor-theme Adwaita
 # gsettings set org.gnome.nm-applet disable-connected-notifications true
 # gsettings set org.gnome.nm-applet disable-disconnected-notifications true
@@ -42,16 +56,16 @@ pacman -S ${pkgs}
 # sudo systemctl enable sshd
 # sudo systemctl start sshd
 
-# dark theme enabled
+# dark mode enabled
 # window behaviour "focus follows mouse" enabled
-# date/time applet settings updated (show week numbers, custom date format)
+# date/time applet settings updated (show week numbers, custom date format "%a, %b %e, %H:%M")
 # battery applet settings updated (show all batteries, show percentage)
 # grouped window applet settings updated
 # remove pinned icons from bottom panel
-# reorder icons on left-hand side of "start menu"
 # desktop icons settings updated (show trash and mounted drives)
 # network settings updated (join wireless network)
 # gthumb settings updated
 # nemo settings updated
-# firefox settings updated
 # keepassxc settings updated
+# firefox settings updated
+# thunderbird settings updated

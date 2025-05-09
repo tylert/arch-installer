@@ -15,11 +15,10 @@ xorg
 # mate-icon-theme
 
 extra_applications='
-eog
+gimp
 firefox
-libreoffice
+libreoffice-fresh
 thunderbird
-totem
 '
 
 pacman --noconfirm --sync ${core_packages} ${extra_applications}
