@@ -298,6 +298,9 @@ Show which files are corrupted (those uncorrectable errors found during a scrub 
     # Read the offending inode numbers and pass them to...
     btrfs inspect-internal inode-resolve ${inode} ${btrfs_root}
 
+    # After cleaning up the offending files in all snapshots...
+    btrfs device stats --reset ${btrfs_root}
+
 * https://btrfs.wiki.kernel.org/index.php/Manpage/btrfs-balance
 * https://btrfs.wiki.kernel.org/index.php/FAQ
 * http://marc.merlins.org/linux/scripts/btrfs-scrub
