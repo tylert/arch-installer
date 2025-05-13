@@ -336,8 +336,11 @@ Replacing Drives
 ::
 
     # Mount the filesystem first and then tell it to swap the missing drive for
-    # a better one...
+    # a better one
     btrfs replace start /dev/disk/by-id/foo /dev/disk/by-id/bar /mnt
+
+    # Show how far along the replace is at currently
+    btrfs replace status -1 /mnt
 
 
 Calculations
