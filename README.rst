@@ -328,6 +328,18 @@ Show which files are corrupted (those uncorrectable errors found during a scrub 
 * https://www.funtoo.org/BTRFS_Fun
 
 
+Replacing Drives
+----------------
+
+* https://wiki.tnonline.net/w/Btrfs/Replacing_a_disk
+
+::
+
+    # Mount the filesystem first and then tell it to swap the missing drive for
+    # a better one...
+    btrfs replace start /dev/disk/by-id/foo /dev/disk/by-id/bar /mnt
+
+
 Calculations
 ------------
 
@@ -520,6 +532,8 @@ Adjust the automatic partition layouts::
 
 Password Magic
 --------------
+
+* https://www.baeldung.com/linux/unlocking-account-failed-attempts
 
 ::
 
