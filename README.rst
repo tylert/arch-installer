@@ -518,6 +518,14 @@ Adjust the automatic partition layouts::
     # Then run the installer
 
 
+Password Magic
+--------------
+
+::
+
+    faillock --user bob --reset
+
+
 FAT Rsync
 ---------
 
