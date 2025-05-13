@@ -196,6 +196,20 @@ Update Groups Without Logging Out
     exec newgrp $(id --group --name)
 
 
+Rotate Display Without xrandr
+-----------------------------
+
+* https://askubuntu.com/questions/237963/how-do-i-rotate-my-display-when-not-using-an-x-server
+
+::
+
+    echo 1 | sudo tee /sys/class/graphics/fbcon/rotate  # only current framebuffer
+    echo 1 | sudo tee /sys/class/graphics/fbcon/rotate_all  # all framebuffers
+
+    # 0 North, 1 East, 2 South, 3 West
+    # Or add "fbcon=rotate:1" to GRUB_CMDLINE_LINUX to have it happen earlier
+
+
 Rsync Over SSH With Sudo
 ------------------------
 
