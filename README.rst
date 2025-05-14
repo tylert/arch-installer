@@ -94,10 +94,10 @@ Prepare all the data drives and mount them::
 * https://markmcb.com/2020/01/07/five-years-of-btrfs
 * https://ownyourbits.com/2018/03/09/easy-sync-of-btrfs-snapshots-with-btrfs-sync
 * https://ramsdenj.com/2016/04/05/using-btrfs-for-easy-backup-and-rollback.html
-* http://snapper.io
+* https://snapper.io
 * https://btrfs.wiki.kernel.org/index.php/Incremental_Backup#Available_Backup_Tools
 * https://github.com/AmesCornish/buttersink
-* https://www.unixsheikh.com/articles/how-i-store-my-files-and-why-you-should-not-rely-on-fancy-tools-for-backup.html
+* https://unixsheikh.com/articles/how-i-store-my-files-and-why-you-should-not-rely-on-fancy-tools-for-backup.html
 * https://github.com/eamonnsullivan/backup-scripts
 * https://arstechnica.com/gadgets/2021/09/examining-btrfs-linuxs-perpetually-half-finished-filesystem
 * https://unixsheikh.com/articles/battle-testing-zfs-btrfs-and-mdadm-dm.html
@@ -123,7 +123,7 @@ SMART Checking
     smartctl -l selftest --json /dev/blablabla    # JSON output
     smartctl -l selftest --json=y /dev/blablabla  # YAML output
 
-* https://github.com/AnalogJ/scrutiny#scrutiny  Go web UI???
+* https://github.com/AnalogJ/scrutiny  Go web UI???
 
 
 Samba Mount Setup
@@ -226,9 +226,9 @@ Rsync Over SSH With Sudo
 * https://crashingdaily.wordpress.com/2007/06/29/rsync-and-sudo-over-ssh
 * https://www.techrepublic.com/article/how-to-run-a-command-that-requires-sudo-via-ssh
 * https://blog.zazu.berlin/software/a-almost-perfect-rsync-over-ssh-backup-script.html
-* http://duplicity.nongnu.org/features.html
-* http://www.mikerubel.org/computers/rsync_snapshots
+* https://duplicity.nongnu.org/features.html
 * https://samdoran.com/rsync-time-machine
+* http://mikerubel.org/computers/rsync_snapshots
 
 
 Container Stuff
@@ -299,29 +299,34 @@ You might want to have a look at the btrfsmaintenance package at https://github.
     # btrfs balance start --background --full-balance /somewhere
     # btrfs balance status /somewhere
 
-    # Start a trim operation
+    # Start a defragment operation
     # TBD
 
-    # Start a defragment operation
+    # Start a trim operation (SSDs only?)
     # TBD
 
 Show which files are corrupted (those uncorrectable errors found during a scrub operation)::
 
+    # Try to find information about the failures...
+    dmesg | grep "csum failed"
     dmesg | grep "checksum error"
+    dmesg | grep "unable to fixup"
 
-    # Read the offending inode numbers and pass them to...
+    # Read off the offending numbers and pass them to...
     btrfs inspect-internal inode-resolve ${inode} ${btrfs_root}
+    btrfs inspect-internal logical-resolve ${logical} ${btrfs_root}
 
     # After cleaning up the offending files in all snapshots...
     btrfs device stats --reset ${btrfs_root}
 
 * https://btrfs.wiki.kernel.org/index.php/Manpage/btrfs-balance
 * https://btrfs.wiki.kernel.org/index.php/FAQ
-* http://marc.merlins.org/linux/scripts/btrfs-scrub
-* http://marc.merlins.org/perso/btrfs/post_2014-05-04_Fixing-Btrfs-Filesystem-Full-Problems.html
+* https://marc.merlins.org/linux/scripts/btrfs-scrub
+* https://marc.merlins.org/perso/btrfs/post_2014-05-04_Fixing-Btrfs-Filesystem-Full-Problems.html
 * https://wiki.tnonline.net/w/Btrfs/Replacing_a_disk
 * https://ask.fedoraproject.org/t/btrfs-drive-logging-csum-failed-errors-time-to-replace/14116/2  csum won't go away?
 * https://superuser.com/questions/858237/finding-files-with-btrfs-uncorrectable-errors
+* https://mpdesouza.com/blog/btrfs-resolving-the-logical-resolve  super strange "unable to fixup" errors
 * https://github.com/tinyzimmer/btrsync  Golang stuff???
 * https://serverfault.com/questions/1111998/btrfs-check-shows-checksum-verify-failed-even-after-scrub
 * https://discussion.fedoraproject.org/t/btrfs-scrub-find-one-error-then-aborted-cannot-resumed/77445/6
@@ -335,12 +340,12 @@ Replacing Drives
 
 ::
 
-    # Mount the filesystem first and then tell it to swap the missing drive for
-    # a better one
-    btrfs replace start /dev/disk/by-id/foo /dev/disk/by-id/bar /mnt
+    # Mount the filesystem first and then tell it to swap the missing drive out
+    btrfs filesystem show ${btrfs_root}
+    btrfs replace start ${devid_thats_gone_now} /dev/mapper/foo ${btrfs_root}
 
     # Show how far along the replace is at currently
-    btrfs replace status -1 /mnt
+    btrfs replace status -1 ${btrfs_root}
 
 
 Calculations
@@ -361,7 +366,7 @@ Calculations
 
     Total unallocatable raw amount: 0.00B
 
-* https://www.carfax.org.uk/btrfs-usage
+* https://carfax.org.uk/btrfs-usage
 
 
 ZFS Stuff
