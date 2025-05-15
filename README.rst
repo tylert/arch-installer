@@ -337,15 +337,20 @@ Replacing Drives
 ----------------
 
 * https://wiki.tnonline.net/w/Btrfs/Replacing_a_disk
+* https://brandonrozek.com/blog/replacing-drive-btrfs
+* https://btrfs.readthedocs.io/en/latest/btrfs-replace.html
 
 ::
 
     # Mount the filesystem first and then tell it to swap the missing drive out
     btrfs filesystem show ${btrfs_root}
-    btrfs replace start ${devid_thats_gone_now} /dev/mapper/foo ${btrfs_root}
+    btrfs replace start ${devid_missing} /dev/mapper/foo ${btrfs_root}
 
     # Show how far along the replace is at currently
     btrfs replace status -1 ${btrfs_root}
+
+    # If you're using a larger drive, you must inform btrfs about the change
+    btrfs filesystem resize ${devid}:max ${btrfs_root}
 
 
 Calculations
