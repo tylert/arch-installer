@@ -49,7 +49,7 @@ Caching Proxy Server For Packages
 
 2 is 1 and 1 is none...
 
-* https://www.msp360.com/resources/blog/3-2-1-1-0-backup-rule
+* https://msp360.com/resources/blog/3-2-1-1-0-backup-rule
 * https://community.veeam.com/blogs-and-podcasts-57/3-2-1-1-0-golden-backup-rule-569
 
 
@@ -224,11 +224,12 @@ Rsync Over SSH With Sudo
     disown
 
 * https://crashingdaily.wordpress.com/2007/06/29/rsync-and-sudo-over-ssh
-* https://www.techrepublic.com/article/how-to-run-a-command-that-requires-sudo-via-ssh
+* https://techrepublic.com/article/how-to-run-a-command-that-requires-sudo-via-ssh
 * https://blog.zazu.berlin/software/a-almost-perfect-rsync-over-ssh-backup-script.html
 * https://duplicity.nongnu.org/features.html
 * https://samdoran.com/rsync-time-machine
 * http://mikerubel.org/computers/rsync_snapshots
+* https://it-notes.dragas.net/2025/07/18/make-your-own-backup-system-part-1-strategy-before-scripts
 
 
 Container Stuff
@@ -330,7 +331,7 @@ Show which files are corrupted (those uncorrectable errors found during a scrub 
 * https://github.com/tinyzimmer/btrsync  Golang stuff???
 * https://serverfault.com/questions/1111998/btrfs-check-shows-checksum-verify-failed-even-after-scrub
 * https://discussion.fedoraproject.org/t/btrfs-scrub-find-one-error-then-aborted-cannot-resumed/77445/6
-* https://www.funtoo.org/BTRFS_Fun
+* https://funtoo.org/BTRFS_Fun
 
 
 Replacing Drives
@@ -474,7 +475,6 @@ References
 * http://blog.redit.name/posts/2014/arch-linux-install-btrfs-root-with-snapshots.html
 * http://blog.fabio.mancinelli.me/2012/12/28/Arch_Linux_on_BTRFS.html
 * https://github.com/egara/arch-btrfs-installation
-* https://www.vultr.com/docs/install-arch-linux-with-btrfs-snapshotting
 * https://wiki.archlinux.org/index.php/Installation_guide
 * https://github.com/bianjp/archlinux-installer
 * https://blog.chendry.org/2015/02/06/automating-arch-linux-installation.html
@@ -496,7 +496,7 @@ Encryption Magic
 ----------------
 
 * http://0pointer.net/blog/unlocking-luks2-volumes-with-tpm2-fido2-pkcs11-security-hardware-on-systemd-248.html
-* https://www.freedesktop.org/software/systemd/man/systemd-cryptenroll.html
+* https://freedesktop.org/software/systemd/man/systemd-cryptenroll.html
 * https://github.com/gandalfb/openmediavault-full-disk-encryption#create-derived-keys-and-crypttab
 * https://unix.stackexchange.com/questions/392284/using-a-single-passphrase-to-unlock-multiple-encrypted-disks-at-boot/392286#392286
 * https://gist.github.com/vms20591/b8b17b3c44fc9b62ff734c0b588014db
@@ -530,7 +530,7 @@ Firefox::
 
 * https://mudkip.me/2024/03/28/Notes-on-EndeavourOS  fancy stuff?
 * https://github.com/vmavromatis/gnome-layout-manager  Unity, macOS, Winderz look-alikes using GNOME???
-* https://www.theregister.com/2023/02/27/lomiri_desktop_on_debian  Lomiri == Unity == meh
+* https://theregister.com/2023/02/27/lomiri_desktop_on_debian  Lomiri == Unity == meh
 * https://forum.endeavouros.com/t/manual-partitioning-with-luks-and-btrfs/51483
 * https://github.com/vinceliuice/WhiteSur-gtk-theme  macOS theme
 * https://support.mozilla.org/en-US/questions/1426184  timezone fix if you use fingerprint protection
@@ -546,7 +546,7 @@ Adjust the automatic partition layouts::
 Password Magic
 --------------
 
-* https://www.baeldung.com/linux/unlocking-account-failed-attempts
+* https://baeldung.com/linux/unlocking-account-failed-attempts
 
 ::
 
@@ -566,4 +566,4 @@ Debian Live Installer
 
 * https://forums.debian.net/viewtopic.php?t=155802  Calamares setup for btrfs subvolumes
 * https://chaos.tomaskral.eu/guides/debian-encrypted-btrfs-root
-* https://www.paritybit.ca/blog/debian-with-btrfs
+* https://paritybit.ca/blog/debian-with-btrfs
