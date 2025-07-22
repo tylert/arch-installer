@@ -534,6 +534,8 @@ Firefox::
 * https://forum.endeavouros.com/t/manual-partitioning-with-luks-and-btrfs/51483
 * https://github.com/vinceliuice/WhiteSur-gtk-theme  macOS theme
 * https://support.mozilla.org/en-US/questions/1426184  timezone fix if you use fingerprint protection
+* https://kau.sh/blog/how-to-firefox  Firefox container stuff and recommended uBlock Origin settings
+* https://github.com/mig4ng/ublock-origin-filters  custom uBlock Origin filters
 
 Adjust the automatic partition layouts::
 
