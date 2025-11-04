@@ -317,6 +317,11 @@ Show which files are corrupted (those uncorrectable errors found during a scrub 
     btrfs inspect-internal inode-resolve ${inode} ${btrfs_root}
     btrfs inspect-internal logical-resolve ${logical} ${btrfs_root}
 
+    dmesg | grep 'checksum error' |\
+        sed -E 's/^.*checksum error at logical ([[:digit:]]*).*$/\1/p' | sort | uniq
+    dmesg | grep 'unable to fixup' |\
+        sed -E 's/^.*error at logical ([[:digit:]]*).*$/\1/p' | sort | uniq
+
     # After cleaning up the offending files in all snapshots...
     btrfs device stats --reset ${btrfs_root}
 
