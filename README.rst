@@ -308,21 +308,16 @@ You might want to have a look at the btrfsmaintenance package at https://github.
 
 Show which files are corrupted (those uncorrectable errors found during a scrub operation)::
 
-    # Try to find information about the failures...
-    dmesg | grep "csum failed"
-    dmesg | grep "checksum error"
-    dmesg | grep "unable to fixup"
-
-    # Read off the offending numbers and pass them to...
-    btrfs inspect-internal inode-resolve ${inode} ${btrfs_root}
-    btrfs inspect-internal logical-resolve ${logical} ${btrfs_root}
-
+    # Find information about which logical thingies have failures
     dmesg | grep 'checksum error' |\
         sed -E 's/^.*checksum error at logical ([[:digit:]]*).*$/\1/p' | sort | uniq
     dmesg | grep 'unable to fixup' |\
         sed -E 's/^.*error at logical ([[:digit:]]*).*$/\1/p' | sort | uniq
 
-    # After cleaning up the offending files in all snapshots...
+    # Find out which files correspond to the failed logical thingies
+    btrfs inspect-internal logical-resolve ${logical} ${btrfs_root}
+
+    # Freshen things before doing a clean run
     btrfs device stats --reset ${btrfs_root}
 
 * https://btrfs.wiki.kernel.org/index.php/Manpage/btrfs-balance
