@@ -19,7 +19,6 @@ keepassxc
 libdvdcss
 librecad
 libreoffice-fresh
-myrepos
 openscad
 perl-rename
 rsync
@@ -27,14 +26,14 @@ thunderbird
 tk
 tmux
 tree
+wireguard-tools
 yt-dlp
 '
 # unison
-# wireguard-tools
 # yggdrasil
 pacman -S ${pkgs}
 
-# Foreign packages (pacman -Qn -q)
+# Foreign packages (pacman -Qm -q)
 # brlaser
 # electron30-bin
 # filespooler
