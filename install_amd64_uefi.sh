@@ -5,10 +5,10 @@
 # Install assumptions:
 # - UEFI
 # - SSD >= swap size + OS requirements
-# - swap size is RAM + "a bit" (hibernate)
+# - swap size is RAM + "a bit" (for hibernate)
 # - unencrypted root
 # - unencrypted swap
-# - btrfs for everything
+# - btrfs as much as possible
 # - boot is inside root
 
 set -xe
@@ -30,7 +30,7 @@ if [ -z "${SUFFIX}" ]; then
 fi
 
 # XXX FIXME TODO  Calculate size of swap partition based on amount of RAM
-# XXX FIXME TODO  https://arslan.io/2019/07/03/how-to-write-idempotent-bash-scripts/
+# XXX FIXME TODO  https://arslan.io/2019/07/03/how-to-write-idempotent-bash-scripts
 
 dd if=/dev/zero of="${DRIVE}" bs=1M count=8
 echo 'label: gpt' | sfdisk --force --no-reread "${DRIVE}"
