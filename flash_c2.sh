@@ -6,16 +6,16 @@
 
 set -e
 
-drive='/dev/sdb'  # eMMC
+drive='/dev/sdb'  # eMMC plugged into a USB gizmo
 first_partition="${drive}1"
 date='latest'
-# root_tarball_remote='http://os.archlinuxarm.org/os/ArchLinuxARM-odroid-c2-latest.tar.gz'
+root_tarball_remote='http://os.archlinuxarm.org/os/ArchLinuxARM-odroid-c2-latest.tar.gz'
 root_tarball_local="/tmp/archlinux-${date}-odroid-c2.tar.gz"
-root_filesystem_type='ext4'
+root_filesystem_type='ext4'  # XXX FIXME TODO  Why can't this be btrfs???
 first_mount_point="$(mktemp --dry-run)"  # unsafeish
 
 # Fetch the root filesystem tarball
-# wget "${root_tarball_remote}" --continue --output-document="${root_tarball_local}"
+# wget --continue --hsts-file=/dev/null --output-document="${root_tarball_local}" "${root_tarball_remote}"
 
 # Format the drive
 dd if=/dev/zero of="${drive}" bs=1M count=8

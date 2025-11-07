@@ -8,18 +8,18 @@
 
 set -e
 
-drive='/dev/mmcblk0'  # uSD
+drive='/dev/mmcblk0'  # uSD in an adapter for an SD card slot
 first_partition="${drive}p1"
 second_partition="${drive}p2"
 date='latest'
-# root_tarball_remote='http://os.archlinuxarm.org/os/ArchLinuxARM-rpi-aarch64-latest.tar.gz'
+root_tarball_remote='http://os.archlinuxarm.org/os/ArchLinuxARM-rpi-aarch64-latest.tar.gz'
 root_tarball_local="/tmp/archlinux-${date}-rpi-aarch64.tar.gz"
-root_filesystem_type='ext4'
+root_filesystem_type='ext4'  # XXX FIXME TODO  Why can't this be btrfs???
 first_mount_point="$(mktemp --dry-run)"  # unsafeish
 second_mount_point="$(mktemp --dry-run)"  # unsafeish
 
 # Fetch the root filesystem tarball
-# wget "${root_tarball_remote}" --continue --output-document="${root_tarball_local}"
+# wget --continue --hsts-file=/dev/null --output-document="${root_tarball_local}" "${root_tarball_remote}"
 
 # Format the drive
 dd if=/dev/zero of="${drive}" bs=1M count=8
