@@ -23,6 +23,9 @@ variables):
     DRIVE=/dev/sda SUFFIX='' NEWHOSTNAME=numuh NEWUSERNAME=sheen NEWPASSWORD=awesome ./install_amd64_uefi.sh
 
 * <https://mags.zone/help/arch-usb.html>
+* <https://disconnected.systems/blog/archlinux-installer/#the-complete-installer-script>
+* <https://disconnected.systems/blog/archlinux-meta-packages/#organising-our-meta-packages>
+* <https://disconnected.systems/blog/archlinux-repo-in-aws-bucket/#aurutils-building-and-managing-packages>
 
 ## UEFI Stuff
 
