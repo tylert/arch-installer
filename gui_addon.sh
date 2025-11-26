@@ -21,7 +21,6 @@ android-udev
 aria2
 chromium
 d2
-deno
 ditaa
 fdupes
 figlet
@@ -48,6 +47,7 @@ tmux
 tree
 wireguard-tools
 yt-dlp
+yt-dlp-ejs
 '
 # unison
 # yggdrasil
