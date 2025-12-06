@@ -1,5 +1,6 @@
 # Arch Linux Install
 
+
 ## Remote Control
 
 First, boot the system from the ISO then configure a password for the
@@ -9,6 +10,7 @@ root user and start the ssh server:
     systemctl start sshd
 
 * <https://wiki.archlinux.org/index.php/Install_Arch_Linux_via_SSH>
+
 
 ## Installing
 
@@ -27,14 +29,17 @@ variables):
 * <https://disconnected.systems/blog/archlinux-meta-packages/#organising-our-meta-packages>
 * <https://disconnected.systems/blog/archlinux-repo-in-aws-bucket/#aurutils-building-and-managing-packages>
 
+
 ## UEFI Stuff
 
     efibootmgr  # list the entries
     efibootmgr --delete-bootnum --bootnum 0000  # delete the Boot0000 entry
 
+
 ## Caching Proxy Server For Packages
 
 * <https://github.com/anatol/pacoloco>
+
 
 ## 3-2-1 Rule
 
@@ -42,6 +47,7 @@ variables):
 
 * <https://msp360.com/resources/blog/3-2-1-1-0-backup-rule>
 * <https://community.veeam.com/blogs-and-podcasts-57/3-2-1-1-0-golden-backup-rule-569>
+
 
 ## Btrfs Bulk Storage
 
@@ -94,6 +100,7 @@ Prepare all the data drives and mount them:
     dd if=/dev/zero of=/dev/disk-by-id/ata-bla-bla-bla
     kill -USR1 $(pgrep ^dd$)
 
+
 ## SMART Checking
 
     for drive in $(ls /dev/disk/by-id/{nvme,ata}* 2>&1 | grep -v 'No such' | grep -v eui | grep -v part); do
@@ -105,6 +112,7 @@ Prepare all the data drives and mount them:
     smartctl -l selftest --json=y /dev/blablabla  # YAML output
 
 * <https://github.com/AnalogJ/scrutiny> Go web UI???
+
 
 ## Samba Mount Setup
 
@@ -165,9 +173,11 @@ shares:
 * <https://serverfault.com/questions/913504/samba-smb-encryption-how-safe-is-it>
 * <https://unix.stackexchange.com/questions/761491/securing-samba-smb-conf-best-parameters>
 
+
 ## Update Groups Without Logging Out
 
     exec newgrp $(id --group --name)
+
 
 ## Rotate Display Without xrandr
 
@@ -178,6 +188,7 @@ shares:
 
     # 0 North, 1 East, 2 South, 3 West
     # Or add "fbcon=rotate:1" to GRUB_CMDLINE_LINUX to have it happen earlier
+
 
 ## Rsync Over SSH With Sudo
 
@@ -196,6 +207,7 @@ shares:
 * <https://samdoran.com/rsync-time-machine>
 * <http://mikerubel.org/computers/rsync_snapshots>
 * <https://it-notes.dragas.net/2025/07/18/make-your-own-backup-system-part-1-strategy-before-scripts>
+
 
 ## Container Stuff
 
@@ -223,6 +235,7 @@ shares:
 * <https://github.com/containerd/nerdctl/blob/main/docs/config.md#properties>
 * <https://blog.mobyproject.org/containerd-namespaces-for-docker-kubernetes-and-beyond-d6c43f565084>
 * <https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1030928> nerdctl horribly broken in Debian
+
 
 ## Btrfs Maintenance
 
@@ -286,6 +299,8 @@ a scrub operation):
 * <https://serverfault.com/questions/1111998/btrfs-check-shows-checksum-verify-failed-even-after-scrub>
 * <https://discussion.fedoraproject.org/t/btrfs-scrub-find-one-error-then-aborted-cannot-resumed/77445/6>
 * <https://funtoo.org/BTRFS_Fun>
+* <https://github.com/stressapptest/stressapptest> memtest on an existing Linux?
+
 
 ## Replacing Drives
 
@@ -303,6 +318,7 @@ a scrub operation):
     # If you're using a larger drive, you must inform btrfs about the change
     btrfs filesystem resize ${devid}:max ${btrfs_root}
 
+
 ## Calculations
 
     pacman -S python-btrfs
@@ -317,6 +333,7 @@ a scrub operation):
     Total unallocatable raw amount: 0.00B
 
 * <https://carfax.org.uk/btrfs-usage>
+
 
 ## ZFS Stuff
 
@@ -363,6 +380,7 @@ AUR:
 * <https://eoli3n.github.io/2020/04/25/recovery.htm> another script to yank ZFS onto running live CD
 * <https://eoli3n.github.io/2020/05/01/zfs-install.html> another script to yank ZFS onto running live CD
 
+
 ## VM Host
 
     # Get virtualization stuff going
@@ -379,6 +397,7 @@ AUR:
     # pacman --noconfirm --sync openbsd-netcat
     # pacman --noconfirm --sync vde2
 
+
 ## Ugly Stuff
 
     # Ensure the CPU microcode gunk is doing it's mysterious thing
@@ -393,12 +412,14 @@ Dump Bluetooth MAC address:
 
     sudo cat /sys/kernel/debug/bluetooth/hci0/identity | cut -d' ' -f1
 
+
 ## Orphaned Packages
 
 To remove packages that were brought in by installing other packages
 that are no longer needed:
 
     pacman -Rns $(pacman -Qtdq)
+
 
 ## References
 
@@ -415,10 +436,12 @@ that are no longer needed:
 * <https://github.com/ChrisTitusTech/ArchTitus>
 * <https://maximiliangolia.com/blog/2022-10-wol-plex-server>
 
+
 ## TODO
 
 * Provide a working enrypted filesystem/swap option
 * Repair the non-UEFI amd64 installer script so grub works properly
+
 
 ## Encryption Magic
 
@@ -432,6 +455,7 @@ that are no longer needed:
     dd if=/dev/zero of=header.img bs=16M count=1
     cryptsetup luksFormat --header header.img --offset 32768 /dev/sda1
     cryptsetup open --header header.img /dev/sda1 moo
+
 
 ## Desktop Linux Annoyances
 
@@ -468,11 +492,13 @@ Adjust the automatic partition layouts:
     # Replace "100%" with some other value, change the size of the EFI partition, etc.
     # Then run the installer
 
+
 ## Password Magic
 
 * <https://baeldung.com/linux/unlocking-account-failed-attempts>
 
     faillock --user bob --reset
+
 
 ## FAT Rsync
 
@@ -480,6 +506,7 @@ When working with FAT filesystems and trying to rsync stuff over (e.g:
 USB drives):
 
     rsync -rtcvP --delete foo/ bar/
+
 
 ## Debian Live Installer
 
