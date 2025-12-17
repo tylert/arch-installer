@@ -190,7 +190,7 @@ shares:
     # Or add "fbcon=rotate:1" to GRUB_CMDLINE_LINUX to have it happen earlier
 
 
-## Rsync Over SSH With Sudo
+## SSH Stuff
 
     # Make certain tools available to a user without a password
     echo 'bubba ALL=NOPASSWD: /usr/bin/rsync' >> /etc/sudoers.d/bubba
@@ -207,6 +207,9 @@ shares:
 * <https://samdoran.com/rsync-time-machine>
 * <http://mikerubel.org/computers/rsync_snapshots>
 * <https://it-notes.dragas.net/2025/07/18/make-your-own-backup-system-part-1-strategy-before-scripts>
+* <https://superuser.com/questions/1763269/how-to-disable-rsa-and-ecdsa-keys-in-openssh-server-on-fedora-linux>
+
+    echo "PubkeyAcceptedAlgorithms ssh-ed25519,ssh-ed25519-cert-v01@openssh.com,sk-ssh-ed25519@openssh.com,sk-ssh-ed25519-cert-v01@openssh.com" > /etc/ssh/sshd_config.d/10-ed25519-only.conf
 
 
 ## Container Stuff
