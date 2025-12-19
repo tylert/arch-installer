@@ -196,9 +196,7 @@ shares:
     echo 'bubba ALL=NOPASSWD: /usr/bin/rsync' >> /etc/sudoers.d/bubba
 
     nohup rsync -avc --delete -e ssh --rsync-path='sudo rsync' \
-        /elsewhere/foo/ wickedserver:/elsewhere/foo/ &
-
-    disown
+        /elsewhere/foo/ wickedserver:/elsewhere/foo/ & disown
 
 * <https://crashingdaily.wordpress.com/2007/06/29/rsync-and-sudo-over-ssh>
 * <https://techrepublic.com/article/how-to-run-a-command-that-requires-sudo-via-ssh>
@@ -210,6 +208,15 @@ shares:
 * <https://superuser.com/questions/1763269/how-to-disable-rsa-and-ecdsa-keys-in-openssh-server-on-fedora-linux>
 
     echo "PubkeyAcceptedAlgorithms ssh-ed25519,ssh-ed25519-cert-v01@openssh.com,sk-ssh-ed25519@openssh.com,sk-ssh-ed25519-cert-v01@openssh.com" > /etc/ssh/sshd_config.d/10-ed25519-only.conf
+
+    # ArchLinux needs an extra step...
+    sed -i '/ssh_host_ecdsa_key/d' /usr/lib/systemd/system/sshdgenkeys.service
+    sed -i '/ssh_host_rsa_key/d' /usr/lib/systemd/system/sshdgenkeys.service
+    systemctl daemon-reload
+
+    # Cull disused host keys
+    rm -v /etc/ssh/ssh_host_ecdsa_key /etc/ssh/ssh_host_ecdsa_key.pub \
+        /etc/ssh/ssh_host_rsa_key /etc/ssh/ssh_host_key_rsa_key.pub
 
 
 ## Container Stuff
