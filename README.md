@@ -301,7 +301,6 @@ a scrub operation):
 * <https://btrfs.wiki.kernel.org/index.php/FAQ>
 * <https://marc.merlins.org/linux/scripts/btrfs-scrub>
 * <https://marc.merlins.org/perso/btrfs/post_2014-05-04_Fixing-Btrfs-Filesystem-Full-Problems.html>
-* <https://wiki.tnonline.net/w/Btrfs/Replacing_a_disk>
 * <https://ask.fedoraproject.org/t/btrfs-drive-logging-csum-failed-errors-time-to-replace/14116/2> csum won\'t go away?
 * <https://superuser.com/questions/858237/finding-files-with-btrfs-uncorrectable-errors>
 * <https://mpdesouza.com/blog/btrfs-resolving-the-logical-resolve> super strange \"unable to fixup\" errors
@@ -312,10 +311,11 @@ a scrub operation):
 * <https://github.com/stressapptest/stressapptest> memtest on an existing Linux?
 
 
-## Replacing Drives
+## Adding and Replacing Drives
 
 * <https://wiki.tnonline.net/w/Btrfs/Replacing_a_disk>
 * <https://brandonrozek.com/blog/replacing-drive-btrfs>
+* <https://wiki.tnonline.net/w/Btrfs/Replacing_a_disk>
 * <https://btrfs.readthedocs.io/en/latest/btrfs-replace.html>
 
     # Mount the filesystem first and then tell it to swap the missing drive out
@@ -325,8 +325,13 @@ a scrub operation):
     # Show how far along the replace is at currently
     btrfs replace status -1 ${btrfs_root}
 
-    # If you're using a larger drive, you must inform btrfs about the change
-    btrfs filesystem resize ${devid}:max ${btrfs_root}
+    # Just adding a new drive to the pool
+    btrfs device add /dev/mapper/foo ${btrfs_root}
+
+    # You must inform btrfs about potential changes in sizes of all drives
+    for ((devid=1; devid<4; devid++)); do
+        btrfs filesystem resize ${devid}:max ${btrfs_root}
+    done
 
 
 ## Calculations
