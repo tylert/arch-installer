@@ -317,6 +317,7 @@ a scrub operation):
 * <https://brandonrozek.com/blog/replacing-drive-btrfs>
 * <https://wiki.tnonline.net/w/Btrfs/Replacing_a_disk>
 * <https://btrfs.readthedocs.io/en/latest/btrfs-replace.html>
+* <https://axllent.org/docs/btrfs-raid1>
 
     # Mount the filesystem first and then tell it to swap the missing drive out
     btrfs filesystem show ${btrfs_root}
