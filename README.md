@@ -76,14 +76,18 @@ Prepare all the data drives and mount them:
 
     # Create a bunch of subvolumes
     mount /dev/mapper/${FIRST_DRIVE} /somewhere
-    btrfs subvolume create /somewhere/@foo
-    btrfs subvolume create /somewhere/@bar
+    btrfs subvolume create /somewhere/foo
+    btrfs subvolume create /somewhere/bar
+    btrfs subvolume create /somewhere/baz
+    btrfs subvolume create /somewhere/quux
     ...
 
     # Mount all the new subvolumes and the main drive for snapshotting
     mount -o subvolid=5 /dev/mapper/${FIRST_DRIVE} /somewhere
-    mount -o subvol=@foo /dev/mapper/${FIRST_DRIVE} /elsewhere/foo
-    mount -o subvol=@bar /dev/mapper/${FIRST_DRIVE} /elsewhere/bar
+    mount -o subvol=foo /dev/mapper/${FIRST_DRIVE} /elsewhere/foo
+    mount -o subvol=bar /dev/mapper/${FIRST_DRIVE} /elsewhere/bar
+    mount -o subvol=baz /dev/mapper/${FIRST_DRIVE} /elsewhere/baz
+    mount -o subvol=quux /dev/mapper/${FIRST_DRIVE} /elsewhere/quux
     ...
 
 * <https://markmcb.com/2020/01/07/five-years-of-btrfs>
