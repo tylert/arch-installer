@@ -6,8 +6,10 @@
 First, boot the system from the ISO then configure a password for the
 root user and start the ssh server:
 
+```
     passwd
     systemctl start sshd
+```
 
 * <https://wiki.archlinux.org/index.php/Install_Arch_Linux_via_SSH>
 
@@ -17,12 +19,14 @@ root user and start the ssh server:
 To start the install process (including some sample environment
 variables):
 
+```
     curl -Ol https://raw.githubusercontent.com/tylert/arch-installer/master/install_amd64_uefi.sh
     curl -Ol https://raw.githubusercontent.com/tylert/arch-installer/master/configure_amd64_uefi.sh
     chmod +x install_amd64_uefi.sh
     chmod +x configure_amd64_uefi.sh
     DRIVE=/dev/nvme0n1 SUFFIX=p NEWHOSTNAME=numuh NEWUSERNAME=sheen NEWPASSWORD=awesome ./install_amd64_uefi.sh
     DRIVE=/dev/sda SUFFIX='' NEWHOSTNAME=numuh NEWUSERNAME=sheen NEWPASSWORD=awesome ./install_amd64_uefi.sh
+```
 
 * <https://mags.zone/help/arch-usb.html>
 * <https://disconnected.systems/blog/archlinux-installer/#the-complete-installer-script>
@@ -32,8 +36,10 @@ variables):
 
 ## UEFI Stuff
 
+```
     efibootmgr  # list the entries
     efibootmgr --delete-bootnum --bootnum 0000  # delete the Boot0000 entry
+```
 
 
 ## Caching Proxy Server For Packages
@@ -53,6 +59,7 @@ variables):
 
 Prepare all the data drives and mount them:
 
+```
     # Install required packages
     pacman --noconfirm --sync btrfs-progs cryptsetup smartmontools
 
@@ -89,6 +96,7 @@ Prepare all the data drives and mount them:
     mount -o subvol=baz /dev/mapper/${FIRST_DRIVE} /elsewhere/baz
     mount -o subvol=quux /dev/mapper/${FIRST_DRIVE} /elsewhere/quux
     ...
+```
 
 * <https://markmcb.com/2020/01/07/five-years-of-btrfs>
 * <https://ownyourbits.com/2018/03/09/easy-sync-of-btrfs-snapshots-with-btrfs-sync>
@@ -101,12 +109,15 @@ Prepare all the data drives and mount them:
 * <https://arstechnica.com/gadgets/2021/09/examining-btrfs-linuxs-perpetually-half-finished-filesystem>
 * <https://unixsheikh.com/articles/battle-testing-zfs-btrfs-and-mdadm-dm.html>
 
+```
     dd if=/dev/zero of=/dev/disk-by-id/ata-bla-bla-bla
     kill -USR1 $(pgrep ^dd$)
+```
 
 
 ## SMART Checking
 
+```
     for drive in $(ls /dev/disk/by-id/{nvme,ata}* 2>&1 | grep -v 'No such' | grep -v eui | grep -v part); do
         echo -n "${drive} "
         smartctl -H ${drive} | grep result | sed 's/SMART overall-health self-assessment test result//'
@@ -114,6 +125,7 @@ Prepare all the data drives and mount them:
 
     smartctl -l selftest --json /dev/blablabla    # JSON output
     smartctl -l selftest --json=y /dev/blablabla  # YAML output
+```
 
 * <https://github.com/AnalogJ/scrutiny> Go web UI???
 
@@ -123,6 +135,7 @@ Prepare all the data drives and mount them:
 Build up a new /etc/samba/smb.conf.stub file containing your desired
 shares:
 
+```
     [foo]
         path = /elsewhere/foo
         writable = yes
@@ -172,6 +185,7 @@ shares:
     useradd --create-home --groups marsupials bubba
     smbpasswd -a bubba
     pdbedit --list
+```
 
 * <https://wiki.archlinux.org/title/Xdg-utils#xdg-open> mounting by clients
 * <https://serverfault.com/questions/913504/samba-smb-encryption-how-safe-is-it>
@@ -180,27 +194,33 @@ shares:
 
 ## Update Groups Without Logging Out
 
+```
     exec newgrp $(id --group --name)
+```
 
 
 ## Rotate Display Without xrandr
 
 * <https://askubuntu.com/questions/237963/how-do-i-rotate-my-display-when-not-using-an-x-server>
 
+```
     echo 1 | sudo tee /sys/class/graphics/fbcon/rotate  # only current framebuffer
     echo 1 | sudo tee /sys/class/graphics/fbcon/rotate_all  # all framebuffers
 
     # 0 North, 1 East, 2 South, 3 West
     # Or add "fbcon=rotate:1" to GRUB_CMDLINE_LINUX to have it happen earlier
+```
 
 
 ## SSH Stuff
 
+```
     # Make certain tools available to a user without a password
     echo 'bubba ALL=NOPASSWD: /usr/bin/rsync' >> /etc/sudoers.d/bubba
 
     nohup rsync -avc --delete -e ssh --rsync-path='sudo rsync' \
         /elsewhere/foo/ wickedserver:/elsewhere/foo/ & disown
+```
 
 * <https://crashingdaily.wordpress.com/2007/06/29/rsync-and-sudo-over-ssh>
 * <https://techrepublic.com/article/how-to-run-a-command-that-requires-sudo-via-ssh>
@@ -211,6 +231,7 @@ shares:
 * <https://it-notes.dragas.net/2025/07/18/make-your-own-backup-system-part-1-strategy-before-scripts>
 * <https://superuser.com/questions/1763269/how-to-disable-rsa-and-ecdsa-keys-in-openssh-server-on-fedora-linux>
 
+```
     echo "PubkeyAcceptedAlgorithms ssh-ed25519,ssh-ed25519-cert-v01@openssh.com,sk-ssh-ed25519@openssh.com,sk-ssh-ed25519-cert-v01@openssh.com" > /etc/ssh/sshd_config.d/10-ed25519-only.conf
 
     # ArchLinux needs an extra step...
@@ -221,10 +242,12 @@ shares:
     # Cull disused host keys
     rm -v /etc/ssh/ssh_host_ecdsa_key /etc/ssh/ssh_host_ecdsa_key.pub \
         /etc/ssh/ssh_host_rsa_key /etc/ssh/ssh_host_rsa_key.pub
+```
 
 
 ## Container Stuff
 
+```
     # Ensure the sub?id stuff is there for each user
     echo "${USER}:100000:65536" | sudo tee -a /etc/subgid
     echo "${USER}:100000:65536" | sudo tee -a /etc/subuid
@@ -242,6 +265,7 @@ shares:
     containerd-rootless-setuptool.sh install-buildkit
 
     echo 'kernel.unprivileged_userns_clone=1' | sudo tee -a /etc/sysctl.d/userns.conf
+```
 
 * <https://github.com/jpetazzo/registrish#hosting-your-images-with-registrish>
 * <https://vadosware.io/post/rootless-containers-in-2020-on-arch-linux>
@@ -256,6 +280,7 @@ shares:
 You might want to have a look at the btrfsmaintenance package at
 <https://github.com/kdave/btrfsmaintenance>.
 
+```
     # Create new snapshots for today
     btrfs subvolume snapshot -r /somewhere/@foo /somewhere/@foo-$(date +%Y-%m-%d)
     btrfs subvolume snapshot -r /somewhere/@bar /somewhere/@bar-$(date +%Y-%m-%d)
@@ -285,10 +310,12 @@ You might want to have a look at the btrfsmaintenance package at
 
     # Start a trim operation (SSDs only?)
     # TBD
+```
 
 Show which files are corrupted (those uncorrectable errors found during
 a scrub operation):
 
+```
     # Find information about which logical thingies have failures
     dmesg | grep 'checksum error' |\
         sed -E 's/^.*checksum error at logical ([[:digit:]]*).*$/\1/p' | sort | uniq
@@ -300,6 +327,7 @@ a scrub operation):
 
     # Freshen things before doing a clean run
     btrfs device stats --reset ${btrfs_root}
+```
 
 * <https://btrfs.wiki.kernel.org/index.php/Manpage/btrfs-balance>
 * <https://btrfs.wiki.kernel.org/index.php/FAQ>
@@ -323,6 +351,7 @@ a scrub operation):
 * <https://btrfs.readthedocs.io/en/latest/btrfs-replace.html>
 * <https://axllent.org/docs/btrfs-raid1>
 
+```
     # Mount the filesystem first and then tell it to swap the missing drive out
     btrfs filesystem show ${btrfs_root}
     btrfs replace start ${devid_missing} /dev/mapper/foo ${btrfs_root}
@@ -337,10 +366,12 @@ a scrub operation):
     for ((devid=1; devid<4; devid++)); do
         btrfs filesystem resize ${devid}:max ${btrfs_root}
     done
+```
 
 
 ## Calculations
 
+```
     pacman -S python-btrfs
     btrfs-space-calculator -m raid1 -d raid1 16TB 10TB 6TB | grep --after-context=3 'Device sizes'
     btrfs-space-calculator -m raid1 -d raid1 16TB 10TB 6TB | grep 'Total unallocatable'
@@ -351,6 +382,7 @@ a scrub operation):
       Device 3: 5.46TiB
 
     Total unallocatable raw amount: 0.00B
+```
 
 * <https://carfax.org.uk/btrfs-usage>
 
@@ -359,14 +391,19 @@ a scrub operation):
 
 Mounting:
 
+```
     zpool import -d /dev/disk/by-id tank1
+```
 
 Scrubbing:
 
+```
     zpool scrub tank1
+```
 
 Snapshots:
 
+```
     zfSnap -s -S -v \
         -a 6m tank1/set1 \
         -a 6m tank1/set2  # keep for 6 months
@@ -377,9 +414,11 @@ Snapshots:
 
     zfSnap -d  # delete expired snapshots
     # -d = Delete old snapshots
+```
 
 AUR:
 
+```
     # Prepare the build environment
     pacman --noconfirm --sync base-devel git linux-headers
 
@@ -393,6 +432,7 @@ AUR:
     pushd zfs-dkms
     makepkg -si
     popd
+```
 
 * <https://archzfs.leibelt.de> script to yank ZFS onto running live CD
 * <https://github.com/stevleibelt/arch-linux-live-cd-iso-with-zfs> ready-made live CD
@@ -403,6 +443,7 @@ AUR:
 
 ## VM Host
 
+```
     # Get virtualization stuff going
     pacman --noconfirm --sync qemu-headless
 
@@ -416,10 +457,12 @@ AUR:
     # pacman --noconfirm --sync bridge-utils
     # pacman --noconfirm --sync openbsd-netcat
     # pacman --noconfirm --sync vde2
+```
 
 
 ## Ugly Stuff
 
+```
     # Ensure the CPU microcode gunk is doing it's mysterious thing
     pacman --noconfirm --sync amd-ucode  # or intel-ucode
 
@@ -427,10 +470,13 @@ AUR:
     pacman --noconfirm --sync ntp
     systemctl enable ntpd
     systemctl start ntpd
+```
 
 Dump Bluetooth MAC address:
 
+```
     sudo cat /sys/kernel/debug/bluetooth/hci0/identity | cut -d' ' -f1
+```
 
 
 ## Orphaned Packages
@@ -438,7 +484,9 @@ Dump Bluetooth MAC address:
 To remove packages that were brought in by installing other packages
 that are no longer needed:
 
+```
     pacman -Rns $(pacman -Qtdq)
+```
 
 
 ## References
@@ -472,28 +520,36 @@ that are no longer needed:
 * <https://gist.github.com/vms20591/b8b17b3c44fc9b62ff734c0b588014db>
 * <https://wiki.archlinux.org/title/Dm-crypt/Specialties#Encrypted_system_using_a_detached_LUKS_header>
 
+```
     dd if=/dev/zero of=header.img bs=16M count=1
     cryptsetup luksFormat --header header.img --offset 32768 /dev/sda1
     cryptsetup open --header header.img /dev/sda1 moo
+```
 
 
 ## Desktop Linux Annoyances
 
 Mouse cursor:
 
+```
     # Ensure package 'adwaita-cursors' is installed, then...
     gsettings set org.cinnamon.desktop.interface cursor-theme Adwaita
+```
 
 Network Manager:
 
+```
     gsettings set org.gnome.nm-applet disable-connected-notifications true
     gsettings set org.gnome.nm-applet disable-disconnected-notifications true
     gsettings set org.gnome.nm-applet disable-vpn-notifications true
+```
 
 Firefox:
 
+```
     # about:config
     privacy.resistFingerprinting = true
+```
 
 * <https://rubenerd.com/mozillas-latest-quagmire> turn off AI garbage
 * <https://mudkip.me/2024/03/28/Notes-on-EndeavourOS> fancy stuff?
@@ -507,17 +563,21 @@ Firefox:
 
 Adjust the automatic partition layouts:
 
+```
     # Boot the liveCD
     # Edit /etc/calamares/modules/partition.conf
     # Replace "100%" with some other value, change the size of the EFI partition, etc.
     # Then run the installer
+```
 
 
 ## Password Magic
 
 * <https://baeldung.com/linux/unlocking-account-failed-attempts>
 
+```
     faillock --user bob --reset
+```
 
 
 ## FAT Rsync
@@ -525,7 +585,9 @@ Adjust the automatic partition layouts:
 When working with FAT filesystems and trying to rsync stuff over (e.g:
 USB drives):
 
+```
     rsync -rtcvP --delete foo/ bar/
+```
 
 
 ## Debian Live Installer
