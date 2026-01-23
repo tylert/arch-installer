@@ -353,6 +353,7 @@ a scrub operation):
 
 ```
     # Mount the filesystem first and then tell it to swap the missing drive out
+    mount -o degraded /dev/mapper/bar /wherever
     btrfs filesystem show ${btrfs_root}
     btrfs replace start ${devid_missing} /dev/mapper/foo ${btrfs_root}
 
