@@ -545,13 +545,6 @@ Network Manager:
     gsettings set org.gnome.nm-applet disable-vpn-notifications true
 ```
 
-Firefox:
-
-```
-    # about:config
-    privacy.resistFingerprinting = true
-```
-
 * <https://rubenerd.com/mozillas-latest-quagmire> turn off AI garbage
 * <https://mudkip.me/2024/03/28/Notes-on-EndeavourOS> fancy stuff?
 * <https://github.com/vmavromatis/gnome-layout-manager> Unity, macOS, Winderz look-alikes using GNOME???
@@ -561,6 +554,8 @@ Firefox:
 * <https://support.mozilla.org/en-US/questions/1426184> timezone fix if you use fingerprint protection
 * <https://kau.sh/blog/how-to-firefox> Firefox container stuff and recommended uBlock Origin settings
 * <https://github.com/mig4ng/ublock-origin-filters> custom uBlock Origin filters
+* <https://bbs.archlinux.org/viewtopic.php?id=309784> derp, too much logging noise
+* <https://gitlab.gnome.org/GNOME/glycin/-/blob/main/glycin/src/sandbox.rs#L233> derp, too much logging noise
 
 Adjust the automatic partition layouts:
 
