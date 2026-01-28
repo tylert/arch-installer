@@ -88,6 +88,7 @@ Prepare all the data drives and mount them:
     btrfs subvolume create /somewhere/baz
     btrfs subvolume create /somewhere/quux
     ...
+    umount /somewhere
 
     # Mount all the new subvolumes and the main drive for snapshotting
     mount -o subvolid=5 /dev/mapper/${FIRST_DRIVE} /somewhere
